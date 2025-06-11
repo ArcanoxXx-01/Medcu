@@ -1,1 +1,1 @@
-# Medcu
+# MediCub
