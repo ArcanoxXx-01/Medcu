@@ -1,0 +1,1 @@
+# Archivo: app/core/__init__.py

@@ -1,6 +1,7 @@
 {
     "python.analysis.extraPaths": [
-        "./src/agents",
-        "./src/pipeline",
+        "./app/ui",
+        "./app/agents",
+        "./app/core"
     ]
 }
