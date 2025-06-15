@@ -10,22 +10,16 @@ def scrape_article(url: str) -> Optional[Tuple[str, str]]:
         url (str): URL del artículo a scrappear.
 
     Returns:
-        Optional[Tuple[str, str]]: Tupla (título, contenido) si es válido, o None si es página por defecto.
+        str: Código HTML si es un artículo válido, o None si es página por defecto.
     """
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, "html.parser")
-
-    # Verificar si es página inválida (default)
-    if soup.find("h1", string="Lo sentimos, pero no hemos podido encontrar la página que usted ha solicitado."):
+    try:
+        response = requests.get(url)
+        soup = BeautifulSoup(response.text, "html.parser")
+        # ver que la pagina contenga un articulo
+        if soup.find("h1", string="Lo sentimos, pero no hemos podido encontrar la página que usted ha solicitado."):
+            return None
+        return response.text
+    
+    except(Exception) as e:
+        print(f"Error al scrapear la url {url}: {e}")
         return None
-
-    # Extraer título y contenido
-    titulo_tag = soup.find("h1")
-    content_div = soup.find("div", {"id": "d-article"})
-
-    if not titulo_tag or not content_div:
-        return None
-
-    titulo = titulo_tag.get_text(strip=True)
-    contenido = content_div.get_text(separator="\n", strip=True)
-    return titulo, contenido

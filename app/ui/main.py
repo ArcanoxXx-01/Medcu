@@ -2,8 +2,8 @@ import streamlit as st
 from app.core.processor import FireworksProcessor
 from app.core.embeddings import EmbeddingGenerator
 from app.core.retrieval import VectorRetriever
-from app.agents.orchestrator import OrquestadorMedico
-# from app.agents.crawler import Crawler
+# from orchestrator.orchestrator import OrquestadorMedico
+from app.agents.crawler_agent.agent import Crawler
 from app.config import *
 
 def main():
@@ -11,8 +11,9 @@ def main():
     processor = FireworksProcessor(FIREWORKS_MODEL_ID, FIREWORKS_API_KEY, API_URL)
     embedder = EmbeddingGenerator("fireworks", FIREWORKS_EMBEDDING_MODEL, FIREWORKS_API_KEY, EMBEDDING_URL)
     retriever = VectorRetriever()
-    orquestador = OrquestadorMedico()
+    # orquestador = OrquestadorMedico()
     # crawler = Crawler()
+    # crawler.run()
     
     # Compoenentes de la UI
     st.set_page_config(page_title='Medicub')
@@ -45,26 +46,25 @@ def main():
         if not entradas:
             st.warning("No se detectaron síntomas ni enfermedades para continuar.")
             return
-        metadatos_embeddings = embedder.embed_texts([" ".join(entradas)])
-        embeddings = [emb['embedding'] for emb in metadatos_embeddings]
+        embeddings = embedder.embed_texts([" ".join(entradas)])
         st.write(embeddings)
         
-        # # Paso 4: recuperar información
-        # documentos = retriever.retrieve(embeddings)
-        # if not documentos:
-        #     st.warning("⚠️ No se encontró información en la base vectorial. Buscando en internet...")
-        #     # documentos = buscar_en_internet(sintomas, enfermedades)
+    #     # # Paso 4: recuperar información
+    #     # documentos = retriever.retrieve(embeddings)
+    #     # if not documentos:
+    #     #     st.warning("⚠️ No se encontró información en la base vectorial. Buscando en internet...")
+    #     #     # documentos = buscar_en_internet(sintomas, enfermedades)
 
-        # st.subheader("📄 Documentos relevantes:")
-        # for i, doc in enumerate(documentos, 1):
-        #     st.markdown(f"**Doc {i}:** {doc.get('texto', '')[:300]}...")
+    #     # st.subheader("📄 Documentos relevantes:")
+    #     # for i, doc in enumerate(documentos, 1):
+    #     #     st.markdown(f"**Doc {i}:** {doc.get('texto', '')[:300]}...")
 
-        # # Paso 5: orquestador
-        # especialidad = orquestador.inferir_especialidad(sintomas, enfermedades)
-        # diagnostico = orquestador.diagnosticar(sintomas, enfermedades, documentos)
+    #     # # Paso 5: orquestador
+    #     # especialidad = orquestador.inferir_especialidad(sintomas, enfermedades)
+    #     # diagnostico = orquestador.diagnosticar(sintomas, enfermedades, documentos)
 
-        # st.subheader("🏥 Especialidad inferida:")
-        # st.write(especialidad)
+    #     # st.subheader("🏥 Especialidad inferida:")
+    #     # st.write(especialidad)
 
-        # st.subheader("✅ Diagnóstico preliminar:")
-        # st.write(diagnostico)
+    #     # st.subheader("✅ Diagnóstico preliminar:")
+    #     # st.write(diagnostico)

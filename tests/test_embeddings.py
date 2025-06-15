@@ -49,7 +49,6 @@ def test_embed_minimo():
     resultado = generator.embed_texts(textos)
     print(resultado)
     assert isinstance(resultado, list)
-    assert isinstance(resultado[0]['embedding'], list)
     assert len(resultado) > 0
 
 test_embed_minimo()

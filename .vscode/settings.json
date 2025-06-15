@@ -2,6 +2,10 @@
     "python.analysis.extraPaths": [
         "./app/ui",
         "./app/agents",
-        "./app/core"
+        "./app/core",
+        "./app/agents/crawler_agent",
+        "./app/agents/crawler_agent/scraper",
+        "./app/agents/crawler_agent/database",
+        "./app/agents/crawler_agent/processor"
     ]
 }

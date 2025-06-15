@@ -32,5 +32,5 @@ class EmbeddingGenerator:
             print("Respuesta completa:", response.text)
             response.raise_for_status()
 
-        return response.json()["data"]
-
+        metadatos_embeddings = response.json()["data"]
+        return [emb['embedding'] for emb in metadatos_embeddings]
