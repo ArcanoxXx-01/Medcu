@@ -1,12 +1,12 @@
-from typing import Dict, List, Tuple
+from typing import Dict
 import re
 
-def chunk_sections(secciones: Dict[str, str]) -> List[Tuple[str, str, str | None, str | None]]:
+def chunk_sections(secciones: Dict[str, str]):
     """
     Genera frases enriquecidas a partir de las secciones del artículo, con trazabilidad de metadatos.
 
     Devuelve:
-        Lista de tuplas: (chunk_text, nombre_usado, causa, sintoma)
+        Lista de tuplas: [chunk_text, metadata = {nombre_usado, causa, sintoma}]
     """
     titulo = secciones.get("titulo", "").strip()
     causas_raw = secciones.get("causas", "")
@@ -30,7 +30,7 @@ def chunk_sections(secciones: Dict[str, str]) -> List[Tuple[str, str, str | None
             texto = f"{nombre} puede presentar {sintoma}."
             chunks.append(texto)
             metadatas.append({"nombre": nombre, "causa": None, "sintoma": sintoma})
-    return chunks 
+    return [chunks, metadatas]
 
 # data = {
 #     "titulo": "Fractura",
@@ -39,5 +39,5 @@ def chunk_sections(secciones: Dict[str, str]) -> List[Tuple[str, str, str | None
 #     "nombres_alternativos": "Hueso roto; Fractura por sobrecarga"
 # }
 
-# for text in chunk_sections(data):
-#     print(text)
+# for x in chunk_sections(data)[0]:
+#     print(x)

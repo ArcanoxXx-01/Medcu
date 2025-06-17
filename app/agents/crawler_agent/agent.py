@@ -1,0 +1,232 @@
+import threading, queue, time, os, logging
+from typing import Dict, List
+
+from .database.doc_store import DocumentStore
+from .database.vector_store import VectorStore
+from .scraper.page_scraper import scrape_article
+from .scraper.save_html import save_html_by_article_number
+from .scraper.url_collector import generate_medlineplus_urls
+from .processor.chunker import chunk_sections
+from .processor.extractor import extract_relevant_sections
+from app.core.embeddings import EmbeddingGenerator
+from app.config import EMBEDDING_URL, FIREWORKS_EMBEDDING_MODEL, FIREWORKS_API_KEY
+
+class Crawler:
+    def __init__(self, sleep_interval: float = 1.0):
+        self.logger = logging.getLogger("Crawler")
+        if not self.logger.handlers:
+            handler = logging.StreamHandler()
+            formatter = logging.Formatter('[%(asctime)s] %(levelname)s - %(message)s')
+            handler.setFormatter(formatter)
+            self.logger.addHandler(handler)
+            self.logger.setLevel(logging.INFO)
+        self.document_store = DocumentStore(db_path="data/documents.db")
+        self.embedding_generator = EmbeddingGenerator(
+            model_id=FIREWORKS_EMBEDDING_MODEL,
+            api_key=FIREWORKS_API_KEY,
+            url=EMBEDDING_URL
+        )
+        self.vector_store = VectorStore(
+            db_path="data/embeddings.db",
+            use_faiss=True,
+            faiss_index_path="data/index.faiss"
+        )
+
+        self.sleep_interval = sleep_interval
+
+        # Colas para comunicación entre hilos
+        self.url_queue = queue.Queue()
+        self.html_queue = queue.Queue()
+        self.parsed_queue = queue.Queue()
+
+        self.stop_event = threading.Event()
+        self.threads: List[threading.Thread] = []
+
+    def run(self):
+        # Crear y arrancar hilos trabajadores
+        workers = [
+            threading.Thread(target=self.scraper_worker, daemon=True),
+            threading.Thread(target=self.extractor_worker, daemon=True),
+            threading.Thread(target=self.embedding_worker, daemon=True),
+        ]
+
+        self.threads = workers
+        for t in self.threads:
+            t.start()
+
+        try:
+            while not self.stop_event.is_set():
+                time.sleep(self.sleep_interval)
+        except KeyboardInterrupt:
+            print("Detención solicitada. Parando crawler...")
+            self.stop()
+
+    def stop(self):
+        self.stop_event.set()
+        # Insertar None en colas para desbloquear hilos bloqueados en get()
+        for q in [self.url_queue, self.html_queue, self.parsed_queue]:
+            q.put(None)
+
+        # Esperar que hilos finalicen
+        for t in self.threads:
+            t.join(timeout=5)
+
+        # Limpiar tareas pendientes
+        self.flush_remaining_tasks()
+        print("Crawler detenido correctamente.")
+
+    def scraper_worker(self):
+        try:
+            for url in generate_medlineplus_urls():
+                if self.stop_event.is_set():
+                    break
+                if not self.document_store.was_url_downloaded(url):
+                    html = scrape_article(url)
+                    if html:
+                        save_html_by_article_number(url, html)
+                        self.document_store.record_url_download(url)
+                        self.html_queue.put((url, html))
+        except Exception as e:
+            print(f"[scraper_worker] Error inesperado: {e}")
+        finally:
+            self.html_queue.put(None)
+
+    def extractor_worker(self):
+        while not self.stop_event.is_set():
+            item = self.html_queue.get()
+            if item is None:
+                break
+            url, html = item
+            try:
+                sections = extract_relevant_sections(html)
+                if sections:
+                    self.document_store.upsert_document(
+                        url=url,
+                        titulo=sections.get("titulo", ""),
+                        causas=sections.get("causas", ""),
+                        sintomas=sections.get("sintomas", ""),
+                        primeros_auxilios=sections.get("primeros_auxilios", ""),
+                        no_se_debe=sections.get("no_se_debe", ""),
+                        nombres_alternativos=sections.get("nombres_alternativos", "")
+                    )
+                    self.parsed_queue.put((url, sections))
+            except Exception as e:
+                print(f"[extractor_worker] Error procesando {url}: {e}")
+            finally:
+                self.html_queue.task_done()
+        self.parsed_queue.put(None)
+
+    def embedding_worker(self):
+        while not self.stop_event.is_set():
+            item = self.parsed_queue.get()
+            if item is None:
+                break
+            url, sections = item
+            try:
+                self._process_and_store_chunks(url, sections)
+            except Exception as e:
+                print(f"[embedding_worker] Error generando embeddings para {url}: {e}")
+            finally:
+                self.parsed_queue.task_done()
+
+    def _process_and_store_chunks(self, url: str, sections: Dict[str, str]):
+        """
+        Procesa las secciones de un artículo, genera los embeddings de los chunks y
+        los almacena en la base vectorial junto con sus metadatos.
+
+        Args:
+            url (str): URL del artículo original.
+            sections (Dict[str, str]): Diccionario con las secciones del artículo.
+        """
+        chunks, metadatas = chunk_sections(sections)
+        if not chunks:
+            return
+
+        for i, chunk in enumerate(chunks):
+            # try:
+            embedding = self.embedding_generator.embed_texts(chunk)
+            # except Exception as e:
+                # print(f"Error al generar embedding {i} de {url}: {e}")
+            metadata = metadatas[i] if i < len(metadatas) else {}
+
+            self.vector_store.upsert_vector(
+                url=url,
+                chunk_index=i,
+                text_chunk=chunk,
+                embedding=embedding,
+                nombre=metadata.get("titulo") or sections.get("titulo", ""),
+                causa=metadata.get("causas") or sections.get("causas", ""),
+                sintoma=metadata.get("sintomas") or sections.get("sintomas", "")
+            )
+            # except Exception as e:
+                # print(f"Error al procesar chunk {i} de {url}: {e}")
+
+            embeddings = self.embedding_generator.embed_texts(chunks)
+            print(x[0:5] for x in embeddings)
+
+            for idx, (chunk, embedding, meta) in enumerate(zip(chunks, embeddings, metadatas)):
+                # try:
+                    self.vector_store.upsert_vector(
+                        url=url,
+                        chunk_index=idx,
+                        text_chunk=chunk,
+                        embedding=embedding,
+                        nombre=meta.get("nombre"),
+                        causa=meta.get("causa"),
+                        sintoma=meta.get("sintoma")
+                    )
+                # except Exception as e:
+                    # print(f"[embedding_worker] Error almacenando vector chunk {idx} para {url}: {e}")
+
+    def process_html_directory(self, html_dir: str = "data/html_docs/"):
+        """
+        Procesa todos los archivos .html en un directorio desde el parseo hasta
+        el almacenamiento de embeddings.
+
+        Args:
+            html_dir (str): Ruta al directorio que contiene los archivos HTML.
+        """
+        for filename in os.listdir(html_dir)[0:1]:
+            if not filename.endswith(".html"):
+                continue
+            print(f"Procesando articulo: {filename}")
+            filepath = os.path.join(html_dir, filename)
+            dummy_url = f"https://medlineplus.gov/spanish/ency/article/{filename}"
+
+            # try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                html = f.read()
+
+            if not html:
+                print(f"Articulo {filename} vacio o corrupto")
+                continue
+            
+            secciones = extract_relevant_sections(html)
+            if not secciones:
+                print(f"Advertencia: no se pudieron extraer secciones del articulos {filename}")
+                continue
+
+            self.document_store.upsert_document(
+                url=dummy_url,
+                titulo=secciones.get("titulo", ""),
+                causas=secciones.get("causas", ""),
+                sintomas=secciones.get("sintomas", ""),
+                primeros_auxilios=secciones.get("primeros_auxilios", ""),
+                no_se_debe=secciones.get("no_se_debe", ""),
+                nombres_alternativos=secciones.get("nombres_alternativos", "")
+            )
+
+            self._process_and_store_chunks(dummy_url, secciones)
+
+            # except Exception as e:
+                # print(f"Error procesando {filename}: {e}")
+
+    def flush_remaining_tasks(self):
+        try:
+            self.html_queue.join()
+        except Exception:
+            pass
+        try:
+            self.parsed_queue.join()
+        except Exception:
+            pass

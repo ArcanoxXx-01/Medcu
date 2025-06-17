@@ -1,7 +1,7 @@
 import streamlit as st
+import threading
 from app.core.processor import FireworksProcessor
 from app.core.embeddings import EmbeddingGenerator
-from app.core.retrieval import VectorRetriever
 # from orchestrator.orchestrator import OrquestadorMedico
 from app.agents.crawler_agent.agent import Crawler
 from app.config import *
@@ -10,10 +10,12 @@ def main():
     # Inicializar componentes
     processor = FireworksProcessor(FIREWORKS_MODEL_ID, FIREWORKS_API_KEY, API_URL)
     embedder = EmbeddingGenerator("fireworks", FIREWORKS_EMBEDDING_MODEL, FIREWORKS_API_KEY, EMBEDDING_URL)
-    retriever = VectorRetriever()
     # orquestador = OrquestadorMedico()
     # crawler = Crawler()
-    # crawler.run()
+    # t_crawler = threading.Thread(target=crawler.run, daemon=True)
+    # t_crawler.start()
+    # crawler.process_html_directory()
+    
     
     # Compoenentes de la UI
     st.set_page_config(page_title='Medicub')

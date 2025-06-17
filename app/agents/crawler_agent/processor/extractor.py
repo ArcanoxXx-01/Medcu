@@ -61,6 +61,8 @@ def extract_relevant_sections(html_content: str) -> Dict[str, str]:
                 result['primeros_auxilios'] = correct_text(content)
             elif section_name == 'No se debe':
                 result['no_se_debe'] = correct_text(content)
+            # elif section_name == 'Lo que se puede esperar en el consultorio médico':
+                
             elif section_name == 'Nombres alternativos':
                 result['nombres_alternativos'] = correct_text(content)
 
