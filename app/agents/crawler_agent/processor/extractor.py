@@ -14,10 +14,14 @@ def extract_relevant_sections(html_content: str) -> Dict[str, str]:
             Diccionario con la información extraída. Claves posibles:
             
 <<<<<<< HEAD
+<<<<<<< HEAD
             'titulo', 'causas', 'sintomas', 'primeros_auxilios', 'no_se_debe', 'ejemplo_comsulta', 'nombres_alternativos'.
 =======
             'titulo', 'causas', 'sintomas', 'primeros_auxilios', 'no_se_debe', ejemplo_comsulta, 'nombres_alternativos'.
 >>>>>>> ef49f87 (add ejemplo_comsulta param to document db)
+=======
+            'titulo', 'causas', 'sintomas', 'primeros_auxilios', 'no_se_debe', 'ejemplo_comsulta', 'nombres_alternativos'.
+>>>>>>> 9e4a382 (Bug fixes in the Crawler)
             
             * Los valores serán cadenas vacías si no se encuentran las secciones.
     """
@@ -70,14 +74,20 @@ def extract_relevant_sections(html_content: str) -> Dict[str, str]:
             elif section_name == 'No se debe':
                 result['no_se_debe'] = correct_text(content)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9e4a382 (Bug fixes in the Crawler)
                 
             elif section_name == 'Lo que se puede esperar en el consultorio médico':
                 result['ejemplo_comsulta'] = correct_text(content)
                 
+<<<<<<< HEAD
 =======
             elif section_name == 'Lo que se puede esperar en el consultorio médico':
                 result['ejemplo_comsulta'] = correct_text(content)
 >>>>>>> ef49f87 (add ejemplo_comsulta param to document db)
+=======
+>>>>>>> 9e4a382 (Bug fixes in the Crawler)
             elif section_name == 'Nombres alternativos':
                 result['nombres_alternativos'] = correct_text(content)
 

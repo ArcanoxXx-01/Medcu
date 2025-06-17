@@ -1,8 +1,6 @@
 import threading, queue, time, os
 from typing import Dict, List
 
-import embeddings
-
 from .database.doc_store import DocumentStore
 from .database.vector_store import VectorStore
 from .scraper.page_scraper import scrape_article
@@ -137,17 +135,27 @@ class Crawler:
         if not chunks:
             return
 
+<<<<<<< HEAD
         chunks = [chunk for chunk in chunks if self.vector_store.get_by_chunk(chunk) is not None]
         try:
             for batch in batch_chunks(chunks):
                 for retry in range(6):
+=======
+        try:
+            for batch in batch_chunks(chunks):
+                for retry in range(5):
+>>>>>>> 9e4a382 (Bug fixes in the Crawler)
                     try:
                         batch_embeddings = self.embedding_generator.embed_texts(batch)
                         embeddings.extend(batch_embeddings)
                         break  # salir del ciclo de retry si tuvo éxito
                     except Exception as e:
                         wait = 2 ** retry
+<<<<<<< HEAD
                         print(f"Error (intento {retry+1}/6): {e}. Reintentando en {wait}s...")
+=======
+                        print(f"Error (intento {retry+1}/5): {e}. Reintentando en {wait}s...")
+>>>>>>> 9e4a382 (Bug fixes in the Crawler)
                         time.sleep(wait)
                 else:
                     print("Fallo permanente al generar embeddings para un batch.")
@@ -183,18 +191,18 @@ class Crawler:
             filepath = os.path.join(html_dir, filename)
             dummy_url = f"https://medlineplus.gov/spanish/ency/article/{filename}"
 
-            try:
-                with open(filepath, "r", encoding="utf-8") as f:
-                    html = f.read()
+            # try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                html = f.read()
 
-                if not html:
-                    print(f"Articulo {filename} vacio o corrupto")
-                    continue
-                
-                secciones = extract_relevant_sections(html)
-                if not secciones:
-                    print(f"Advertencia: no se pudieron extraer secciones del articulos {filename}")
-                    continue
+            if not html:
+                print(f"Articulo {filename} vacio o corrupto")
+                continue
+            
+            secciones = extract_relevant_sections(html)
+            if not secciones:
+                print(f"Advertencia: no se pudieron extraer secciones del articulos {filename}")
+                continue
 
             self.document_store.upsert_document(
                 url=dummy_url,
@@ -207,7 +215,7 @@ class Crawler:
                 nombres_alternativos=secciones.get("nombres_alternativos", "")
             )
 
-                # self._process_and_store_chunks(dummy_url, secciones)
+            self._process_and_store_chunks(dummy_url, secciones)
 
             # except Exception as e:
             #     print(f"Error procesando {filename}: {e}")

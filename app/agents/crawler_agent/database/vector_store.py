@@ -17,12 +17,17 @@ class VectorStore:
         self,
         db_path: str ="data/embeddings.db",
 <<<<<<< HEAD
+<<<<<<< HEAD
         faiss_index_path: Optional[str] = "data/embeddings.index",
         embedding_dim: int = 768,
 =======
         faiss_index_path: Optional[str] = None,
         embedding_dim: int = 1536,
 >>>>>>> ef49f87 (add ejemplo_comsulta param to document db)
+=======
+        faiss_index_path: Optional[str] = "data/embeddings.index",
+        embedding_dim: int = 768,
+>>>>>>> 9e4a382 (Bug fixes in the Crawler)
         use_faiss: bool = True
     ):
         self.db_path = db_path

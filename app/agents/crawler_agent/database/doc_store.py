@@ -167,4 +167,8 @@ class DocumentStore:
 
 # db = DocumentStore("prueba.db")
 
+<<<<<<< HEAD
 # db.upsert_document()
+=======
+# db.upsert_document()
+>>>>>>> 9e4a382 (Bug fixes in the Crawler)
