@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import streamlit as st
 import traceback
+=======
+# import streamlit as st
+>>>>>>> ef49f87 (add ejemplo_comsulta param to document db)
 import threading
 
 from app.agents.orchestrator.orchestrator import Orchestrator
@@ -16,6 +20,7 @@ from app.config import *
 def main():
     
     # Inicializar componentes
+<<<<<<< HEAD
     process_model = FireworksProcessor(
         model_id=FIREWORKS_MODEL_ID,
         api_key=FIREWORKS_API_KEY,
@@ -73,19 +78,29 @@ def main():
     crawler = Crawler()
     t_crawler = threading.Thread(target=crawler.run, daemon=True)
     # t_crawler.start()
+=======
+    processor = FireworksProcessor(FIREWORKS_MODEL_ID, FIREWORKS_API_KEY, API_URL)
+    embedder = EmbeddingGenerator("fireworks", FIREWORKS_EMBEDDING_MODEL, FIREWORKS_API_KEY, EMBEDDING_URL)
+    # orquestador = OrquestadorMedico()
+    crawler = Crawler()
+    # t_crawler = threading.Thread(target=crawler.run, daemon=True)
+    # t_crawler.start()
+    crawler.process_html_directory()
+>>>>>>> ef49f87 (add ejemplo_comsulta param to document db)
     
     
     # Compoenentes de la UI
-    st.set_page_config(page_title='Medicub')
-    st.title('🩺 Asistente Médico con IA')
+    # st.set_page_config(page_title='Medicub')
+    # st.title('🩺 Asistente Médico con IA')
 
-    consulta = st.text_area('Describe tus síntomas o consulta médica:', height=150)
+    # consulta = st.text_area('Describe tus síntomas o consulta médica:', height=150)
 
-    if st.button('Enviar'):
-        if not consulta.strip():
-            st.warning('Por favor, escribe una consulta.')
-            return
+    # if st.button('Enviar'):
+    #     if not consulta.strip():
+    #         st.warning('Por favor, escribe una consulta.')
+    #         return
 
+<<<<<<< HEAD
         st.info('🔍 Procesando...')
         response = orchestrator.diagnosticar(consulta)
         st.write(response)
@@ -104,6 +119,24 @@ def main():
         # st.write(f"Enfermedades: {enfermedades}")
 
         # # Paso 3: generar embedding
+=======
+    #     st.info('🔍 Procesando...')
+
+    #     # Paso 1: limpiar consulta
+    #     texto_limpio = processor.limpiar_consulta(consulta)
+    #     st.subheader("🧹 Consulta procesada:")
+    #     st.write(texto_limpio)
+
+    #     # Paso 2: extraer entidades médicas
+    #     entidades = processor.extraer_entidades(texto_limpio)
+    #     sintomas = entidades.get("sintomas", [])
+    #     enfermedades = entidades.get("enfermedades", [])
+    #     st.subheader("🧠 Entidades médicas detectadas:")
+    #     st.write(f"Síntomas: {sintomas}")
+    #     st.write(f"Enfermedades: {enfermedades}")
+
+        # Paso 3: generar embedding
+>>>>>>> ef49f87 (add ejemplo_comsulta param to document db)
         # entradas = sintomas + enfermedades
         # if not entradas:
         #     st.warning("No se detectaron síntomas ni enfermedades para continuar.")
