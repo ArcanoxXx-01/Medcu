@@ -2,16 +2,19 @@ import random
 
 class OrquestadorMedico:
     def __init__(self):
+        self.diagnostic = "Perdón, aún no he sido capaz de generar un diagóstico."
+        " Podrías volver a intentarlo explicando detalladamente los síntomas que presentas"
+
+    def diagnose(self, 
+            sintomas_presentes:         list[str], 
+            enfermedades_presentes:     list[str], 
+            sintomas_excluidos:         list[str] = [],
+            enfermedades_excluidas:     list[str] = [],
+            consulta_original:          str = "No hay consulta"
+            ) -> str:
+        """
+        Genera un diagnóstico
+        """
         pass
     
-    def inferir_especialidad(self, sintomas: list[str], enfermedades: list[str]) -> str:
-        """
-        Simulación: escoge una especialidad médica en función de síntomas (mejorable con LLM real).
-        """
-        pass
-
-    def diagnosticar(self, sintomas: list[str], enfermedades: list[str], contexto_docs: list[dict]) -> str:
-        """
-        Simulación: genera un diagnóstico ficticio (se reemplazará por agente o LLM).
-        """
-        pass
+    
