@@ -9,7 +9,7 @@ class DocumentStore:
     Cada hilo mantiene su propia conexión a la base de datos.
     """
 
-    def __init__(self, db_path: str):
+    def __init__(self, db_path: str ="data/documents.db"):
         self.db_path = db_path
         self._local = threading.local()
         self._init_schema()
@@ -46,6 +46,7 @@ class DocumentStore:
                 primeros_auxilios TEXT,
                 no_se_debe TEXT,
                 nombres_alternativos TEXT,
+                ejemplo_comsulta TEXT,
                 timestamp TEXT NOT NULL
             )
         """)
@@ -54,8 +55,13 @@ class DocumentStore:
         conn.close()
 
     def was_url_downloaded(self, url: str) -> bool:
-        """
-        Verifica si una URL ya ha sido descargada previamente.
+        """Verifica si una URL ya ha sido descargada previamente.
+
+        Args:
+            url (str): url del artículo
+
+        Returns:
+            bool: representa si ya se descargó el artículo
         """
         conn = self._get_connection()
         cursor = conn.cursor()
@@ -64,7 +70,10 @@ class DocumentStore:
 
     def record_url_download(self, url: str):
         """
-        Registra que una URL fue descargada, con timestamp actual.
+        Registra que una **URL** fue descargada, con **`timestamp`** actual.
+        
+        Args:
+            url (str): url del artículo
         """
         conn = self._get_connection()
         cursor = conn.cursor()
@@ -82,7 +91,8 @@ class DocumentStore:
         sintomas: Optional[str],
         primeros_auxilios: Optional[str],
         no_se_debe: Optional[str],
-        nombres_alternativos: Optional[str]
+        nombres_alternativos: Optional[str],
+        ejemplo_comsulta: Optional[str]
     ):
         """
         Inserta o actualiza un documento médico completo.
@@ -92,7 +102,7 @@ class DocumentStore:
         cursor.execute("""
             INSERT OR REPLACE INTO documents (
                 url, titulo, causas, sintomas, primeros_auxilios,
-                no_se_debe, nombres_alternativos, timestamp
+                no_se_debe, nombres_alternativos, ejemplo_comsulta, timestamp
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             url,
@@ -102,16 +112,19 @@ class DocumentStore:
             primeros_auxilios or "",
             no_se_debe or "",
             nombres_alternativos or "",
+            ejemplo_comsulta or "",
             datetime.utcnow().isoformat()
         ))
         conn.commit()
 
-    def get_html_path(self, url: str) -> str:
+    def get_html_path(url: str) -> str:
         """
         Devuelve la ruta local al archivo HTML asociado a la URL dada.
         Asume un patrón de almacenamiento basado en el hash de la URL.
         """
         import os
-        import hashlib
-        filename = hashlib.sha1(url.encode()).hexdigest() + ".html"
-        return os.path.join("data", "html", filename)
+        return os.path.join("data", "html_docs", url.split('/')[-1])
+
+db = DocumentStore("prueba.db")
+
+db.upsert_document()

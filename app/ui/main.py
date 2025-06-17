@@ -44,29 +44,29 @@ def main():
         st.write(f"Enfermedades: {enfermedades}")
 
         # Paso 3: generar embedding
-        entradas = sintomas + enfermedades
-        if not entradas:
-            st.warning("No se detectaron síntomas ni enfermedades para continuar.")
-            return
-        embeddings = embedder.embed_texts([" ".join(entradas)])
-        st.write(embeddings)
+        # entradas = sintomas + enfermedades
+        # if not entradas:
+        #     st.warning("No se detectaron síntomas ni enfermedades para continuar.")
+        #     return
+        # embeddings = embedder.embed_texts([" ".join(entradas)])
+        # st.write(embeddings)
         
-    #     # # Paso 4: recuperar información
-    #     # documentos = retriever.retrieve(embeddings)
-    #     # if not documentos:
-    #     #     st.warning("⚠️ No se encontró información en la base vectorial. Buscando en internet...")
-    #     #     # documentos = buscar_en_internet(sintomas, enfermedades)
+        # Paso 4: recuperar información
+        # documentos = retriever.retrieve(embeddings)
+        # if not documentos:
+            # st.warning("⚠️ No se encontró información en la base vectorial. Buscando en internet...")
+            # documentos = buscar_en_internet(sintomas, enfermedades)
 
-    #     # st.subheader("📄 Documentos relevantes:")
-    #     # for i, doc in enumerate(documentos, 1):
-    #     #     st.markdown(f"**Doc {i}:** {doc.get('texto', '')[:300]}...")
+        st.subheader("📄 Buscando Información relevante...")
+        # for i, doc in enumerate(documentos, 1):
+        #     st.markdown(f"**Doc {i}:** {doc.get('texto', '')[:300]}...")
 
-    #     # # Paso 5: orquestador
-    #     # especialidad = orquestador.inferir_especialidad(sintomas, enfermedades)
-    #     # diagnostico = orquestador.diagnosticar(sintomas, enfermedades, documentos)
+        # # Paso 5: orquestador
+        # especialidad = orquestador.inferir_especialidad(sintomas, enfermedades)
+        # diagnostico = orquestador.diagnosticar(sintomas, enfermedades, documentos)
 
-    #     # st.subheader("🏥 Especialidad inferida:")
-    #     # st.write(especialidad)
+        # st.subheader("🏥 Especialidad inferida:")
+        # st.write(especialidad)
 
-    #     # st.subheader("✅ Diagnóstico preliminar:")
-    #     # st.write(diagnostico)
+        # st.subheader("✅ Diagnóstico preliminar:")
+        # st.write(diagnostico)
