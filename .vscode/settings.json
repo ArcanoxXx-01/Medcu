@@ -7,5 +7,6 @@
         "./app/agents/crawler_agent/scraper",
         "./app/agents/crawler_agent/database",
         "./app/agents/crawler_agent/processor"
-    ]
+    ],
+    "python.analysis.autoImportCompletions": true
 }
