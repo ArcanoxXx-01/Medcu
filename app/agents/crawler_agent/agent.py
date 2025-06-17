@@ -1,8 +1,6 @@
 import threading, queue, time, os
 from typing import Dict, List
 
-import embeddings
-
 from .database.doc_store import DocumentStore
 from .database.vector_store import VectorStore
 from .scraper.page_scraper import scrape_article
@@ -16,10 +14,7 @@ from app.config import EMBEDDING_URL, FIREWORKS_EMBEDDING_MODEL, FIREWORKS_API_K
 class Crawler:
     def __init__(self, sleep_interval: float = 1.0):
         self.document_store = DocumentStore()
-        self.vector_store = VectorStore(
-            use_faiss = True,
-            faiss_index_path = "data/index.faiss"
-        )
+        self.vector_store = VectorStore( use_faiss = True)
         self.embedding_generator = EmbeddingGenerator(
             model_id=FIREWORKS_EMBEDDING_MODEL,
             api_key=FIREWORKS_API_KEY,
@@ -102,7 +97,7 @@ class Crawler:
                         sintomas=sections.get("sintomas", ""),
                         primeros_auxilios=sections.get("primeros_auxilios", ""),
                         no_se_debe=sections.get("no_se_debe", ""),
-                        ejemplo_comsulta=sections.get("ejemplo_comsulta",""),
+                        ejemplo_consulta=sections.get("ejemplo_consulta",""),
                         nombres_alternativos=sections.get("nombres_alternativos", "")
                     )
                     self.parsed_queue.put((url, sections))
@@ -134,46 +129,41 @@ class Crawler:
             url (str): URL del artículo original.
             sections (Dict[str, str]): Diccionario con las secciones del artículo.
         """
-        x = chunk_sections(sections)
-        chunks = x[0]
-        metadatas = x[1]
+        embeddings = []
+        chunks, metadatas = chunk_sections(sections)
+        
         if not chunks:
             return
 
-        for i, chunk in enumerate(chunks):
-            try:
-                embedding = self.embedding_generator.embed_texts(chunk)
-            # except Exception as e:
-            #     print(f"Error al generar embedding {i} de {url}: {e}")
-                
-                metadata = metadatas[i] if i < len(metadatas) else {}
-
+        try:
+            for batch in batch_chunks(chunks):
+                for retry in range(5):
+                    try:
+                        batch_embeddings = self.embedding_generator.embed_texts(batch)
+                        embeddings.extend(batch_embeddings)
+                        break  # salir del ciclo de retry si tuvo éxito
+                    except Exception as e:
+                        wait = 2 ** retry
+                        print(f"Error (intento {retry+1}/5): {e}. Reintentando en {wait}s...")
+                        time.sleep(wait)
+                else:
+                    print("Fallo permanente al generar embeddings para un batch.")
+        except Exception as e:
+            print(f"Error inesperado al generar embeddings: {e}")
+            
+        for idx, (chunk, embedding, meta) in enumerate(zip(chunks, embeddings, metadatas)):
+            # try:
                 self.vector_store.upsert_vector(
                     url=url,
-                    chunk_index=i,
+                    chunk_index=idx,
                     text_chunk=chunk,
                     embedding=embedding,
-                    nombre=metadata.get("titulo") or sections.get("titulo", ""),
-                    causa=metadata.get("causas") or sections.get("causas", ""),
-                    sintoma=metadata.get("sintomas") or sections.get("sintomas", "")
+                    nombre=meta.get("nombre"),
+                    causa=meta.get("causa"),
+                    sintoma=meta.get("sintoma")
                 )
-            
-            except Exception as e:
-                print(f"Error al procesar el chunk {i} de {url.split('/')[-1]}: {e}")
-
-            for idx, (chunk, embedding, meta) in enumerate(zip(chunks, embeddings, metadatas)):
-                try:
-                    self.vector_store.upsert_vector(
-                        url=url,
-                        chunk_index=idx,
-                        text_chunk=chunk,
-                        embedding=embedding,
-                        nombre=meta.get("nombre"),
-                        causa=meta.get("causa"),
-                        sintoma=meta.get("sintoma")
-                    )
-                except Exception as e:
-                    print(f"[embedding_worker] Error almacenando vector chunk {idx} para {url}: {e}")
+            # except Exception as e:
+            #     print(f"[embedding_worker] Error almacenando vector chunk {idx} para {url.split('/')[-1]}: {e}")
 
     def process_html_directory(self, html_dir: str = "data/html_docs/"):
         """
@@ -183,40 +173,41 @@ class Crawler:
         Args:
             html_dir (str): Ruta al directorio que contiene los archivos HTML.
         """
-        for filename in os.listdir(html_dir)[0:1]:
+        for filename in os.listdir(html_dir):
             if not filename.endswith(".html"):
                 continue
             print(f"Procesando articulo: {filename}")
             filepath = os.path.join(html_dir, filename)
             dummy_url = f"https://medlineplus.gov/spanish/ency/article/{filename}"
 
-            try:
-                with open(filepath, "r", encoding="utf-8") as f:
-                    html = f.read()
+            # try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                html = f.read()
 
-                if not html:
-                    print(f"Articulo {filename} vacio o corrupto")
-                    continue
-                
-                secciones = extract_relevant_sections(html)
-                if not secciones:
-                    print(f"Advertencia: no se pudieron extraer secciones del articulos {filename}")
-                    continue
+            if not html:
+                print(f"Articulo {filename} vacio o corrupto")
+                continue
+            
+            secciones = extract_relevant_sections(html)
+            if not secciones:
+                print(f"Advertencia: no se pudieron extraer secciones del articulos {filename}")
+                continue
 
-                self.document_store.upsert_document(
-                    url=dummy_url,
-                    titulo=secciones.get("titulo", ""),
-                    causas=secciones.get("causas", ""),
-                    sintomas=secciones.get("sintomas", ""),
-                    primeros_auxilios=secciones.get("primeros_auxilios", ""),
-                    no_se_debe=secciones.get("no_se_debe", ""),
-                    nombres_alternativos=secciones.get("nombres_alternativos", "")
-                )
+            self.document_store.upsert_document(
+                url=dummy_url,
+                titulo=secciones.get("titulo", ""),
+                causas=secciones.get("causas", ""),
+                sintomas=secciones.get("sintomas", ""),
+                primeros_auxilios=secciones.get("primeros_auxilios", ""),
+                no_se_debe=secciones.get("no_se_debe", ""),
+                ejemplo_consulta=secciones.get("ejemplo_consulta", ""),
+                nombres_alternativos=secciones.get("nombres_alternativos", "")
+            )
 
-                # self._process_and_store_chunks(dummy_url, secciones)
+            self._process_and_store_chunks(dummy_url, secciones)
 
-            except Exception as e:
-                print(f"Error procesando {filename}: {e}")
+            # except Exception as e:
+            #     print(f"Error procesando {filename}: {e}")
 
     def flush_remaining_tasks(self):
         try:
@@ -227,3 +218,19 @@ class Crawler:
             self.parsed_queue.join()
         except Exception:
             pass
+
+
+# ========== Util ===========
+
+def batch_chunks(chunks, batch_size=128):
+    """Agrupar los chunks en grupos de 128 chunks para las peticiones
+
+    Args:
+        chunks (list): lista de todos los chunks
+        batch_size (int, optional): tamaño de los bloques en que se agruparan los chunks.
+
+    Yields:
+        retorna cada uno de los bloques de chunks
+    """
+    for i in range(0, len(chunks), batch_size):
+        yield chunks[i:i + batch_size]
