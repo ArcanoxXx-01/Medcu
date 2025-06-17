@@ -1,4 +1,3 @@
-from ast import With
 import threading
 import sqlite3
 import numpy as np
@@ -17,8 +16,8 @@ class VectorStore:
     def __init__(
         self,
         db_path: str ="data/embeddings.db",
-        faiss_index_path: Optional[str] = None,
-        embedding_dim: int = 1536,
+        faiss_index_path: Optional[str] = "data/embeddings.index",
+        embedding_dim: int = 768,
         use_faiss: bool = True
     ):
         self.db_path = db_path

@@ -46,7 +46,7 @@ class DocumentStore:
                 primeros_auxilios TEXT,
                 no_se_debe TEXT,
                 nombres_alternativos TEXT,
-                ejemplo_comsulta TEXT,
+                ejemplo_consulta TEXT,
                 timestamp TEXT NOT NULL
             )
         """)
@@ -132,7 +132,7 @@ class DocumentStore:
         primeros_auxilios: Optional[str],
         no_se_debe: Optional[str],
         nombres_alternativos: Optional[str],
-        ejemplo_comsulta: Optional[str]
+        ejemplo_consulta: Optional[str]
     ):
         """
         Inserta o actualiza un documento médico completo.
@@ -142,8 +142,8 @@ class DocumentStore:
         cursor.execute("""
             INSERT OR REPLACE INTO documents (
                 url, titulo, causas, sintomas, primeros_auxilios,
-                no_se_debe, nombres_alternativos, ejemplo_comsulta, timestamp
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                no_se_debe, nombres_alternativos, ejemplo_consulta, timestamp
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             url,
             titulo or "",
@@ -152,7 +152,7 @@ class DocumentStore:
             primeros_auxilios or "",
             no_se_debe or "",
             nombres_alternativos or "",
-            ejemplo_comsulta or "",
+            ejemplo_consulta or "",
             datetime.utcnow().isoformat()
         ))
         conn.commit()
@@ -165,6 +165,6 @@ class DocumentStore:
         import os
         return os.path.join("data", "html_docs", url.split('/')[-1])
 
-db = DocumentStore("prueba.db")
+# db = DocumentStore("prueba.db")
 
-db.upsert_document()
+# db.upsert_document()

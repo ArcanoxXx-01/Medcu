@@ -13,7 +13,7 @@ def extract_relevant_sections(html_content: str) -> Dict[str, str]:
         Dict[str, str]:   
             Diccionario con la información extraída. Claves posibles:
             
-            'titulo', 'causas', 'sintomas', 'primeros_auxilios', 'no_se_debe', ejemplo_comsulta, 'nombres_alternativos'.
+            'titulo', 'causas', 'sintomas', 'primeros_auxilios', 'no_se_debe', 'ejemplo_comsulta', 'nombres_alternativos'.
             
             * Los valores serán cadenas vacías si no se encuentran las secciones.
     """
@@ -56,14 +56,19 @@ def extract_relevant_sections(html_content: str) -> Dict[str, str]:
 
             if section_name == 'Causas':
                 result['causas'] = correct_text(content)
+                
             elif section_name == 'Síntomas':
                 result['sintomas'] = correct_text(content)
+                
             elif section_name == 'Primeros auxilios':
                 result['primeros_auxilios'] = correct_text(content)
+                
             elif section_name == 'No se debe':
                 result['no_se_debe'] = correct_text(content)
+                
             elif section_name == 'Lo que se puede esperar en el consultorio médico':
                 result['ejemplo_comsulta'] = correct_text(content)
+                
             elif section_name == 'Nombres alternativos':
                 result['nombres_alternativos'] = correct_text(content)
 
