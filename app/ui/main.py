@@ -1,4 +1,4 @@
-import streamlit as st
+# import streamlit as st
 import threading
 from app.core.processor import FireworksProcessor
 from app.core.embeddings import EmbeddingGenerator
@@ -11,37 +11,37 @@ def main():
     processor = FireworksProcessor(FIREWORKS_MODEL_ID, FIREWORKS_API_KEY, API_URL)
     embedder = EmbeddingGenerator("fireworks", FIREWORKS_EMBEDDING_MODEL, FIREWORKS_API_KEY, EMBEDDING_URL)
     # orquestador = OrquestadorMedico()
-    # crawler = Crawler()
+    crawler = Crawler()
     # t_crawler = threading.Thread(target=crawler.run, daemon=True)
     # t_crawler.start()
-    # crawler.process_html_directory()
+    crawler.process_html_directory()
     
     
     # Compoenentes de la UI
-    st.set_page_config(page_title='Medicub')
-    st.title('🩺 Asistente Médico con IA')
+    # st.set_page_config(page_title='Medicub')
+    # st.title('🩺 Asistente Médico con IA')
 
-    consulta = st.text_area('Describe tus síntomas o consulta médica:', height=150)
+    # consulta = st.text_area('Describe tus síntomas o consulta médica:', height=150)
 
-    if st.button('Enviar'):
-        if not consulta.strip():
-            st.warning('Por favor, escribe una consulta.')
-            return
+    # if st.button('Enviar'):
+    #     if not consulta.strip():
+    #         st.warning('Por favor, escribe una consulta.')
+    #         return
 
-        st.info('🔍 Procesando...')
+    #     st.info('🔍 Procesando...')
 
-        # Paso 1: limpiar consulta
-        texto_limpio = processor.limpiar_consulta(consulta)
-        st.subheader("🧹 Consulta procesada:")
-        st.write(texto_limpio)
+    #     # Paso 1: limpiar consulta
+    #     texto_limpio = processor.limpiar_consulta(consulta)
+    #     st.subheader("🧹 Consulta procesada:")
+    #     st.write(texto_limpio)
 
-        # Paso 2: extraer entidades médicas
-        entidades = processor.extraer_entidades(texto_limpio)
-        sintomas = entidades.get("sintomas", [])
-        enfermedades = entidades.get("enfermedades", [])
-        st.subheader("🧠 Entidades médicas detectadas:")
-        st.write(f"Síntomas: {sintomas}")
-        st.write(f"Enfermedades: {enfermedades}")
+    #     # Paso 2: extraer entidades médicas
+    #     entidades = processor.extraer_entidades(texto_limpio)
+    #     sintomas = entidades.get("sintomas", [])
+    #     enfermedades = entidades.get("enfermedades", [])
+    #     st.subheader("🧠 Entidades médicas detectadas:")
+    #     st.write(f"Síntomas: {sintomas}")
+    #     st.write(f"Enfermedades: {enfermedades}")
 
         # Paso 3: generar embedding
         # entradas = sintomas + enfermedades
@@ -57,7 +57,7 @@ def main():
             # st.warning("⚠️ No se encontró información en la base vectorial. Buscando en internet...")
             # documentos = buscar_en_internet(sintomas, enfermedades)
 
-        st.subheader("📄 Buscando Información relevante...")
+        # st.subheader("📄 Buscando Información relevante...")
         # for i, doc in enumerate(documentos, 1):
         #     st.markdown(f"**Doc {i}:** {doc.get('texto', '')[:300]}...")
 
