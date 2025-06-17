@@ -135,16 +135,17 @@ class Crawler:
         if not chunks:
             return
 
+        chunks = [chunk for chunk in chunks if self.vector_store.get_by_chunk(chunk) is not None]
         try:
             for batch in batch_chunks(chunks):
-                for retry in range(5):
+                for retry in range(6):
                     try:
                         batch_embeddings = self.embedding_generator.embed_texts(batch)
                         embeddings.extend(batch_embeddings)
                         break  # salir del ciclo de retry si tuvo éxito
                     except Exception as e:
                         wait = 2 ** retry
-                        print(f"Error (intento {retry+1}/5): {e}. Reintentando en {wait}s...")
+                        print(f"Error (intento {retry+1}/6): {e}. Reintentando en {wait}s...")
                         time.sleep(wait)
                 else:
                     print("Fallo permanente al generar embeddings para un batch.")

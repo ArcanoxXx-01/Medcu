@@ -146,6 +146,26 @@ class VectorStore:
                 results.append((row["url"], row["chunk_index"], row["text_chunk"], float(dist)))
         return results
 
+    def get_by_chunk(self, chunk: str) -> Optional[dict]:
+        """Busca si existe alguna fila en la base de datos que tenga exactamente el mismo texto en la columna text_chunk.
+
+        Args:
+            chunk (str): Texto por el cual se compararán los chunks de la base de datos.
+
+        Returns:
+            Optional[dict]: Retorna la fila como diccionario si se encuentra una coincidencia exacta, o None en caso contrario.
+        """
+        conn = sqlite3.connect(self.db_path)
+        conn.row_factory = sqlite3.Row  # Esto es para acceder a los resultados como diccionarios
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM vectors WHERE text_chunk = ?", (chunk,))
+        row = cursor.fetchone()
+
+        conn.close()
+
+        return dict(row) if row else None
+
     def save_faiss_index(self, path: Optional[str] = None):
         """
         Guarda el índice FAISS en disco para persistencia.
