@@ -136,6 +136,7 @@ class Crawler:
             return
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         chunks = [chunk for chunk in chunks if self.vector_store.get_by_chunk(chunk) is not None]
         try:
             for batch in batch_chunks(chunks):
@@ -145,6 +146,12 @@ class Crawler:
             for batch in batch_chunks(chunks):
                 for retry in range(5):
 >>>>>>> 9e4a382 (Bug fixes in the Crawler)
+=======
+        chunks = [chunk for chunk in chunks if self.vector_store.get_by_chunk(chunk) is not None]
+        try:
+            for batch in batch_chunks(chunks):
+                for retry in range(6):
+>>>>>>> bf9eccf (Knowledge Graph)
                     try:
                         batch_embeddings = self.embedding_generator.embed_texts(batch)
                         embeddings.extend(batch_embeddings)
@@ -152,10 +159,14 @@ class Crawler:
                     except Exception as e:
                         wait = 2 ** retry
 <<<<<<< HEAD
+<<<<<<< HEAD
                         print(f"Error (intento {retry+1}/6): {e}. Reintentando en {wait}s...")
 =======
                         print(f"Error (intento {retry+1}/5): {e}. Reintentando en {wait}s...")
 >>>>>>> 9e4a382 (Bug fixes in the Crawler)
+=======
+                        print(f"Error (intento {retry+1}/6): {e}. Reintentando en {wait}s...")
+>>>>>>> bf9eccf (Knowledge Graph)
                         time.sleep(wait)
                 else:
                     print("Fallo permanente al generar embeddings para un batch.")

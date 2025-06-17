@@ -19,6 +19,7 @@ class Orchestrator:
         self.top_k = top_k
         self.feedback_gain_threshold = feedback_gain_threshold
 
+<<<<<<< HEAD
     def diagnosticar(self, consulta_original: str):
         print("comenzo a procesar la consulta")
         # Paso 1: Limpieza de texto
@@ -135,3 +136,23 @@ class Orchestrator:
             resultado.extend(valores)
         return resultado
 
+=======
+class OrquestadorMedico:
+    def __init__(self):
+        self.diagnostic = "Perdón, aún no he sido capaz de generar un diagóstico."
+        " Podrías volver a intentarlo explicando detalladamente los síntomas que presentas"
+
+    def diagnose(self, 
+            sintomas_presentes:         list[str], 
+            enfermedades_presentes:     list[str], 
+            sintomas_excluidos:         list[str] = [],
+            enfermedades_excluidas:     list[str] = [],
+            consulta_original:          str = "No hay consulta"
+            ) -> str:
+        """
+        Genera un diagnóstico
+        """
+        pass
+    
+    
+>>>>>>> bf9eccf (Knowledge Graph)

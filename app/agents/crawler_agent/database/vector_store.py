@@ -169,7 +169,11 @@ class VectorStore:
         conn.row_factory = sqlite3.Row  # Esto es para acceder a los resultados como diccionarios
         cursor = conn.cursor()
 
+<<<<<<< HEAD
         cursor.execute("SELECT nombre, causa, sintoma FROM vectors WHERE text_chunk = ?", (chunk,))
+=======
+        cursor.execute("SELECT * FROM vectors WHERE text_chunk = ?", (chunk,))
+>>>>>>> bf9eccf (Knowledge Graph)
         row = cursor.fetchone()
 
         conn.close()
