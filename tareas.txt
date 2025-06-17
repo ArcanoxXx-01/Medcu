@@ -1,0 +1,12 @@
+
+-Crear base de datos a partir de partir de los html
+-Crear base vectorial para las comparaciones de los embeddings
+-Ranking de embeddings
+-Crear grafos de conocimientos a partir de la base de datos
+
+-Crear la heuristica para dar peso a las aristas
+-Buscar base de datos de historias clinicas para darle peso a las aristas del diagnosticador
+
+-Crear los prompts para generar preuntas y respuestas
+
+-Logica del Orquestador ( n-capas )

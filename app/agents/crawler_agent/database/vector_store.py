@@ -16,7 +16,7 @@ class VectorStore:
 
     def __init__(
         self,
-        db_path: str,
+        db_path: str ="data/embeddings.db",
         faiss_index_path: Optional[str] = None,
         embedding_dim: int = 1536,
         use_faiss: bool = True

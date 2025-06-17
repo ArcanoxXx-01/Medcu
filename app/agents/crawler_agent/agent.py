@@ -1,5 +1,7 @@
-import threading, queue, time, os, logging
+import threading, queue, time, os
 from typing import Dict, List
+
+import embeddings
 
 from .database.doc_store import DocumentStore
 from .database.vector_store import VectorStore
@@ -13,25 +15,16 @@ from app.config import EMBEDDING_URL, FIREWORKS_EMBEDDING_MODEL, FIREWORKS_API_K
 
 class Crawler:
     def __init__(self, sleep_interval: float = 1.0):
-        self.logger = logging.getLogger("Crawler")
-        if not self.logger.handlers:
-            handler = logging.StreamHandler()
-            formatter = logging.Formatter('[%(asctime)s] %(levelname)s - %(message)s')
-            handler.setFormatter(formatter)
-            self.logger.addHandler(handler)
-            self.logger.setLevel(logging.INFO)
-        self.document_store = DocumentStore(db_path="data/documents.db")
+        self.document_store = DocumentStore()
+        self.vector_store = VectorStore(
+            use_faiss = True,
+            faiss_index_path = "data/index.faiss"
+        )
         self.embedding_generator = EmbeddingGenerator(
             model_id=FIREWORKS_EMBEDDING_MODEL,
             api_key=FIREWORKS_API_KEY,
             url=EMBEDDING_URL
         )
-        self.vector_store = VectorStore(
-            db_path="data/embeddings.db",
-            use_faiss=True,
-            faiss_index_path="data/index.faiss"
-        )
-
         self.sleep_interval = sleep_interval
 
         # Colas para comunicación entre hilos
@@ -43,7 +36,7 @@ class Crawler:
         self.threads: List[threading.Thread] = []
 
     def run(self):
-        # Crear y arrancar hilos trabajadores
+        
         workers = [
             threading.Thread(target=self.scraper_worker, daemon=True),
             threading.Thread(target=self.extractor_worker, daemon=True),
@@ -80,12 +73,14 @@ class Crawler:
             for url in generate_medlineplus_urls():
                 if self.stop_event.is_set():
                     break
-                if not self.document_store.was_url_downloaded(url):
+                if self.document_store.check_url_expiration(url):
                     html = scrape_article(url)
                     if html:
                         save_html_by_article_number(url, html)
                         self.document_store.record_url_download(url)
                         self.html_queue.put((url, html))
+                else:
+                    date = self.document_store
         except Exception as e:
             print(f"[scraper_worker] Error inesperado: {e}")
         finally:
@@ -107,6 +102,7 @@ class Crawler:
                         sintomas=sections.get("sintomas", ""),
                         primeros_auxilios=sections.get("primeros_auxilios", ""),
                         no_se_debe=sections.get("no_se_debe", ""),
+                        ejemplo_comsulta=sections.get("ejemplo_comsulta",""),
                         nombres_alternativos=sections.get("nombres_alternativos", "")
                     )
                     self.parsed_queue.put((url, sections))
@@ -138,34 +134,35 @@ class Crawler:
             url (str): URL del artículo original.
             sections (Dict[str, str]): Diccionario con las secciones del artículo.
         """
-        chunks, metadatas = chunk_sections(sections)
+        x = chunk_sections(sections)
+        chunks = x[0]
+        metadatas = x[1]
         if not chunks:
             return
 
         for i, chunk in enumerate(chunks):
-            # try:
-            embedding = self.embedding_generator.embed_texts(chunk)
+            try:
+                embedding = self.embedding_generator.embed_texts(chunk)
             # except Exception as e:
-                # print(f"Error al generar embedding {i} de {url}: {e}")
-            metadata = metadatas[i] if i < len(metadatas) else {}
+            #     print(f"Error al generar embedding {i} de {url}: {e}")
+                
+                metadata = metadatas[i] if i < len(metadatas) else {}
 
-            self.vector_store.upsert_vector(
-                url=url,
-                chunk_index=i,
-                text_chunk=chunk,
-                embedding=embedding,
-                nombre=metadata.get("titulo") or sections.get("titulo", ""),
-                causa=metadata.get("causas") or sections.get("causas", ""),
-                sintoma=metadata.get("sintomas") or sections.get("sintomas", "")
-            )
-            # except Exception as e:
-                # print(f"Error al procesar chunk {i} de {url}: {e}")
-
-            embeddings = self.embedding_generator.embed_texts(chunks)
-            print(x[0:5] for x in embeddings)
+                self.vector_store.upsert_vector(
+                    url=url,
+                    chunk_index=i,
+                    text_chunk=chunk,
+                    embedding=embedding,
+                    nombre=metadata.get("titulo") or sections.get("titulo", ""),
+                    causa=metadata.get("causas") or sections.get("causas", ""),
+                    sintoma=metadata.get("sintomas") or sections.get("sintomas", "")
+                )
+            
+            except Exception as e:
+                print(f"Error al procesar el chunk {i} de {url.split('/')[-1]}: {e}")
 
             for idx, (chunk, embedding, meta) in enumerate(zip(chunks, embeddings, metadatas)):
-                # try:
+                try:
                     self.vector_store.upsert_vector(
                         url=url,
                         chunk_index=idx,
@@ -175,8 +172,8 @@ class Crawler:
                         causa=meta.get("causa"),
                         sintoma=meta.get("sintoma")
                     )
-                # except Exception as e:
-                    # print(f"[embedding_worker] Error almacenando vector chunk {idx} para {url}: {e}")
+                except Exception as e:
+                    print(f"[embedding_worker] Error almacenando vector chunk {idx} para {url}: {e}")
 
     def process_html_directory(self, html_dir: str = "data/html_docs/"):
         """
@@ -193,33 +190,33 @@ class Crawler:
             filepath = os.path.join(html_dir, filename)
             dummy_url = f"https://medlineplus.gov/spanish/ency/article/{filename}"
 
-            # try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                html = f.read()
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    html = f.read()
 
-            if not html:
-                print(f"Articulo {filename} vacio o corrupto")
-                continue
-            
-            secciones = extract_relevant_sections(html)
-            if not secciones:
-                print(f"Advertencia: no se pudieron extraer secciones del articulos {filename}")
-                continue
+                if not html:
+                    print(f"Articulo {filename} vacio o corrupto")
+                    continue
+                
+                secciones = extract_relevant_sections(html)
+                if not secciones:
+                    print(f"Advertencia: no se pudieron extraer secciones del articulos {filename}")
+                    continue
 
-            self.document_store.upsert_document(
-                url=dummy_url,
-                titulo=secciones.get("titulo", ""),
-                causas=secciones.get("causas", ""),
-                sintomas=secciones.get("sintomas", ""),
-                primeros_auxilios=secciones.get("primeros_auxilios", ""),
-                no_se_debe=secciones.get("no_se_debe", ""),
-                nombres_alternativos=secciones.get("nombres_alternativos", "")
-            )
+                self.document_store.upsert_document(
+                    url=dummy_url,
+                    titulo=secciones.get("titulo", ""),
+                    causas=secciones.get("causas", ""),
+                    sintomas=secciones.get("sintomas", ""),
+                    primeros_auxilios=secciones.get("primeros_auxilios", ""),
+                    no_se_debe=secciones.get("no_se_debe", ""),
+                    nombres_alternativos=secciones.get("nombres_alternativos", "")
+                )
 
-            self._process_and_store_chunks(dummy_url, secciones)
+                # self._process_and_store_chunks(dummy_url, secciones)
 
-            # except Exception as e:
-                # print(f"Error procesando {filename}: {e}")
+            except Exception as e:
+                print(f"Error procesando {filename}: {e}")
 
     def flush_remaining_tasks(self):
         try:

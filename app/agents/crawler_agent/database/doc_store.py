@@ -1,7 +1,7 @@
-import sqlite3
-import threading
-from datetime import datetime
+import sqlite3, threading
 from typing import Optional
+from datetime import datetime, timedelta
+
 
 class DocumentStore:
     """
@@ -82,6 +82,46 @@ class DocumentStore:
             (url, datetime.utcnow().isoformat())
         )
         conn.commit()
+
+    def check_url_expiration(self, url, time_amount, time_unit='hours'):
+        """
+        Comprueba si una URL ha expirado según el tiempo especificado.
+        
+        Args:
+            url (str): La URL a verificar
+            time_amount (int): Cantidad de tiempo
+            time_unit (str): Unidad de tiempo ('hours', 'days', 'minutes', etc.)
+            
+        Returns:
+            bool: 
+                - True si la URL no existe en la base de datos
+                - True si la URL ha expirado (timestamp + tiempo < ahora)
+                - False si la URL no ha expirado
+        """
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        # Obtener el timestamp de la URL
+        cursor.execute("""
+            SELECT timestamp FROM downloaded_urls 
+            WHERE url = ?
+        """, (url,))
+        
+        result = cursor.fetchone()
+        conn.close()
+        
+        if not result:
+            return True  # URL no existe
+        
+        # Convertir el timestamp de la base de datos a datetime
+        db_timestamp = datetime.fromisoformat(result[0])
+        
+        # Calcular el tiempo de expiración
+        time_delta = timedelta(**{time_unit: time_amount})
+        expiration_time = db_timestamp + time_delta
+        
+        # Comprobar si ha expirado
+        return datetime.now() > expiration_time
 
     def upsert_document(
         self,
