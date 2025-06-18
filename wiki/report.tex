@@ -1,0 +1,121 @@
+\documentclass{llncs}
+
+\usepackage[spanish]{babel}
+\usepackage{makeidx}
+\usepackage{graphicx}
+
+\begin{document}
+
+\mainmatter
+
+\title{ MediCub: \textit{un asistente médico impulsado por IA} }
+\titlerunning { MediCub }
+
+\author{Darío López Falcón\inst{1} \and Eduardo Brito Labrada\inst{1} \and Ernesto Abreu Peraza\inst{1}}
+\authorrunning{Darío López Falcón \and Eduardo Brito Labrada \and Ernesto Abreu Peraza}
+
+\institute{Facultad de Matemática y Computación, Universidad de La Habana}
+
+\maketitle
+
+\begin{abstract}
+
+MediCub\footnote{\url{https://github.com/ArcanoxXx-01/MediCub}} es un asistente médico basado en inteligencia artificial diseñado para apoyar a médicos durantes consultas o servir
+como herramienta de preconsulta para pacientes. El sistema simula el razonamiento clínico humano mediante etapas que incluyen
+la extracción de entidades médicas, generación de posibles diagnósticos, retroalimentación iterativa y recomendación basadas en
+pruebas.
+\keywords{inteligencia artificial, simulación, sistemas de recuperación de la información, salud}
+\end{abstract}
+
+\section{Introducción}
+
+Es muy común en muchos hospitales, que los pacientes tengan que enfrentarse a largos tiempo de espera o incertidumbre sobre la urgencia o gravedad de sus síntomas. Esta
+situación no solo incrementa la carga de trabajo para los profesionales de la salud, sino que también puede retrasar diagnósticos cruciales y afectar la calidad de la atención
+médica.
+
+Ante esta problemática, nace MediCub, un asistente médico impulsado por inteligencia artificial, diseñado con el objetivo de brindar apoyo durante las consultas clínicas y 
+funcionar como una herramienta de preconsulta para los pacientes. El sistema se enfoca en interpretar consultas escritas en lenguaje natural, analizando síntomas, antecedentes 
+médicos y dolencias reportadas por el paciente, para luego generar un prediagnóstico razonado y estructurado.
+
+A diferencia de otros sistemas existentes, MediCub no se limita a listar posibles enfermedades, sino que simula el razonamiento de un médico humano, siguiendo un proceso iterativo
+de análisis, inferencia y retroalimentación con el paciente; su funcionalidad se extiende para identificar entidades médicas relevantes (síntomas, enfermedades, tratamientos), propone
+posibles diagnósticos y realiza preguntas adicionales para refinar su comprensión del caso.
+
+Es importante destacar que MediCub no pretende sustituir al profesional de la salud, sino complementar su labor, facilitando la recolección inicial de información clínica y ofreciendo 
+una visión preliminar del caso. Con ello, se busca mejorar la eficiencia del proceso diagnóstico, optimizar el tiempo del personal médico y fortalecer el acceso a una atención más oportuna
+y personalizada.
+
+\section{Solución}
+
+La solución propuesta se basa en la simulación computacional del comportamiento de un médico humano durante una consulta clínica. El procedimiento se divide en varias etapas que permiten el correcto
+funcionamiento de esta solución:
+
+\begin{enumerate}
+  \item \textbf{Explicación inicial del paciente}: Esta etapa inicia con una consulta en lenguaje natural, en la que el paciente describe su situación médica: síntomas, antecedentes, molestias o eventos recientes
+  que le hayan sucedido y que considere importante. Esto constituye la base fundamental para las siguientes etapas.
+  \item \textbf{Extracción de entidades médicas}: El sistema emplea técnicas de procesamiento de lenguaje natural para identificar y extraer las entidades médicas relevantes del texto ingresado por 
+  el paciente, esas entidades incluyen síntomas, enfermedades conocidas, tratamientos previos, factores de riesgo, etc.
+  \item \textbf{Descarte por conocimiento médico}: Utilizando una base de conocimiento clínico estructurada, el sistema asocia las entidades extraídas con un conjunto preliminar de enfermedades compatibles (conjunto $E_1$).
+  Esta inferencia se basa en correlaciones semánticas y relaciones clínicas entre síntomas y patologías.
+  \item \textbf{Retroalimentación y acotamiento del diagnóstico}: Si la información inicial no permite determinar un diagnóstico probable, el sistema genera preguntas adicionales orientadas a reducir la ambigüedad diagnóstica.
+  Estas preguntas son seleccionadas de forma estratégica para maximizar la discriminación entre posibles enfermedades, priorizando síntomas clave.
+  \item \textbf{Etapa de iteración}: Las respuestas del paciente alimentan una nueva ronda de inferencia, actualizando el conjunto de enfermedades probables. Este ciclo de retroalimentación continúa hasta alcanzar un conjunto
+  reducido de hipótesis diagnósticas con alta probabilidad.
+  \item \textbf{Descartes por pruebas}: En una etapa posterior, se simula el razonamiento médico basado en pruebas clínicas. Aunque el sistema no puede ordenar la realización de pruebas o estudios, puede sugerir realizar pruebas
+  que resultados hipotéticos confirmarían o descartarían una enfermedad específica.
+  \item \textbf{Prediagnóstico}: Finalmente, el sistema presenta un resumen con el conjunto de enfermedades más probables, junto con las entidades detectadas, las relaciones inferidas y la justificación clínica correspondiente.
+  Este resultado se entrega como una ayuda al profesional médico o como orientación preliminar al paciente.
+\end{enumerate}
+
+Además de este diseño basado en etapas, que permite el correcto funcionamiento del sistema, se tomaron en cuenta varias consideraciones técnicas, éticas y prácticas. En primer lugar, se definió que este sistema solo actuaría como un
+asistente médico y no como sustituto de un profesional de la salud, por lo que sus funcionalidades están limitadas a brindar una orientación preliminar. Se priorizó el uso de esta herramienta para hispanohablantes, por lo que se utilizaron
+fuentes confiables y accesibles en español, como MedlinePlus\cite{medlineplus}, para garantizar que la información médica se mantenga actualizada se diseñaron componentes como el crawler y un actualizador de la base de datos. Se tuvo en cuenta
+que este sistema no solo iba a ser utilizado por usuarios con formación técnica, por lo que se utilizó una interfaz clara y comprensible así como el procesamiento de lenguaje natural. En términos de interacción, se adoptó un enfoque conversacional
+empático con preguntas claras simulando el razonamiento de un médico.
+
+\subsection{Componentes principales utilizadas}
+
+A partir de la descomposición funcional del razonamiento médico simulado, se definieron componentes esenciales para que el sistema pudiera ejecutar dicha simulación de forma efectiva y estructurada:
+
+\begin{itemize}
+  \item \textbf{Procesador de consultas}: Esta componente tiene como objetivo extraer la información médica relevante a partir de una consulta escrita en lenguaje natural. Para ello, realiza tareas de preprocesamiento como la "limpieza" del texto y la
+  extracción de entidades médicas tales como síntomas, enfermedades o antecedentes mencionados por el usuario.
+  \item \textbf{Expansor de consulta}: Este componente abarca varias etapas de razonamiento clínico automatizado y se encarga de enriquecer e interpretar la información extraída. Está compuesto por una base de metadatos vinculada a vectores indexados, un
+  generador de rankings que ordena posibles diagnósticos, un generador de preguntas para refinar la información provista por el usuario y una fase de retroalimentación que permite iterar sobre nuevas respuestas para mejorar la precisión del prediagnóstico.
+  \item \textbf{Crawler y actualizador de la base de datos}: Este agente automatizado tiene como función mantener actualizada la base documental médica del sistema, la cual se nutre principalmente de MedlinePlus\cite{medlineplus} en español. Este módulo está compuesto
+  por varios submódulos:
+  \begin{itemize}
+    \item Un scraper de artículos, que obtiene el código HTML de nuevos documentos o de aquellos cuya última descarga es obsoleta.
+    \item Un extractor de información, encargado de procesar dicho HTML para identificar elementos claves como causas, síntomas, nombres alternativos, procedimientos a realizar y contraindicaciones.
+    \item Un chunker, que divide la información extraída en fragmentos o "chunks", cada uno acompañado de su correspondiente metadato.
+    \item Un modelo de embedding que genera vectores representativos de cada chunk para su posterior indexación y recuperación. En este trabajo, debido a limitaciones de recursos, se utilizó un modelo gratuito ofrecido por Fireworks\cite{fireworks_ai}
+  \end{itemize}
+
+\end{itemize}
+
+\begin{figure}  
+\begin{center}
+  \includegraphics[scale=0.25]{assistant_workflow}
+\end{center}
+\caption{Flujo de trabajo del sistema}
+\end{figure}
+  
+%
+% ---- Bibliography ----
+%
+\begin{thebibliography}{5}
+%
+\bibitem {medlineplus}
+MedlinePlus. (s.f.). \textit{Biblioteca Nacional de Medicina de EE.UU en Español}. Disponible en
+\url{https://medlineplus.gov/spanish/}.
+
+\bibitem{simulacion}
+García Garrido, L., Martí Orosa, L., Pérez Sánchez, L.: \textit{Temas de Simulación}. Facultad de Matemática y Computación, Universidad de La Habana (s.f.)
+
+\bibitem{fireworks_ai}
+Fireworks.ai. (2025). \textit{Fireworks.ai}. Disponible en: \url{https://fireworks.ai/}.
+
+
+\end{thebibliography}
+
+\end{document}
