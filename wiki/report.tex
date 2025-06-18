@@ -73,6 +73,9 @@ fuentes confiables y accesibles en español, como MedlinePlus\cite{medlineplus},
 que este sistema no solo iba a ser utilizado por usuarios con formación técnica, por lo que se utilizó una interfaz clara y comprensible así como el procesamiento de lenguaje natural. En términos de interacción, se adoptó un enfoque conversacional
 empático con preguntas claras simulando el razonamiento de un médico.
 
+Para validar las respuestas dadas por el sistema se utilizaron tanto consultas manuales, que permitieron tener retroalimentación más directa de qué tan cómodo iba a ser para el usuario interactuar con el sistema; y se utilizaron pruebas automáticas
+extraídas de Fisterra\cite{fisterra}.
+
 \subsection{Componentes principales utilizadas}
 
 A partir de la descomposición funcional del razonamiento médico simulado, se definieron componentes esenciales para que el sistema pudiera ejecutar dicha simulación de forma efectiva y estructurada:
@@ -90,8 +93,16 @@ A partir de la descomposición funcional del razonamiento médico simulado, se d
     \item Un chunker, que divide la información extraída en fragmentos o "chunks", cada uno acompañado de su correspondiente metadato.
     \item Un modelo de embedding que genera vectores representativos de cada chunk para su posterior indexación y recuperación. En este trabajo, debido a limitaciones de recursos, se utilizó un modelo gratuito ofrecido por Fireworks\cite{fireworks_ai}
   \end{itemize}
-
+  \item \textbf{Orquestador}: esta es la componente fundamental del sistema ya que coordina la interacción entre los distintos componentes del mismo, en cada momento decide que módulo debe activarse en dependencia del estado actual de la información extraída hasta el momento.
 \end{itemize}
+
+\section{Conclusiones}
+
+La implementación del sistema MediCub ha permitido alcanzar importantes logros en la simulación del razonamiento clínico mediante inteligencia artificial. Se logró diseñar una arquitectura modular capaz de procesar consultas en lenguaje natural, extraer entidades médicas relevantes
+y generar prediagnósticos fundamentados, incorporando un mecanismo de retroalimentación iterativa. Además, se integró una base de conocimientos médica actualizada automáticamente a partir de fuentes confiables lo que proporciona una sólida referencia para la toma de decisiones.
+
+No obstante, se identifican varias limitaciones que condicionan la efectivadad del sistema. En primer lugar, la calidad de las respuestas generadadas depende de la claridad y precisión de la entrada proporcionada por el usuario, lo cual puede limitar la utilidad del sistema en escenarios
+donde el paciente no pueda expresar sus síntomas de forma técnica o estructurada.
 
 \begin{figure}  
 \begin{center}
@@ -115,6 +126,8 @@ García Garrido, L., Martí Orosa, L., Pérez Sánchez, L.: \textit{Temas de Sim
 \bibitem{fireworks_ai}
 Fireworks.ai. (2025). \textit{Fireworks.ai}. Disponible en: \url{https://fireworks.ai/}.
 
+\bibitem{fisterra}
+Fisterra (2025). \textit{Información clínica para profesionales de la salud}. Dispnible en \url{https://www.fisterra.com/}.
 
 \end{thebibliography}
 
