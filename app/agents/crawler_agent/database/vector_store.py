@@ -170,10 +170,14 @@ class VectorStore:
         cursor = conn.cursor()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         cursor.execute("SELECT nombre, causa, sintoma FROM vectors WHERE text_chunk = ?", (chunk,))
 =======
         cursor.execute("SELECT * FROM vectors WHERE text_chunk = ?", (chunk,))
 >>>>>>> bf9eccf (Knowledge Graph)
+=======
+        cursor.execute("SELECT nombre, causa, sintoma FROM vectors WHERE text_chunk = ?", (chunk,))
+>>>>>>> 4a9bfae (All pipeline)
         row = cursor.fetchone()
 
         conn.close()

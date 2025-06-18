@@ -1,9 +1,14 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import streamlit as st
 import traceback
 =======
 # import streamlit as st
 >>>>>>> ef49f87 (add ejemplo_comsulta param to document db)
+=======
+import streamlit as st
+import traceback
+>>>>>>> 4a9bfae (All pipeline)
 import threading
 
 from app.agents.orchestrator.orchestrator import Orchestrator
@@ -21,6 +26,9 @@ def main():
     
     # Inicializar componentes
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4a9bfae (All pipeline)
     process_model = FireworksProcessor(
         model_id=FIREWORKS_MODEL_ID,
         api_key=FIREWORKS_API_KEY,
@@ -75,6 +83,7 @@ def main():
         feedback_gain_threshold = 1
     )
     
+<<<<<<< HEAD
     crawler = Crawler()
     t_crawler = threading.Thread(target=crawler.run, daemon=True)
     # t_crawler.start()
@@ -82,25 +91,33 @@ def main():
     processor = FireworksProcessor(FIREWORKS_MODEL_ID, FIREWORKS_API_KEY, API_URL)
     embedder = EmbeddingGenerator("fireworks", FIREWORKS_EMBEDDING_MODEL, FIREWORKS_API_KEY, EMBEDDING_URL)
     # orquestador = OrquestadorMedico()
+=======
+>>>>>>> 4a9bfae (All pipeline)
     crawler = Crawler()
-    # t_crawler = threading.Thread(target=crawler.run, daemon=True)
+    t_crawler = threading.Thread(target=crawler.run, daemon=True)
     # t_crawler.start()
+<<<<<<< HEAD
     crawler.process_html_directory()
 >>>>>>> ef49f87 (add ejemplo_comsulta param to document db)
+=======
+>>>>>>> 4a9bfae (All pipeline)
     
     
     # Compoenentes de la UI
-    # st.set_page_config(page_title='Medicub')
-    # st.title('🩺 Asistente Médico con IA')
+    st.set_page_config(page_title='Medicub')
+    st.title('🩺 Asistente Médico con IA')
 
-    # consulta = st.text_area('Describe tus síntomas o consulta médica:', height=150)
+    consulta = st.text_area('Describe tus síntomas o consulta médica:', height=150)
 
-    # if st.button('Enviar'):
-    #     if not consulta.strip():
-    #         st.warning('Por favor, escribe una consulta.')
-    #         return
+    if st.button('Enviar'):
+        if not consulta.strip():
+            st.warning('Por favor, escribe una consulta.')
+            return
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4a9bfae (All pipeline)
         st.info('🔍 Procesando...')
         response = orchestrator.diagnosticar(consulta)
         st.write(response)
@@ -109,6 +126,7 @@ def main():
         # texto_limpio = process_model.limpiar_consulta(consulta)
         # st.subheader("🧹 Consulta procesada:")
         # st.write(texto_limpio)
+<<<<<<< HEAD
 
         # # Paso 2: extraer entidades médicas
         # entidades = process_model.extraer_entidades(texto_limpio)
@@ -121,12 +139,18 @@ def main():
         # # Paso 3: generar embedding
 =======
     #     st.info('🔍 Procesando...')
+=======
+>>>>>>> 4a9bfae (All pipeline)
 
-    #     # Paso 1: limpiar consulta
-    #     texto_limpio = processor.limpiar_consulta(consulta)
-    #     st.subheader("🧹 Consulta procesada:")
-    #     st.write(texto_limpio)
+        # # Paso 2: extraer entidades médicas
+        # entidades = process_model.extraer_entidades(texto_limpio)
+        # sintomas = entidades.get("sintomas", [])
+        # enfermedades = entidades.get("enfermedades", [])
+        # st.subheader("🧠 Entidades médicas detectadas:")
+        # st.write(f"Síntomas: {sintomas}")
+        # st.write(f"Enfermedades: {enfermedades}")
 
+<<<<<<< HEAD
     #     # Paso 2: extraer entidades médicas
     #     entidades = processor.extraer_entidades(texto_limpio)
     #     sintomas = entidades.get("sintomas", [])
@@ -137,6 +161,9 @@ def main():
 
         # Paso 3: generar embedding
 >>>>>>> ef49f87 (add ejemplo_comsulta param to document db)
+=======
+        # # Paso 3: generar embedding
+>>>>>>> 4a9bfae (All pipeline)
         # entradas = sintomas + enfermedades
         # if not entradas:
         #     st.warning("No se detectaron síntomas ni enfermedades para continuar.")
