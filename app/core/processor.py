@@ -103,3 +103,19 @@ class FireworksProcessor:
             }
         except Exception as e:
             raise ValueError(f"Error al extraer entidades: {e}\nSalida obtenida: {output}")
+        
+    def generate_diagnostic(self, diagnostico, entidades):
+        prompt = GENERATE_DIAGNOSTIC.format(diagnostico=diagnostico, entidades=entidades)
+        try:
+            output = self._llm_request(prompt).strip()
+            return output
+        except Exception as e:
+            raise ValueError(f"Error al generar texto del diagnóstico: {e}\nPrompt usado: {prompt}")
+
+    def generate_question(self, entidad):
+        prompt = GENERATE_QUESTION.format(entidad=entidad)
+        try:
+            output = self._llm_request(prompt).strip()
+            return output
+        except Exception as e:
+            raise ValueError(f"Error al generar pregunta de feedback: {e}\nPrompt usado: {prompt}")

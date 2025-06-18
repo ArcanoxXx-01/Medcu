@@ -2,7 +2,7 @@ import threading
 import sqlite3
 import numpy as np
 import faiss
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
 class VectorStore:
     """
@@ -117,7 +117,7 @@ class VectorStore:
         self,
         query_embedding: List[float],
         top_k: int = 5
-    ) -> List[Tuple[str, int, str, float]]:
+    ) -> list[str]:
         """
         Busca los top_k vectores más similares a la consulta y devuelve
         información básica con la distancia.
@@ -143,7 +143,7 @@ class VectorStore:
             cursor.execute("SELECT url, chunk_index, text_chunk FROM vectors WHERE id = ?", (idx+1,))
             row = cursor.fetchone()
             if row:
-                results.append((row["url"], row["chunk_index"], row["text_chunk"], float(dist)))
+                results.append(row["text_chunk"])
         return results
 
     def get_by_chunk(self, chunk: str) -> Optional[dict]:
@@ -159,7 +159,7 @@ class VectorStore:
         conn.row_factory = sqlite3.Row  # Esto es para acceder a los resultados como diccionarios
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM vectors WHERE text_chunk = ?", (chunk,))
+        cursor.execute("SELECT nombre, causa, sintoma FROM vectors WHERE text_chunk = ?", (chunk,))
         row = cursor.fetchone()
 
         conn.close()
