@@ -1,0 +1,11 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+FIREWORKS_API_KEY = os.getenv("FIREWORKS_API_KEY")
+FIREWORKS_MODEL_ID = os.getenv("FIREWORKS_MODEL_ID")
+FIREWORKS_EMBEDDING_MODEL = os.getenv("FIREWORKS_EMBEDDING_MODEL")
+API_URL=os.getenv('API_URL')
+EMBEDDING_URL=os.getenv('EMBEDDING_URL')
+SCRAPE_EXPIRATION_DAYS=30
