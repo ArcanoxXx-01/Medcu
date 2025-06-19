@@ -66,11 +66,41 @@ class VectorStore:
                 # Validar que dimensión coincida
                 if self.faiss_index.d != self.embedding_dim:
                     raise ValueError("Dimensión FAISS no coincide con embedding_dim")
+                return
             except Exception:
                 # Si falla leer índice, crear uno nuevo
                 self.faiss_index = faiss.IndexFlatL2(self.embedding_dim)
         else:
+            self.faiss_index = faiss.IndexFlatL2(self.embedding_dim)    
+        self.rebuild_faiss_index_from_db()
+        self.save_faiss_index()
+
+    def rebuild_faiss_index_from_db(self):
+        """
+        Reconstruye el índice FAISS desde todos los vectores embebidos almacenados en la base de datos SQLite.
+        Sobrescribe cualquier índice FAISS actual en memoria.
+        """
+        if not self.use_faiss:
+            return
+
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT embedding FROM vectors")
+        rows = cursor.fetchall()
+
+        embeddings = []
+        for row in rows:
+            embedding_bytes = row["embedding"]
+            embedding_np = np.frombuffer(embedding_bytes, dtype=np.float32)
+            if embedding_np.shape[0] == self.embedding_dim:
+                embeddings.append(embedding_np)
+
+        embeddings_np = np.stack(embeddings) if embeddings else np.empty((0, self.embedding_dim), dtype=np.float32)
+
+        with self._faiss_lock:
             self.faiss_index = faiss.IndexFlatL2(self.embedding_dim)
+            if embeddings_np.shape[0] > 0:
+                self.faiss_index.add(embeddings_np)
 
     def upsert_vector(
         self,
@@ -166,7 +196,7 @@ class VectorStore:
 
         return dict(row) if row else None
 
-    def save_faiss_index(self, path: Optional[str] = None):
+    def save_faiss_index(self, path: str = "data/embeddings.index"):
         """
         Guarda el índice FAISS en disco para persistencia.
         """

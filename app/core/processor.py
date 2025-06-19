@@ -97,10 +97,10 @@ class FireworksProcessor:
             entidades = eval(output, {"__builtins__": {}})
             if not isinstance(entidades, dict):
                 raise ValueError("La salida no es un diccionario.")
-            return {
+            return dict({
                 "sintomas": entidades.get("sintomas", []),
                 "enfermedades": entidades.get("enfermedades", [])
-            }
+            })
         except Exception as e:
             raise ValueError(f"Error al extraer entidades: {e}\nSalida obtenida: {output}")
         

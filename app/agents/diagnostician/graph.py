@@ -11,6 +11,7 @@ class MedicalGraphBuilder:
     def __init__(self, db_path: str = "data/embeddings.db"):
         self.db_path = db_path
         self.graph = nx.DiGraph()
+        self.add_edges_from_csv()
 
     def build_graph(self):
         """Construir el grafo
@@ -35,7 +36,7 @@ class MedicalGraphBuilder:
         else:
             self.graph.add_edge(source, target, tipo=tipo, peso=peso)
 
-    def add_edges_from_csv(self, csv_path: str):
+    def add_edges_from_csv(self, csv_path: str = 'data/edges.csv'):
         """Agregar aristas de un csv"""
         with open(csv_path, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -142,3 +143,8 @@ class MedicalGraphBuilder:
                     nodos_similares.add(nombre)
 
         return list(nodos_similares)
+
+
+# graph = MedicalGraphBuilder()
+# graph.build_graph()
+# graph.visualize()

@@ -31,8 +31,9 @@ def main():
     vec_store = VectorStore()
 
     knowledge_graph = MedicalGraphBuilder()
-    t_build_kb = threading.Thread(target=knowledge_graph.build_graph)
-    t_build_kb.start()
+    # knowledge_graph.build_graph()
+    # t_build_kb = threading.Thread(target=knowledge_graph.build_graph())
+    # t_build_kb.start()
 
     # csv_dir = "data/edges.csv"
     # try:
@@ -49,6 +50,7 @@ def main():
 
         def preguntar_usuario(self, entidad: str) -> bool:
             question = process_model.generate_question(entidad)
+            print(question)
             respuesta = st.radio(
                 question,
                 ["Sí", "No"],
@@ -56,7 +58,7 @@ def main():
             )
             if respuesta == "Sí":
                 return True
-            return None
+            return False
 
     orchestrator = Orchestrator(
         cleaner = process_model.limpiar_consulta,
@@ -90,43 +92,3 @@ def main():
         response = orchestrator.diagnosticar(consulta)
         st.write(response)
         
-        # # Paso 1: limpiar consulta
-        # texto_limpio = process_model.limpiar_consulta(consulta)
-        # st.subheader("🧹 Consulta procesada:")
-        # st.write(texto_limpio)
-
-        # # Paso 2: extraer entidades médicas
-        # entidades = process_model.extraer_entidades(texto_limpio)
-        # sintomas = entidades.get("sintomas", [])
-        # enfermedades = entidades.get("enfermedades", [])
-        # st.subheader("🧠 Entidades médicas detectadas:")
-        # st.write(f"Síntomas: {sintomas}")
-        # st.write(f"Enfermedades: {enfermedades}")
-
-        # # Paso 3: generar embedding
-        # entradas = sintomas + enfermedades
-        # if not entradas:
-        #     st.warning("No se detectaron síntomas ni enfermedades para continuar.")
-        #     return
-        # embeddings = embedder.embed_texts([" ".join(entradas)])
-        # st.write(embeddings)
-        
-        # Paso 4: recuperar información
-        # documentos = retriever.retrieve(embeddings)
-        # if not documentos:
-        #     st.warning("⚠️ No se encontró información en la base vectorial. Buscando en internet...")
-        #     documentos = buscar_en_internet(sintomas, enfermedades)
-
-        # st.subheader("📄 Buscando Información relevante...")
-        # for i, doc in enumerate(documentos, 1):
-        #     st.markdown(f"**Doc {i}:** {doc.get('texto', '')[:300]}...")
-
-        # # Paso 5: orquestador
-        # especialidad = orquestador.inferir_especialidad(sintomas, enfermedades)
-        # diagnostico = orquestador.diagnosticar(sintomas, enfermedades, documentos)
-
-        # st.subheader("🏥 Especialidad inferida:")
-        # st.write(especialidad)
-
-        # st.subheader("✅ Diagnóstico preliminar:")
-        # st.write(diagnostico)
