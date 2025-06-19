@@ -24,7 +24,8 @@ class Orchestrator:
 =======
 >>>>>>> 4a9bfae (All pipeline)
     def diagnosticar(self, consulta_original: str):
-        print("comenzo a procesar la consulta")
+        # print("comenzo a procesar la consulta")
+        
         # Paso 1: Limpieza de texto
         try:
             consulta_limpia = self.cleaner(consulta_original)
@@ -35,7 +36,7 @@ class Orchestrator:
 
         # Paso 2: Extracción de entidades médicas
         try:
-            print("consulta limpiada")
+            # print("consulta limpiada")
             entidades = self.extractor(consulta_limpia)
             # print(entidades)
         except Exception as e:
@@ -43,7 +44,7 @@ class Orchestrator:
 
         # Paso 3: Embeddings
         try:
-            print("consulta procesada")
+            # print("consulta procesada")
             input = self.concatenar_valores(entidades)
             if not input:
                 self.responder.generar_respuesta_error("No se encontraron sintomas ni enfermedades en la consulta")
@@ -56,7 +57,7 @@ class Orchestrator:
             embeddings = []
 
         # Paso 4: Búsqueda en base vectorial
-        print("consulta embeddingsada")
+        # print("consulta embeddingsada")
         chunks_relacionados = []
         if embeddings:
             try:
@@ -66,10 +67,10 @@ class Orchestrator:
             except Exception:
                 print("Fallo al comparar embeddings: continuando sin recuperar informacion relacionada con el embedding")
                 pass
-
+        print(chunks_relacionados)
         # Paso 5: Recuperar entidades de chunks
         try:
-            print("Chunks recuperados")
+            # print("Chunks recuperados")
             entidades_recuperadas = []
             for chunk in chunks_relacionados:
                 new_entities = self.vector_store.get_by_chunk(chunk)
@@ -85,7 +86,7 @@ class Orchestrator:
             print("Fallo al extraer informacion de los chunks recuperados: continuando sin dicha informacion")
             
         # Paso 6: Inferencia inicial
-        print("consulta ampliada")
+        # print("consulta ampliada")
         try:
             nodos_negros = self.knowledge_graph.obtener_nodos_asociados(self.concatenar_valores(entidades))
         except Exception as e:
@@ -97,14 +98,14 @@ class Orchestrator:
             return self.responder.generar_respuesta_error(f"Fallo durante la diagnosticacion: {e}")
             
         # Paso 7-10: Feedback iterativo
-        print("Pregunta para generar")
+        # print("Pregunta para generar")
         try:
             nodos_grises = self.knowledge_graph.obtener_nodos_asociados(entidades_recuperadas)
+            print(nodos_grises)
             while True:
                 sugerencia = self.knowledge_graph.sugerir_pregunta_feedback(nodos_negros, nodos_grises)
                 if not sugerencia:
                     break
-
                 quiere_confirmar = self.responder.preguntar_usuario(sugerencia)
                 if quiere_confirmar:
                     nodos_negros.append(sugerencia)
@@ -118,23 +119,14 @@ class Orchestrator:
             print("Fallo durante la obtencion de feedback: devolver mejor diagnostico hasta el momento")
             
         try:
-            return self.responder.generar_respuesta_diagnostico(mejor_diag)
+            return self.responder.generar_respuesta_diagnostico(mejor_diag, self.concatenar_valores(entidades))
         
         except Exception as e:
             return self.responder.generar_respuesta_error(f"Fallo durante la generacion del diagnostico: {e}")
             
-    # def _extraer_entidades_de_chunks(self, chunks):
-    #     entidades = set()
-    #     for url, idx, texto, _ in chunks:
-    #         # O usar extractor sobre los textos de los chunks
-    #         try:
-    #             extraidas = self.extractor.extraer(texto)
-    #             entidades.update(extraidas)
-    #         except Exception:
-    #             continue
-    #     return list(entidades)
+
     
-    def concatenar_valores(diccionario, a=None):
+    def concatenar_valores(dself, diccionario):
         resultado = []
         for valores in diccionario.values():
             resultado.extend(valores)

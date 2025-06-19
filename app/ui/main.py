@@ -44,8 +44,9 @@ def main():
     vec_store = VectorStore()
 
     knowledge_graph = MedicalGraphBuilder()
-    t_build_kb = threading.Thread(target=knowledge_graph.build_graph)
-    t_build_kb.start()
+    # knowledge_graph.build_graph()
+    # t_build_kb = threading.Thread(target=knowledge_graph.build_graph())
+    # t_build_kb.start()
 
     # csv_dir = "data/edges.csv"
     # try:
@@ -62,6 +63,7 @@ def main():
 
         def preguntar_usuario(self, entidad: str) -> bool:
             question = process_model.generate_question(entidad)
+            print(question)
             respuesta = st.radio(
                 question,
                 ["Sí", "No"],
@@ -69,7 +71,7 @@ def main():
             )
             if respuesta == "Sí":
                 return True
-            return None
+            return False
 
     orchestrator = Orchestrator(
         cleaner = process_model.limpiar_consulta,
@@ -121,6 +123,7 @@ def main():
         st.info('🔍 Procesando...')
         response = orchestrator.diagnosticar(consulta)
         st.write(response)
+<<<<<<< HEAD
         
         # # Paso 1: limpiar consulta
         # texto_limpio = process_model.limpiar_consulta(consulta)
@@ -190,3 +193,6 @@ def main():
 
         # st.subheader("✅ Diagnóstico preliminar:")
         # st.write(diagnostico)
+=======
+        
+>>>>>>> dd369ba (uodate)
