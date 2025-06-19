@@ -81,8 +81,21 @@ extraídas de Fisterra\cite{fisterra}.
 A partir de la descomposición funcional del razonamiento médico simulado, se definieron componentes esenciales para que el sistema pudiera ejecutar dicha simulación de forma efectiva y estructurada:
 
 \begin{itemize}
-  \item \textbf{Procesador de consultas}: Esta componente tiene como objetivo extraer la información médica relevante a partir de una consulta escrita en lenguaje natural. Para ello, realiza tareas de preprocesamiento como la "limpieza" del texto y la
-  extracción de entidades médicas tales como síntomas, enfermedades o antecedentes mencionados por el usuario.
+  \item \textbf{Orquestador}: esta es la componente fundamental del sistema ya que coordina la interacción entre los distintos componentes del mismo, en cada momento decide que módulo debe activarse en dependencia del estado actual de la información extraída hasta el momento. Se diseñó
+  con una arquitectura modular que integra varios componentes claves del sistema. A continuación se describe el funcionamiento de esta componente.
+  \begin{enumerate}
+    \item \textbf{Procesador de consultas}: Esta componente tiene como objetivo normalizar el texto de entrada y extraer la información médica relevante a partir de una consulta escrita en lenguaje natural. Para ello, realiza tareas de preprocesamiento como la ``limpieza" del texto y la
+    extracción de entidades médicas tales como síntomas, enfermedades o antecedentes mencionados por el usuario.
+    \item \textbf{Generación de embeddings}: Las entidades extraídas fueron transformadas en vectores mediante un modelo de embeddings semánticos, lo cual permite medir similitud con la base vectorial.
+    \item \textbf{Búsqueda Semántica en la Base Vectorial}: Se compararon los vectores de entrada con los vectores prealmacenados de documentos médicos procesados previamente (chunks). Se realizó un ranking de resultados basado en la similitud.
+    \item \textbf{Selección de resultados relevantes}:  Se conservaron únicamente los $k$ documentos con mayor similitud que superaban un umbral predefinido. Estos documentos aportaron información útil adicional para enriquecer el diagnóstico.
+    \item \textbf{Diagnóstico Inicial}: Se generó un diagnóstico preliminar utilizando solo las entidades extraídas de la consulta original.
+    \item \textbf{Evaluación de Entidades Recuperadas}:  Se evalua si alguna de las entidades médicas adicionales encontradas en los documentos recuperados tenía potencial para mejorar el diagnóstico. Si se identificaba alguna, esta se presentaba al usuario como una pregunta de seguimiento.
+    \item \textbf{Interacción con el usuario}: Se consulta al usuario si presentaba dicha entidad. En caso afirmativo, se repitió el paso de diagnóstico incluyendo esta nueva información.
+    \item \textbf{Repetición hasta convergencia}: El ciclo diagnóstico-pregunta se repitió hasta que el sistema alcanzaba un umbral de confianza en el diagnóstico, no se identificaban más entidades con ganancia diagnóstica relevante o el usuario rechazaba todas las entidades adicionales.
+    \item \textbf{Generación de Respuesta Final}: Se genera una respuesta empática y clara para el usuario final, explicando el diagnóstico más probable y los motivos médicos subyacentes, utilizando un modelo LLM y un prompt especializado.
+    \item \textbf{Tolerancia a Fallos}: En cualquier etapa donde se produjera un error, el orquestador continuaba con el mejor resultado disponible hasta el momento, garantizando que el usuario recibiera siempre una respuesta funcional.
+  \end{enumerate}
   \item \textbf{Expansor de consulta}: Este componente abarca varias etapas de razonamiento clínico automatizado y se encarga de enriquecer e interpretar la información extraída. Está compuesto por una base de metadatos vinculada a vectores indexados, un
   generador de rankings que ordena posibles diagnósticos, un generador de preguntas para refinar la información provista por el usuario y una fase de retroalimentación que permite iterar sobre nuevas respuestas para mejorar la precisión del prediagnóstico.
   \item \textbf{Crawler y actualizador de la base de datos}: Este agente automatizado tiene como función mantener actualizada la base documental médica del sistema, la cual se nutre principalmente de MedlinePlus\cite{medlineplus} en español. Este módulo está compuesto
@@ -90,11 +103,21 @@ A partir de la descomposición funcional del razonamiento médico simulado, se d
   \begin{itemize}
     \item Un scraper de artículos, que obtiene el código HTML de nuevos documentos o de aquellos cuya última descarga es obsoleta.
     \item Un extractor de información, encargado de procesar dicho HTML para identificar elementos claves como causas, síntomas, nombres alternativos, procedimientos a realizar y contraindicaciones.
-    \item Un chunker, que divide la información extraída en fragmentos o "chunks", cada uno acompañado de su correspondiente metadato.
+    \item Un chunker, que divide la información extraída en fragmentos o ``chunks", cada uno acompañado de su correspondiente metadato.
     \item Un modelo de embedding que genera vectores representativos de cada chunk para su posterior indexación y recuperación. En este trabajo, debido a limitaciones de recursos, se utilizó un modelo gratuito ofrecido por Fireworks\cite{fireworks_ai}
   \end{itemize}
-  \item \textbf{Orquestador}: esta es la componente fundamental del sistema ya que coordina la interacción entre los distintos componentes del mismo, en cada momento decide que módulo debe activarse en dependencia del estado actual de la información extraída hasta el momento.
+  \item \textbf{Medical graph builder}: es el componente encargado de representar y explotar conocimiento médico estructurado en forma de un grafo dirigido. Su inclusión dentro del sistema de diagnóstico tuvo como finalidad complementar los resultados derivados del procesamiento semántico 
+  (embeddings) con inferencias explícitas basadas en relaciones conocidas entre enfermedades, síntomas y causas. Su objetivo principal es representar el conocimiento médico como un grafo dirigido, donde los nodos son entidades clínias y las aristas representan relaciones relevantes (por ejemplo, ``causa de", ``síntoma de", etc.),
+  esto proporciona operaciones de consultas como: encontrar entidades relaciones, sugerir posibles diagnósticos asociados a síntomas y explorar caminos diagnósticos alternativos.
+  El grafo fue implementado mediante \texttt{networkx.DiGraph}.
 \end{itemize}
+
+\begin{figure}  
+\begin{center}
+  \includegraphics[scale=0.25]{Work Flow.png}
+\end{center}
+\caption{Flujo de trabajo del sistema}
+\end{figure}
 
 \section{Conclusiones}
 
@@ -104,13 +127,6 @@ y generar prediagnósticos fundamentados, incorporando un mecanismo de retroalim
 No obstante, se identifican varias limitaciones que condicionan la efectivadad del sistema. En primer lugar, la calidad de las respuestas generadadas depende de la claridad y precisión de la entrada proporcionada por el usuario, lo cual puede limitar la utilidad del sistema en escenarios
 donde el paciente no pueda expresar sus síntomas de forma técnica o estructurada.
 
-\begin{figure}  
-\begin{center}
-  \includegraphics[scale=0.25]{assistant_workflow}
-\end{center}
-\caption{Flujo de trabajo del sistema}
-\end{figure}
-  
 %
 % ---- Bibliography ----
 %
