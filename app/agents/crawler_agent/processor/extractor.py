@@ -13,70 +13,44 @@ def extract_relevant_sections(html_content: str) -> Dict[str, str]:
         Dict[str, str]:   
             Diccionario con la información extraída. Claves posibles:
             
-            'titulo', 'causas', 'sintomas', 'primeros_auxilios', 'no_se_debe', 'ejemplo_comsulta', 'nombres_alternativos'.
+            'enfermedad', 'causas', 'sintomas', 'nombres_alternativos'.
             
             * Los valores serán cadenas vacías si no se encuentran las secciones.
     """
+    content = correct_text(html_content)
     result = {
-        'titulo': '',
         'causas': '',
         'sintomas': '',
-        'primeros_auxilios': '',
-        'no_se_debe': '',
-        'ejemplo_comsulta': '',
         'nombres_alternativos': ''
     }
 
     try:
-        soup = BeautifulSoup(html_content, 'html.parser')
+        soup = BeautifulSoup(content, 'html.parser')
 
-        # Extraer título
-        title_tag = soup.find('h1', class_='with-also')
-        if title_tag:
-            result['titulo'] = correct_text(title_tag.get_text(strip=True))
+        enfermedad = soup.find('h1').get_text(strip=True)
 
-        # Extraer secciones
-        sections = soup.find_all('div', class_='section')
-
-        for section in sections:
-            header = section.find('div', class_='section-header')
+        for section in soup.find_all('div', class_='section'):
+            header = section.find(['h2', 'h3'])
             if not header:
                 continue
+            tittle = header.get_text(strip=True).lower()
 
-            section_title = header.find('h2')
-            if not section_title:
-                continue
+            if 'causa' in tittle:
+                result['causas'] = section.get_text(separator=' ', strip=True)
+            elif 'síntoma' in tittle or 'sintoma' in tittle:
+                result['sintomas'] = section.get_text(separator=' ', strip=True)
+            elif 'nombres alternativos' in tittle:
+                result['nombres_alternativos'] = section.get_text(separator=' ', strip=True)
 
-            section_name = section_title.get_text(strip=True)
-            section_body = section.find('div', class_='section-body')
-            if not section_body:
-                continue
-
-            content = section_body.get_text('\n', strip=True)
-
-            if section_name == 'Causas':
-                result['causas'] = correct_text(content)
-                
-            elif section_name == 'Síntomas':
-                result['sintomas'] = correct_text(content)
-                
-            elif section_name == 'Primeros auxilios':
-                result['primeros_auxilios'] = correct_text(content)
-                
-            elif section_name == 'No se debe':
-                result['no_se_debe'] = correct_text(content)
-                
-            elif section_name == 'Lo que se puede esperar en el consultorio médico':
-                result['ejemplo_comsulta'] = correct_text(content)
-                
-            elif section_name == 'Nombres alternativos':
-                result['nombres_alternativos'] = correct_text(content)
+        return {
+            'enfermedad': enfermedad,
+            **result
+        }
 
     except Exception as e:
         print("Error al parsear el HTML: ", e)
         return None
 
-    return result
 
 def correct_text(text: str):
     text = text.replace("Ã¡", "á")
@@ -85,4 +59,17 @@ def correct_text(text: str):
     text = text.replace("Ã±", "ñ")
     text = text.replace("Ã­", "í")
     text = text.replace("Ãº", "ú")
-    return text
+    text.replace('\'','')
+    text.replace('"','')
+    return text.lower().strip()
+    
+
+# path = 'data/html_docs/000001.html'
+
+# with open(path,'r')as f:
+#     content = correct_text(f.read())
+#     x = extract_relevant_sections(content)
+#     print('Enfermedad:', x['enfermedad'],'\n')
+#     print('Causas:',x['causas'],'\n')
+#     print('Sintomas:',x['sintomas'],'\n')
+#     print('Nombres Alternativos:',x['nombres_alternativos'],'\n')

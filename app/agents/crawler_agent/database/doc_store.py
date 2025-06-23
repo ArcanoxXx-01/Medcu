@@ -85,7 +85,7 @@ class DocumentStore:
 
     def check_url_expiration(self, url, time_amount, time_unit='hours'):
         """
-        Comprueba si una URL ha expirado según el tiempo especificado.
+        Comprueba si una URL ha expirado según el tiempo especificado, o no se ha descargado aún.
         
         Args:
             url (str): La URL a verificar
@@ -129,10 +129,10 @@ class DocumentStore:
         titulo: Optional[str],
         causas: Optional[str],
         sintomas: Optional[str],
-        primeros_auxilios: Optional[str],
-        no_se_debe: Optional[str],
         nombres_alternativos: Optional[str],
-        ejemplo_consulta: Optional[str]
+        primeros_auxilios: Optional[str] = None,
+        no_se_debe: Optional[str] = None,
+        ejemplo_consulta: Optional[str] = None
     ):
         """
         Inserta o actualiza un documento médico completo.

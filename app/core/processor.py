@@ -47,7 +47,7 @@ class FireworksProcessor:
                 {"role": "user", "content": prompt}
             ],
             "temperature": temperature,
-            "max_tokens": 512,
+            "max_tokens": 1024,
             "stop": ["</END>"]
         }
 
@@ -119,3 +119,38 @@ class FireworksProcessor:
             return output
         except Exception as e:
             raise ValueError(f"Error al generar pregunta de feedback: {e}\nPrompt usado: {prompt}")
+        
+    def process_entities(self, content:dict):
+        enfermedad = content.get('enfermedad', '')
+        causas = content.get('causas', '')
+        sintomas = content.get('sintomas', '')
+        nombres_alternativos = content.get('nombres_alternativos', '')
+        
+        prompt = PROCESAR_ENTIDADES.format(
+            enfermedad = enfermedad,
+            causas = causas,
+            sintomas = sintomas,
+            nombres_alternativos = nombres_alternativos)
+        try:
+            output = self._llm_request(prompt).strip()
+            
+            if output.startswith("```") or output.endswith("```"):
+                output = output.split("```")[1].strip()
+            if output.startswith("json"):
+                output = output.split("json")[1].strip() 
+                
+            # print(output)
+            
+            entidades = eval(output, {"__builtins__": {}})
+            
+            if not isinstance(entidades, dict):
+                raise ValueError("La salida no es un diccionario.")
+            
+            return dict({
+                "enfermedad" : entidades.get("enfermedad", ""),
+                "causas": entidades.get("causas", []),
+                "sintomas": entidades.get("sintomas", []),
+                "nombres_alternativos": entidades.get("nombres_alternativos", [])
+            })
+        except Exception as e:
+            raise ValueError(f"Error extraer las entidades del texto: {e}")

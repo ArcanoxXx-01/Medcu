@@ -1,5 +1,4 @@
 import streamlit as st
-import traceback
 import threading
 
 from app.agents.orchestrator.orchestrator import Orchestrator
@@ -31,7 +30,7 @@ def main():
     vec_store = VectorStore()
 
     knowledge_graph = MedicalGraphBuilder()
-    # knowledge_graph.build_graph()
+    
     # t_build_kb = threading.Thread(target=knowledge_graph.build_graph())
     # t_build_kb.start()
 
@@ -46,19 +45,23 @@ def main():
             st.error(f"⚠️ {mensaje}")
 
         def generar_respuesta_diagnostico(self, diagnostico: str, entidades: list[str]) -> None:
-            st.markdown(process_model.generate_diagnostic(diagnostico, entidades))
-
+            try:
+                st.markdown(process_model.generate_diagnostic(diagnostico, entidades))
+            except:
+                st.markdown(f"Dado los síntomas descritos, es muy probable que presente '{diagnostico}', por favor consulte a un especialista")
+                print("Fallo al crear la respuesta con LLM. \nUsando respuesta por defecto")
+                
         def preguntar_usuario(self, entidad: str) -> bool:
-            question = process_model.generate_question(entidad)
-            print(question)
-            respuesta = st.radio(
-                question,
-                ["Sí", "No"],
-                key=entidad
-            )
-            if respuesta == "Sí":
-                return True
-            return False
+            try:
+                question = process_model.generate_question(entidad)
+            except:
+                question = f"¿Presenta el síntoma {entidad}?"
+                print("Fallo al generar la pregunta con LLM. \nUsando pregunta por defetco...")
+                
+            key = f"respuesta_{entidad}"
+            seleccion = st.radio(question, ["Sí", "No"], key=key)
+
+            return seleccion == "Sí"
 
     orchestrator = Orchestrator(
         cleaner = process_model.limpiar_consulta,
@@ -68,14 +71,13 @@ def main():
         knowledge_graph = knowledge_graph,
         responder = ResponderStreamlit(),
         similarity_threshold = 0.8,
-        top_k = 5,
+        top_k = 15,
         feedback_gain_threshold = 1
     )
     
-    crawler = Crawler()
-    t_crawler = threading.Thread(target=crawler.run, daemon=True)
+    # crawler = Crawler()
+    # t_crawler = threading.Thread(target=crawler.run, daemon=True)
     # t_crawler.start()
-    
     
     # Compoenentes de la UI
     st.set_page_config(page_title='Medicub')
@@ -91,4 +93,3 @@ def main():
         st.info('🔍 Procesando...')
         response = orchestrator.diagnosticar(consulta)
         st.write(response)
-        

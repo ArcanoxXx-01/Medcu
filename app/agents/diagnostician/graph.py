@@ -12,6 +12,7 @@ class MedicalGraphBuilder:
         self.db_path = db_path
         self.graph = nx.DiGraph()
         self.add_edges_from_csv()
+        self.build_graph()
 
     def build_graph(self):
         """Construir el grafo

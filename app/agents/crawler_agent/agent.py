@@ -1,3 +1,4 @@
+from mimetypes import init
 import threading, queue, time, os
 from typing import Dict, List
 
@@ -9,19 +10,27 @@ from .scraper.url_collector import generate_medlineplus_urls
 from .processor.chunker import chunk_sections
 from .processor.extractor import extract_relevant_sections
 from app.core.embeddings import EmbeddingGenerator
-from app.config import EMBEDDING_URL, FIREWORKS_EMBEDDING_MODEL, FIREWORKS_API_KEY
+from app.core.processor import FireworksProcessor
+from app.config import *
 
 class Crawler:
     def __init__(self, sleep_interval: float = 1.0):
         self.document_store = DocumentStore()
         self.vector_store = VectorStore( use_faiss = True)
+        self.sleep_interval = sleep_interval
+        
         self.embedding_generator = EmbeddingGenerator(
             model_id=FIREWORKS_EMBEDDING_MODEL,
             api_key=FIREWORKS_API_KEY,
             url=EMBEDDING_URL
         )
-        self.sleep_interval = sleep_interval
-
+        
+        self.process_model = FireworksProcessor(
+            model_id=FIREWORKS_MODEL_ID,
+            api_key=FIREWORKS_API_KEY,
+            api_url=API_URL
+        )
+        
         # Colas para comunicación entre hilos
         self.url_queue = queue.Queue()
         self.html_queue = queue.Queue()
@@ -64,24 +73,36 @@ class Crawler:
         print("Crawler detenido correctamente.")
 
     def scraper_worker(self):
+        """ Hilo encargado de obtener el código HTML de los artículos que aún no se han descargado
+            o que superaron el tiempo de expiración.
+        """
         try:
             for url in generate_medlineplus_urls():
                 if self.stop_event.is_set():
                     break
                 if self.document_store.check_url_expiration(url):
-                    html = scrape_article(url)
+                    try:
+                        html = scrape_article(url)
+                    except Exception as e:
+                        print(f"Error al descargar HTML de {url}:\n{e}")
+                        continue
                     if html:
                         save_html_by_article_number(url, html)
                         self.document_store.record_url_download(url)
-                        self.html_queue.put((url, html))
-                else:
-                    date = self.document_store
+                        self.html_queue.put((url, html))                    
         except Exception as e:
             print(f"[scraper_worker] Error inesperado: {e}")
         finally:
             self.html_queue.put(None)
 
     def extractor_worker(self):
+        """
+        Hilo encargado de tomar el código html de los artículos descargados y procesarlos.
+    
+        El procesado incluye:  
+            - extraer el contenido de las secciones importantes: nombre, causas, sintomas,...
+            - guardar en la base de datos de los documentos los metadatos obtenidos
+        """
         while not self.stop_event.is_set():
             item = self.html_queue.get()
             if item is None:
@@ -92,12 +113,9 @@ class Crawler:
                 if sections:
                     self.document_store.upsert_document(
                         url=url,
-                        titulo=sections.get("titulo", ""),
+                        titulo=sections.get("enfermedad", ""),
                         causas=sections.get("causas", ""),
                         sintomas=sections.get("sintomas", ""),
-                        primeros_auxilios=sections.get("primeros_auxilios", ""),
-                        no_se_debe=sections.get("no_se_debe", ""),
-                        ejemplo_consulta=sections.get("ejemplo_consulta",""),
                         nombres_alternativos=sections.get("nombres_alternativos", "")
                     )
                     self.parsed_queue.put((url, sections))
@@ -108,6 +126,10 @@ class Crawler:
         self.parsed_queue.put(None)
 
     def embedding_worker(self):
+        """Hilo encargado de tomar los metadatos de los artículos rocesados:
+        - dividir en chunks y metadatos
+        - guardar los embeddings y los metadatos de los chunks en la base de datos.
+        """
         while not self.stop_event.is_set():
             item = self.parsed_queue.get()
             if item is None:
@@ -120,7 +142,7 @@ class Crawler:
             finally:
                 self.parsed_queue.task_done()
 
-    def _process_and_store_chunks(self, url: str, sections: Dict[str, str]):
+    def _process_and_store_chunks(self, url: str, sections: dict):
         """
         Procesa las secciones de un artículo, genera los embeddings de los chunks y
         los almacena en la base vectorial junto con sus metadatos.
@@ -130,19 +152,22 @@ class Crawler:
             sections (Dict[str, str]): Diccionario con las secciones del artículo.
         """
         embeddings = []
-        chunks, metadatas = chunk_sections(sections)
-        
+        try:
+            chunks, metadatas = chunk_sections(sections, self.process_model)
+        except Exception as e:
+            raise Exception(f"Error al obtener chunhs: {e}")
+            
         if not chunks:
             return
 
-        chunks = [chunk for chunk in chunks if self.vector_store.get_by_chunk(chunk) is not None]
+        # chunks = [chunk for chunk in chunks if self.vector_store.get_by_chunk(chunk) is not None] #Quitar chunks repetidos
         try:
             for batch in batch_chunks(chunks):
                 for retry in range(6):
                     try:
                         batch_embeddings = self.embedding_generator.embed_texts(batch)
                         embeddings.extend(batch_embeddings)
-                        break  # salir del ciclo de retry si tuvo éxito
+                        break
                     except Exception as e:
                         wait = 2 ** retry
                         print(f"Error (intento {retry+1}/6): {e}. Reintentando en {wait}s...")
@@ -164,9 +189,9 @@ class Crawler:
                     sintoma=meta.get("sintoma")
                 )
             except Exception as e:
-                print(f"[embedding_worker] Error almacenando vector chunk {idx} para {url.split('/')[-1]}: {e}")
+                print(f"[embedding_worker] Error almacenando vector chunk {idx} para {url.split('/')[-1]}:\n{e}")
 
-    def process_html_directory(self, html_dir: str = "data/html_docs/"):
+    def process_html_directory(self, html_dir: str = "data/html_docs/",init_id = 0, final_id = 3108):
         """
         Procesa todos los archivos .html en un directorio desde el parseo hasta
         el almacenamiento de embeddings.
@@ -174,41 +199,43 @@ class Crawler:
         Args:
             html_dir (str): Ruta al directorio que contiene los archivos HTML.
         """
-        for filename in os.listdir(html_dir):
+        files = os.listdir(html_dir)
+        files.sort()
+        for filename in files[init_id:final_id]:
             if not filename.endswith(".html"):
                 continue
-            print(f"Procesando articulo: {filename}")
+            
             filepath = os.path.join(html_dir, filename)
-            dummy_url = f"https://medlineplus.gov/spanish/ency/article/{filename}"
+            
+            url = f"https://medlineplus.gov/spanish/ency/article/{filename}"
+            
+            if self.document_store.check_url_expiration(url, 30):
+                print(f"Procesando articulo: {filename}")
+                try:
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        html = f.read()
 
-            try:
-                with open(filepath, "r", encoding="utf-8") as f:
-                    html = f.read()
+                    if not html:
+                        print(f"Articulo {filename} vacio o corrupto")
+                        continue
+                    
+                    secciones = extract_relevant_sections(html)
+                    if not secciones:
+                        print(f"Advertencia: no se pudieron extraer secciones del articulos {filename}")
+                        continue
 
-                if not html:
-                    print(f"Articulo {filename} vacio o corrupto")
-                    continue
-                
-                secciones = extract_relevant_sections(html)
-                if not secciones:
-                    print(f"Advertencia: no se pudieron extraer secciones del articulos {filename}")
-                    continue
-
-                self.document_store.upsert_document(
-                    url=dummy_url,
-                    titulo=secciones.get("titulo", ""),
-                    causas=secciones.get("causas", ""),
-                    sintomas=secciones.get("sintomas", ""),
-                    primeros_auxilios=secciones.get("primeros_auxilios", ""),
-                    no_se_debe=secciones.get("no_se_debe", ""),
-                    ejemplo_consulta=secciones.get("ejemplo_consulta", ""),
-                    nombres_alternativos=secciones.get("nombres_alternativos", "")
-                )
-
-                self._process_and_store_chunks(dummy_url, secciones)
-
-            except Exception as e:
-                print(f"Error procesando {filename}: {e}")
+                    self.document_store.upsert_document(
+                        url=url,
+                        titulo=secciones.get("enfermedad", ""),
+                        causas=secciones.get("causas", ""),
+                        sintomas=secciones.get("sintomas", ""),
+                        nombres_alternativos=secciones.get("nombres_alternativos", "")
+                    )
+                    self._process_and_store_chunks(url, secciones)
+                    
+                except Exception as e:
+                    print(f"Error procesando {filename}: {e}")
+                    break
 
     def flush_remaining_tasks(self):
         try:
@@ -219,9 +246,6 @@ class Crawler:
             self.parsed_queue.join()
         except Exception:
             pass
-
-
-# ========== Util ===========
 
 def batch_chunks(chunks, batch_size=128):
     """Agrupar los chunks en grupos de 128 chunks para las peticiones
