@@ -15,6 +15,7 @@ client = genai.Client(api_key=API_KEY)
 with open('tests.json', 'r', encoding='utf-8') as f:
     tests = json.load(f)
 
+accuracy = 0; total = 0
 for key, value in tests.items():
     patient = value['Consulta']
     diagnostic = value['Diagnóstico']
@@ -25,7 +26,7 @@ for key, value in tests.items():
         f"Tu tarea es generar un diagnóstico más detallado, inferido o corregido si fuese necesario.\n\n"
         f"Consulta del paciente:\n{patient}\n\n"
         f"Diagnóstico inicial:\n{diagnostic}\n\n"
-        f"Diagnóstico final:"
+        f"Diagnóstico final breve (no mas de 50 palabras):"
     )
 
     response = client.models.generate_content(
@@ -54,14 +55,41 @@ for key, value in tests.items():
         f"Responde únicamente con 1 o 0 a las preguntas médicas relacionadas con estos síntomas."
     )
 
-    print(first_message)
+    final_answer = 'Úlcera venosa en tercio inferior del pie derecho'
 
-    query = input()
+    query = 'tienes hambre?'
 
     followup_response = client.models.generate_content(
         model="gemini-2.5-flash",
         contents=boolean_prompt + query
     )
     
-    print(followup_response.text[-1])
+    # print(followup_response.text[-1])
     
+    accuracy_evaluator_prompt = (
+        f"Actúa como un evaluador experto de diagnósticos médicos. "
+        f"Evalúa qué tan precisa es la respuesta generada por el sistema (respuesta dada) comparada con la respuesta esperada. "
+        f"Usa una escala de 0 a 5, donde:\n"
+        f"0 = completamente incorrecta,\n"
+        f"1 = muy inexacta,\n"
+        f"2 = parcialmente incorrecta,\n"
+        f"3 = algo correcta,\n"
+        f"4 = mayormente correcta,\n"
+        f"5 = completamente correcta.\n\n"
+        f"Responde únicamente con un número entero del 0 al 5, sin explicaciones ni texto adicional.\n\n"
+        f"Respuesta esperada:\n{expected_answer}\n\n"
+        f"Respuesta dada por el sistema:\n{final_answer}\n\n"
+        f"Evaluación:"
+    )
+
+    response_accuracy = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=accuracy_evaluator_prompt,
+    ).text.split()[-1]
+
+    accuracy += int(response_accuracy)
+    total += 5
+
+    if total > 30: break
+
+print(accuracy / total)
