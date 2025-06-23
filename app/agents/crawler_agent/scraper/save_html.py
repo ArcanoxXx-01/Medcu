@@ -1,5 +1,4 @@
 import os
-from urllib.parse import urlparse
 import re
 
 def save_html_by_article_number(url: str, html_content: str, folder: str = "data/html_docs/"):
