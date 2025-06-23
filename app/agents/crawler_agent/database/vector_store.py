@@ -130,9 +130,10 @@ class VectorStore:
 
         Returns:
             List de tuplas (url, chunk_index, text_chunk, distance)
-        """        if not self.use_faiss or self.faiss_index is None:
+        """        
+        if not self.use_faiss or self.faiss_index is None:
             return []
-
+        
         query_np = np.array(query_embedding, dtype=np.float32).reshape(1, -1)
 
         try:

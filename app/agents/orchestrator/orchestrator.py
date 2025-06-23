@@ -68,7 +68,7 @@ class Orchestrator:
             try:
                 for result_dict in related_chunks_results:
                     recovered_entities.extend(self.concat_values(result_dict))
-                recovered_entities = (recovered_entities)
+                recovered_entities = list(set(recovered_entities))
                 # print("recover entities: ",recovered_entities)
             except Exception as e:
                 print(f"Fallo al extraer información de los chunks recuperados:\n{e}\nContinuando sin dicha información...")
@@ -96,7 +96,7 @@ class Orchestrator:
             while True:
                 print("Generando pregunta de feedback...")
                 sugerencia = self.knowledge_graph.sugerir_pregunta_feedback(black_nodes, gray_nodes)
-                
+                print("Sugerencia:", sugerencia)
                 try:
                     question = self.questioner(sugerencia)
                 except Exception as e:
@@ -111,9 +111,36 @@ class Orchestrator:
                 user_confirm = self.responder.confirmation
                    
                 if user_confirm:
-                    black_nodes.append(sugerencia)
+                    black_nodes.extend(self.knowledge_graph.obtener_nodos_asociados(sugerencia))
+                    
                     best_diagnostic = self.knowledge_graph.infer_diagnosis(black_nodes)
-                    # Aqui seria procesar la entidad que se añadio a la consulta para añadir nuevos nodos grices
+                    print(f"\nBuscando información sobre {sugerencia}")
+                    try:
+                        new_embedding = self.embedder([sugerencia])
+                    except Exception as e:
+                        print(f"Fallo al obtener nuva información:\n{e}\n Continuando con información actual...")
+                        new_embedding = []
+                    
+                    new_chunks = []
+                    if new_embedding:
+                        for embedding in new_embedding:
+                            try:
+                                new_chunks.extend(self.vector_store.search(embedding, top_k=self.top_k))
+                            except Exception as e:
+                                print(f"Fallo al comparar embeddings:\n{e}\n\nBuscando información de internet para ampliar la consulta...\n")
+                                # related_chunks_results = []  # Aquí iría el fallback al crawler
+
+                    new_recovered_entities = []
+                    if new_chunks:
+                        try:
+                            for result_dict in new_chunks:
+                                new_recovered_entities.extend(self.concat_values(result_dict))
+                            new_recovered_entities = list(set(recovered_entities))
+                            # print("recover entities: ",recovered_entities)
+                        except Exception as e:
+                            print(f"Fallo al extraer las entidades de los chunks recuperados:\n{e}\nContinuando sin dicha información...")
+                  
+                    gray_nodes.extend(self.knowledge_graph.obtener_nodos_asociados(new_recovered_entities))
                 else:
                     if gray_nodes.__contains__(sugerencia):
                         gray_nodes.remove(sugerencia)

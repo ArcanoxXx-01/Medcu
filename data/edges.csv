@@ -1,5 +1,734 @@
 nombre,sintoma,causa,peso
+migraña,dolor de cabeza,estrés,2.5
+migraña,náuseas,insomnio,1.5
 migraña,dolor de cabeza,golpe en la cabeza,1.5
 migraña,dolor de cabeza,insomnio,1.0
-fractura craneal,dolor en la cabeza,golpe en la cabeza,1.5
+migraña,sensibilidad a la luz,alimentos procesados,1.2
+migraña,visión borrosa,cambios hormonales,1.8
+fractura craneal,dolor en la cabeza,golpe en la cabeza,3.0
 fractura craneal,dolor en la cabeza,insomnio,0.3
+fractura craneal,pérdida de conciencia,accidente de tráfico,2.8
+fractura craneal,sangrado,natación con impacto,2.0
+fractura craneal,vómitos,caída desde altura,2.5
+gripe,fiebre,infección viral,2.2
+gripe,dolor muscular,cambio de clima,1.3
+gripe,tos,contacto cercano,1.8
+gripe,dolor de garganta,exposición prolongada al frío,1.5
+apendicitis,dolor abdominal,inflamación del apéndice,3.0
+apendicitis,fiebre,infección bacteriana,2.0
+apendicitis,pérdida de apetito,obstrucción intestinal,1.7
+apendicitis,náuseas,dieta baja en fibra,1.5
+asma,dificultad para respirar,exposición a alérgenos,2.8
+asma,tos persistente,aire frío,2.0
+asma,silbidos al respirar,ejercicio físico,1.7
+asma,opresión en el pecho,contaminación ambiental,2.5
+diabetes tipo 2,sed excesiva,resistencia a la insulina,2.7
+diabetes tipo 2,visión borrosa,hiperglucemia,2.0
+diabetes tipo 2,fatiga,obesidad,2.5
+diabetes tipo 2,orinar frecuentemente,alimentación alta en azúcares,2.3
+hipertensión,visión borrosa,estrés crónico,2.1
+hipertensión,dolor de cabeza,exceso de sal,2.4
+hipertensión,zumbido en los oídos,problemas renales,2.0
+hipertensión,mareos,sedentarismo,2.2
+alzheimer,pérdida de memoria,envejecimiento cerebral,3.0
+alzheimer,desorientación,depósitos de beta-amiloide,2.5
+alzheimer,cambios de humor,factores genéticos,2.2
+alzheimer,dificultad para hablar,lesión neurológica,2.3
+covid-19,fiebre,infección por SARS-CoV-2,3.0
+covid-19,tos seca,contacto cercano con infectado,2.8
+covid-19,pérdida del olfato,mutación viral,2.5
+covid-19,dificultad para respirar,pulmonar previa,2.7
+neumonía,fiebre,infección bacteriana,2.8
+neumonía,tos con flema,infección viral,2.5
+neumonía,dolor en el pecho,exposición prolongada al frío,2.2
+neumonía,escalofríos,sistema inmune débil,2.4
+hepatitis B,ictericia,infección por VHB,3.0
+hepatitis B,dolor abdominal,contacto con fluidos infectados,2.7
+hepatitis B,náuseas,transmisión sexual,2.2
+hepatitis B,orina oscura,uso compartido de agujas,2.5
+gastritis,dolor abdominal,consumo excesivo de alcohol,2.4
+gastritis,náuseas,infección por Helicobacter pylori,2.7
+gastritis,ardor estomacal,uso prolongado de AINES,2.5
+gastritis,pérdida de apetito,estrés,1.8
+artritis,dolor articular,desgaste del cartílago,2.5
+artritis,rigidez matutina,reacción autoinmune,2.8
+artritis,hinchazón,edad avanzada,2.1
+artritis,dificultad para mover articulaciones,herencia genética,1.9
+insuficiencia renal,fatiga,hipertensión crónica,2.7
+insuficiencia renal,hinchazón en piernas,diabetes no controlada,2.9
+insuficiencia renal,dolor lumbar,obstrucción urinaria,2.5
+insuficiencia renal,palidez,anemia secundaria,2.3
+epoc,dificultad respiratoria,tabaquismo,3.0
+epoc,tos crónica,exposición al humo,2.6
+epoc,producción de esputo,contaminación del aire,2.3
+epoc,opresión torácica,inhalación prolongada de productos químicos,2.4
+lupus,fatiga,reacción autoinmune,2.6
+lupus,erupción en la piel,luz ultravioleta,2.0
+lupus,dolor en articulaciones,factores genéticos,2.2
+lupus,fiebre,trastorno inmunológico,2.4
+anemia,fatiga,deficiencia de hierro,3.0
+anemia,palidez,dieta pobre en nutrientes,2.5
+anemia,dificultad para respirar,pérdida de sangre,2.7
+anemia,mareos,trastornos digestivos,2.2
+esquizofrenia,alucinaciones,alteración en neurotransmisores,2.8
+esquizofrenia,comportamiento desorganizado,factores genéticos,2.4
+esquizofrenia,delirios,estrés prenatal,2.6
+esquizofrenia,apatía,trauma psicológico,2.1
+epilepsia,convulsiones,actividad eléctrica anormal en el cerebro,3.0
+epilepsia,pérdida de conciencia,traumatismo craneal,2.6
+epilepsia,confusión postictal,infección cerebral,2.2
+epilepsia,mirada fija,fiebre alta en la infancia,1.9
+celíaca,diarrea crónica,intolerancia al gluten,3.0
+celíaca,distensión abdominal,reacción autoinmune,2.7
+celíaca,fatiga,malabsorción intestinal,2.5
+celíaca,pérdida de peso,daño en vellosidades intestinales,2.6
+hipotiroidismo,fatiga,disminución de la función tiroidea,2.8
+hipotiroidismo,aumento de peso,deficiencia de yodo,2.4
+hipotiroidismo,piel seca,autoinmune (Hashimoto),2.6
+hipotiroidismo,sensibilidad al frío,tratamiento previo con yodo radiactivo,2.2
+hipertiroidismo,temblores,producción excesiva de hormonas tiroideas,2.9
+hipertiroidismo,insomnio,de Graves,2.6
+hipertiroidismo,pérdida de peso,nódulos tiroideos,2.3
+hipertiroidismo,taquicardia,exceso de yodo,2.5
+meningitis,fiebre alta,infección viral o bacteriana,3.0
+meningitis,rigidez en el cuello,propagación desde otra infección,2.8
+meningitis,confusión,lesión cerebral,2.4
+meningitis,fotofobia,sistema inmune debilitado,2.2
+bronquitis,tos persistente,infección viral,2.6
+bronquitis,dolor en el pecho,exposición a irritantes,2.4
+bronquitis,fatiga,tabaquismo,2.8
+bronquitis,exceso de mucosidad,aire contaminado,2.3
+esclerosis múltiple,visión borrosa,desmielinización del SNC,2.7
+esclerosis múltiple,entumecimiento,reacción autoinmune,2.8
+esclerosis múltiple,dificultad para caminar,factores genéticos,2.5
+esclerosis múltiple,fatiga,deficiencia de vitamina D,2.3
+tuberculosis,tos con sangre,infección por Mycobacterium tuberculosis,3.0
+tuberculosis,pérdida de peso,contacto prolongado con infectados,2.5
+tuberculosis,escalofríos,inmunodepresión,2.6
+tuberculosis,fiebre nocturna,hacinamiento,2.2
+dengue,fiebre alta,picadura de mosquito Aedes,3.0
+dengue,dolor muscular,viaje a zona endémica,2.4
+dengue,sarpullido,contacto con sangre infectada,2.0
+dengue,dolor retroocular,infección viral,2.8
+zika,fiebre leve,picadura de mosquito Aedes,2.6
+zika,conjuntivitis,transmisión sexual,2.3
+zika,erupción cutánea,viaje a zona tropical,2.0
+zika,dolor en las articulaciones,infección viral,2.5
+varicela,erupciones cutáneas,infección por virus varicela-zóster,3.0
+varicela,comezón,contacto directo con infectado,2.7
+varicela,fiebre leve,exposición escolar,2.2
+varicela,fatiga,sistema inmune inmaduro,2.4
+sarampión,fiebre alta,virus del sarampión,3.0
+sarampión,tos seca,falta de vacunación,2.8
+sarampión,manchas de Koplik,exposición comunitaria,2.5
+sarampión,conjuntivitis,ambientes cerrados y densos,2.3
+rubeola,sarpullido leve,infección viral,2.6
+rubeola,ganglios inflamados,falta de vacunación,2.4
+rubeola,fiebre baja,contacto con secreciones nasales,2.1
+rubeola,dolor articular,embarazo,2.7
+úlcera venosa,herida que no cicatriza,insuficiencia venosa crónica,2.8
+úlcera venosa,hiperpigmentación de la piel,historia previa de úlcera vascular,2.5
+úlcera venosa,eccema en piel circundante,trabajo de pie prolongado,2.3
+úlcera venosa,ligera fóvea,tabaquismo,2.1
+pie diabético,úlcera en el pie,diabetes mal controlada,3.0
+pie diabético,infección localizada,HbA1c elevada,2.8
+pie diabético,dolor leve o ausente,neuropatía periférica,2.6
+cistitis aguda,disuria,infección del tracto urinario,2.9
+cistitis aguda,frecuencia urinaria,bacterias uropatógenas,2.7
+cistitis aguda,urgencia urinaria,relaciones sexuales recientes,2.4
+cistitis aguda,malestar pélvico,uso inadecuado de antibióticos,2.2
+fibrilación auricular,latido irregular,degeneración del nodo sinusal,2.6
+fibrilación auricular,ausencia de síntomas,edad avanzada,2.3
+fibrilación auricular,diagnóstico incidental,hipertensión crónica,2.7
+fibrilación auricular,riesgo trombótico,alteración en la contracción auricular,2.8
+hipertensión arterial,tensión arterial elevada,consumo de tabaco crónico,2.7
+hipertensión arterial,hipertensión aislada,sobrepeso (IMC 28),2.4
+hipertensión arterial,ausencia de síntomas,trabajo con alto nivel de estrés físico,2.0
+asma bronquial,disnea de grandes esfuerzos,hiperreactividad bronquial,2.8
+asma bronquial,tos nocturna,obstrucción bronquial reversible,2.6
+asma bronquial,sibilancias nocturnas,asma no alérgica,2.4
+diabetes mellitus tipo 2,hiperglucemia en ayunas,vida sedentaria,2.9
+diabetes mellitus tipo 2,ausencia de síntomas clínicos,resistencia a la insulina,2.5
+diabetes mellitus tipo 2,glucemia elevada en controles previos,deterioro progresivo de la tolerancia a la glucosa,2.3
+cáncer de mama estadio IV,sequedad bucal,dexametasona prolongada,2.6
+cáncer de mama estadio IV,polidipsia y poliuria,efectos secundarios del tratamiento,2.4
+cáncer de mama estadio IV,candidiasis bucal,inmunosupresión por quimioterapia,2.7
+cáncer de mama estadio IV,atrofia muscular,encamamiento prolongado,2.5
+anemia ferropénica,disnea de esfuerzo,hemoglobina baja,2.9
+anemia ferropénica,fatiga progresiva,deficiencia de hierro,2.7
+anemia ferropénica,VCM disminuido,sangrado crónico oculto,2.8
+anemia ferropénica,deterioro funcional en insuficiencia cardíaca,oxigenación deficiente,2.6
+insuficiencia cardíaca,disnea al acostarse,disfunción ventricular izquierda,2.9
+insuficiencia cardíaca,edema periférico,retención de líquidos,2.7
+insuficiencia cardíaca,estertores pulmonares,congestión pulmonar,2.8
+insuficiencia cardíaca,astenia importante,sobrepeso e hipertensión prolongada,2.6
+dolor oncológico,cervicalgia,cáncer de pulmón metastásico,3.0
+dolor oncológico,braquialgia bilateral,infiltración tumoral en columna cervical,2.8
+dolor oncológico,adelgazamiento,invasión sistémica tumoral,2.5
+cáncer de mama,retracción del pezón,carcinoma mamario subyacente,2.9
+cáncer de mama,ausencia de síntomas previos,carácter insidioso del tumor,2.6
+información al paciente,malentendido sobre tratamiento,comunicación clínica deficiente,2.5
+información al paciente,confusión sobre el pronóstico,expectativas inadecuadas,2.7
+información al paciente,desinformación del estado real,optimismo terapéutico mal interpretado,2.8
+trombosis venosa profunda,hinchazón unilateral de pierna,alteración del flujo venoso,3.0
+trombosis venosa profunda,dolor en trayecto venoso,formación de coágulos,2.9
+trombosis venosa profunda,edema con fóvea,estasis venosa en diabético,2.7
+trombosis venosa profunda,ausencia de fiebre,trombosis sin componente infeccioso,2.5
+síndrome mielodisplásico,epistaxis,plaquetopenia secundaria a mielodisplasia,2.8
+síndrome mielodisplásico,gingivorragia,insuficiencia medular,2.7
+síndrome mielodisplásico,astenia severa,anemia crónica,2.9
+síndrome mielodisplásico,descompensación cardíaca,sobrecarga transfusional,2.6
+duelo patológico,insomnio reciente,pérdida del cónyuge,2.7
+duelo patológico,falta de apetito,proceso de duelo activo,2.5
+duelo patológico,tristeza persistente,evento vital traumático,2.6
+tromboembolismo pulmonar,disnea progresiva,inmovilización o trombosis venosa previa,3.0
+tromboembolismo pulmonar,expectoración hemoptoica,émbolo pulmonar,2.9
+tromboembolismo pulmonar,taquicardia en reposo,trombo en arteria pulmonar,2.8
+tromboembolismo pulmonar,fiebre leve,proceso inflamatorio agudo,2.3
+dislipemia,hipercolesterolemia,dieta rica en grasas y tabaquismo,2.8
+dislipemia,hipertrigliceridemia,consumo de alcohol,2.6
+dislipemia,ausencia de síntomas,desequilibrio lipídico crónico,2.4
+dislipemia,riesgo cardiovascular elevado,factores modificables no tratados,2.7
+paciente no adherente,prurito nocturno,dermatitis sin tratamiento,2.3
+paciente no adherente,rechazo a la vacuna de la gripe,creencia negativa previa,2.6
+paciente no adherente,mal control de crónica,incumplimiento de tratamiento,2.7
+paciente no adherente,insomnio,malestar no tratado adecuadamente,2.4
+cefalea crónica,dolor de cabeza persistente,migraña mal controlada,2.8
+cefalea crónica,insomnio,tratamiento inadecuado o ansiedad,2.5
+lumbalgia nocturna,dolor lumbar al dormir,contractura muscular crónica,2.6
+lumbalgia nocturna,insatisfacción con tratamiento,expectativas terapéuticas no cubiertas,2.4
+trastorno por consumo de alcohol,negación del problema,consumo crónico de alcohol,2.9
+trastorno por consumo de alcohol,conflictos familiares,conducta evasiva,2.7
+artrosis cervical,mareos al mover la cabeza,degeneración osteoarticular cervical,2.9
+artrosis cervical,crujidos cervicales,artrosis avanzada,2.7
+artrosis cervical,dolor cervical con irradiación,compresión nerviosa leve,2.8
+cefalea tensional,dolor de cabeza frontal,estrés laboral crónico,2.9
+cefalea tensional,mareos matutinos,sobrecarga emocional,2.6
+síndrome de agotamiento nervioso,cambios de humor,estrés acumulado,2.8
+síndrome de agotamiento nervioso,cansancio generalizado,ansiedad laboral,2.7
+hernia de hiato,ardor estomacal,reflujo gastroesofágico,3.0
+hernia de hiato,sabor ácido en la boca,debilidad del esfínter esofágico inferior,2.8
+hernia de hiato,malestar retroesternal,posición supina tras comer,2.6
+hipertensión,tensión arterial alta,no adherencia al tratamiento antihipertensivo,3.0
+hipertensión,disfunción eréctil,efectos adversos de medicación,2.8
+virilización,hirsutismo facial,hiperandrogenismo incipiente,2.9
+alergia cutánea persistente,prurito y lesiones cutáneas,ineficacia del tratamiento inicial,2.7
+alergia cutánea persistente,deseo de derivación,desconfianza en atención primaria,2.5
+síndrome de ansiedad somatizada,disnea suspirosa,ansiedad reactiva al desempleo,3.0
+síndrome de ansiedad somatizada,pinchazos precordiales,estrés crónico,2.8
+síndrome de ansiedad somatizada,insomnio,agotamiento emocional,2.7
+disnea progresiva,dificultad respiratoria con esfuerzo,metástasis pulmonar (osteosarcoma),3.0
+disnea progresiva,tos seca,recurrencia oncológica pulmonar,2.9
+lupus eritematoso sistémico,anorexia y pérdida de peso,autoinmune sistémica,3.0
+lupus eritematoso sistémico,lesión malar y artralgias,actividad reumática,3.0
+trastorno de pánico,crisis de angustia con disnea,activación autonómica sin causa orgánica,3.0
+trastorno de pánico,palpitaciones y mareos,episodios autolimitados de ansiedad,2.9
+pie diabético,ulceración en pie,complicación microvascular de diabetes,3.0
+trastorno bipolar tipo I,euforia y verborrea,episodio maníaco,3.0
+trastorno bipolar tipo I,hiperactividad y gasto descontrolado,desregulación del estado de ánimo,3.0
+duelo complicado,pérdida de peso e insomnio,duelo reciente por muerte repentina,2.8
+trastorno adaptativo,ansiedad y preocupación,situación estresante laboral,2.7
+trastorno adaptativo,dificultad para dormir,ajuste emocional al fracaso,2.6
+trastorno somatomorfo,dolor crónico inespecífico,expresión somática de malestar psíquico,2.9
+trastorno somatomorfo,síntomas físicos múltiples y vagos,sin base orgánica demostrable,3.0
+insomnio,dificultad para dormir e irritabilidad,alteración del ritmo circadiano y estrés,3.0
+trastorno de ansiedad generalizada,nerviosismo persistente y tensión muscular,ansiedad crónica,3.0
+nefropatía diabética,creatinina elevada y microalbuminuria,complicación renal por diabetes mal controlada,3.0
+prostatitis aguda,disuria y próstata dolorosa,proceso infeccioso agudo prostático,3.0
+hipertiroidismo,taquicardia y bocio difuso,exceso de hormona tiroidea,3.0
+diabetes gestacional,embarazo en mujer con IMC alto y test positivo,fisiopatología endocrina del embarazo,2.9
+tuberculosis,revisión de evidencia clínica,proceso educativo sobre infección respiratoria,1.0
+síncope,pérdida de conocimiento breve durante el ejercicio,hipoperfusión cerebral transitoria,3.0
+diarrea crónica,deposiciones blandas sin productos patológicos,trastorno funcional intestinal,2.8
+hombro doloroso,dolor progresivo en hombro derecho,patología subacromial,2.8
+lumbalgia con ciática,dolor lumbar con irradiación a miembro inferior,compresión radicular lumbar,3.0
+epoc,tos crónica con disnea progresiva,pulmonar obstructiva por tabaquismo,3.0
+gpc,elaboración de protocolo clínico,proceso educativo basado en evidencia,1.0
+gpc,acceso a guías de práctica clínica,formación en salud basada en evidencia,1.0
+gpc,cumplimiento de criterios de inclusión,calidad metodológica de la guía,1.0
+gpc,necesidad de información clínica desde el móvil,acceso remoto a guías mediante GuíaSalud,1.0
+gpc,interés en canales de comunicación profesionales,utilización de redes sociales y boletines informativos,1.0
+revisión clínica,búsqueda de guía sobre bronquiectasias,aplicación en atención primaria,1.0
+aspectos generales,inquietud por vacunación en niño con parálisis cerebral,miedo a efectos adversos por comorbilidad,2.5
+aspectos generales,omisión de dosis de vacunas infantiles,falta de adherencia al calendario vacunal,2.5
+aspectos generales,necesidad de vacunación frente a varicela,planificación de embarazo en mujer no inmunizada,2.0
+aspectos generales,necesidad de vacunación en lactante con hemofilia,precauciones especiales por coagulopatía,2.0
+vacunas,alergia gastrointestinal al huevo en lactante,duda sobre administración de vacuna triple vírica,2.5
+vacunas,vacunación sistemática en lactante de 11 meses,actualización del calendario vacunal,1.5
+vacunas,negatividad serológica completa en niño vacunado frente a hepatitis B,falla vacunal o seroconversión inadecuada,2.5
+vacunas,contacto reciente con caso positivo de varicela en brote escolar,indicación de vacunación postexposición,3.0
+vacunas,pendiente de vacuna neumocócica por omisión previa,recuperación de dosis no administrada,1.5
+vacunas,riesgo elevado por implante coclear,refuerzo vacunal neumocócico,2.0
+insomnio,cansancio,ansiedad,0.85
+insomnio,dificultad para concentrarse,estrés,0.75
+ansiedad,tensión muscular,presiones laborales,0.7
+ansiedad,taquicardia,exceso de cortisol,0.65
+nefropatía,edema,hipertensión,0.9
+nefropatía,proteinuria,glucosa alta,0.85
+prostatitis,disuria,infección urinaria,0.9
+prostatitis,fiebre,bacterias,0.8
+hipertiroidismo,pérdida de peso,disfunción tiroidea,0.9
+hipertiroidismo,nerviosismo,exceso de hormona tiroidea,0.8
+diabetes,polidipsia,insuficiencia insulínica,0.9
+diabetes,visión borrosa,hiperglucemia,0.75
+trastorno bipolar,insomnio,alteración neuroquímica,0.7
+trastorno bipolar,irritabilidad,fluctuación emocional,0.75
+duelo,apatía,pérdida,0.6
+duelo,insomnio,estrés emocional,0.65
+trastorno adaptativo,irritabilidad,evento traumático,0.65
+trastorno adaptativo,cansancio,situación estresante,0.6
+somatización,mareos,ansiedad crónica,0.7
+somatización,dolor abdominal,situación psicológica,0.65
+síncope,mareos,hipotensión postural,0.85
+síncope,pérdida de conciencia,arritmia,0.9
+diarrea,dolor abdominal,infección,0.8
+diarrea,deshidratación,virus intestinal,0.7
+artrosis,rigidez,desgaste articular,0.85
+artrosis,limitación funcional,edad avanzada,0.8
+lumbalgia,parestesia,hernia discal,0.75
+lumbalgia,dolor irradiado,compresión nerviosa,0.8
+EPOC,tos crónica,tabaco,0.9
+EPOC,disnea,obstrucción bronquial,0.85
+Guía práctica clínica,orientación,mejora clínica,0.4
+Guía práctica clínica,estándares,actualización,0.35
+vacunación,fiebre leve,reacción inmune,0.6
+vacunación,erupción cutánea,alergia,0.5
+varicela,fiebre,virus varicela-zóster,0.8
+varicela,prurito,reactivación viral,0.7
+herpes zóster,erupción cutánea,dolor neuropático,0.7
+herpes zóster,fiebre,virus latente,0.65
+rotavirus,dolor abdominal,deshidratación,0.75
+rotavirus,vómitos,infección viral,0.7
+insomnio,irritabilidad,estrés,0.8
+insomnio,dolores de cabeza,tensión,0.65
+ansiedad,palpitaciones,exceso de adrenalina,0.75
+ansiedad,sudoración,hiperactividad simpática,0.7
+nefropatía,hipertensión,diabetes,0.9
+nefropatía,astenia,falla renal,0.7
+prostatitis,dolor lumbar,infección bacteriana,0.85
+prostatitis,polaquiuria,infección urinaria,0.8
+hipertiroidismo,temblor,aumento hormonal,0.8
+hipertiroidismo,hiperactividad,trastorno tiroideo,0.75
+diabetes,poliuria,hiperglucemia,0.9
+diabetes,fatiga,insuficiencia insulina,0.7
+trastorno bipolar,hipersomnia,alteración neurotransmisores,0.65
+trastorno bipolar,ansiedad,fluctuación emocional,0.7
+duelo,tristeza,pérdida reciente,0.8
+duelo,apatía,estado depresivo,0.6
+trastorno adaptativo,ansiedad,evento estresante,0.65
+trastorno adaptativo,dificultad concentración,estresor,0.6
+somatización,dolor muscular,ansiedad,0.7
+somatización,náuseas,estrés psicológico,0.65
+insomnio,cansancio,insomnio crónico,0.85
+insomnio,ansiedad,estrés laboral,0.7
+ansiedad,tensión,sobrecarga,0.75
+ansiedad,inquietud,estrés,0.7
+nefropatía,microalbuminuria,diabetes mal controlada,0.9
+nefropatía,edema,falla renal,0.75
+prostatitis,fiebre,infección bacteriana,0.85
+prostatitis,dolor perineal,infección prostática,0.8
+hipertiroidismo,taquicardia,exceso tiroideo,0.9
+hipertiroidismo,pérdida peso,hiperfunción tiroidea,0.8
+diabetes,poliuria,hiperglucemia crónica,0.95
+diabetes,polidipsia,glucosa elevada,0.9
+trastorno bipolar,euforia,alteración química,0.7
+trastorno bipolar,irritabilidad,desequilibrio emocional,0.65
+duelo,insomnio,pérdida emocional,0.6
+duelo,fatiga,estado anímico bajo,0.55
+trastorno adaptativo,dificultad sueño,estrés psicosocial,0.65
+trastorno adaptativo,desánimo,cambios vitales,0.6
+somatización,mareos,ansiedad crónica,0.7
+somatización,fatiga,estrés psicológico,0.65
+dengue,fiebre,mordedura mosquito,0.95
+dengue,dolor cabeza,infección viral,0.9
+dengue,dolor muscular,infección dengue,0.85
+dengue,dolor articular,infección viral,0.8
+dengue,náuseas,infección viral,0.75
+dengue,vómitos,infección viral,0.7
+dengue,sarpullido,inmunidad reactiva,0.65
+dengue,fatiga,infección viral,0.6
+dengue,sangrado,mala coagulación,0.7
+dengue,hemorragia,mala coagulación,0.75
+dengue,hipotensión,choque dengue,0.8
+dengue,mareos,hipotensión,0.65
+dengue,dolor retroocular,infección viral,0.85
+dengue,fiebre alta,mordedura mosquito,0.9
+dengue,cefalea,dengue grave,0.85
+dengue,dolor abdominal,dengue severo,0.7
+dengue,vómitos repetidos,dengue severo,0.75
+dengue,trombocitopenia,infección viral,0.9
+dengue,shock,complicación grave,0.95
+dengue,edema,inflamación vascular,0.65
+gripe,fiebre,infección viral,0.9
+gripe,tos,secreción respiratoria,0.85
+gripe,dolor garganta,infección viral,0.8
+gripe,dolor muscular,infección viral,0.75
+gripe,cansancio,infección viral,0.7
+gripe,dolor cabeza,infección viral,0.75
+gripe,congestión nasal,infección viral,0.7
+gripe,escalofríos,infección viral,0.65
+gripe,dificultad respiratoria,infección grave,0.6
+gripe,malestar general,infección viral,0.7
+hipertensión arterial,cabeza pesada,alta presión sanguínea,0.8
+hipertensión arterial,mareos,hipertensión,0.7
+hipertensión arterial,zumbido oídos,hipertensión,0.65
+hipertensión arterial,visión borrosa,daño vascular,0.7
+hipertensión arterial,sangrado nasal,ruptura vasos,0.6
+hipertensión arterial,dificultad respiratoria,complicación cardíaca,0.6
+hipertensión arterial,fatiga,estrés cardíaco,0.65
+asma,dificultad respiratoria,inflamación vías respiratorias,0.95
+asma,tos seca,hiperreactividad bronquial,0.85
+asma,sibilancias,estrechamiento bronquial,0.9
+asma,opresión pecho,broncoespasmo,0.9
+asma,fatiga,hipoxia,0.7
+asma,ansiedad,crisis asmática,0.6
+asma,cianosis,hipoxia severa,0.6
+diabetes tipo 2,aumento sed,disfunción insulina,0.9
+diabetes tipo 2,aumento orina,hiperglucemia,0.9
+diabetes tipo 2,fatiga,resistencia insulina,0.8
+diabetes tipo 2,visión borrosa,hiperglucemia,0.75
+diabetes tipo 2,pérdida peso,metabolismo alterado,0.7
+diabetes tipo 2,infecciones recurrentes,inmunidad comprometida,0.65
+diabetes tipo 2,hormigueo extremidades,neuropatía,0.7
+diabetes tipo 2,heridas lentas en curar,hiperglucemia,0.7
+infección respiratoria aguda,tos,infección bacteriana/viral,0.9
+infección respiratoria aguda,fiebre,infección bacteriana/viral,0.85
+infección respiratoria aguda,dificultad respiratoria,obstrucción vías aéreas,0.8
+infección respiratoria aguda,dolor garganta,infección viral,0.7
+infección respiratoria aguda,escalofríos,infección viral,0.65
+infección respiratoria aguda,cansancio,infección,0.6
+tuberculosis,tos persistente,infección bacteriana,0.95
+tuberculosis,fiebre,infección bacteriana,0.85
+tuberculosis,pérdida peso,infección crónica,0.8
+tuberculosis,sudoración nocturna,infección bacteriana,0.75
+tuberculosis,fatiga,infección crónica,0.7
+tuberculosis,dolor torácico,infección pulmonar,0.65
+tuberculosis,hemoptisis,daño pulmonar,0.7
+diarrea infecciosa,dolor abdominal,infección gastrointestinal,0.9
+diarrea infecciosa,dolor cólico,infección gastrointestinal,0.85
+diarrea infecciosa,desequilibrio electrolítico,deshidratación,0.8
+diarrea infecciosa,vómitos,infección gastrointestinal,0.75
+diarrea infecciosa,fiebre,infección bacteriana/viral,0.7
+diarrea infecciosa,deshidratación,perdida líquidos,0.9
+VIH/SIDA,fiebre,infección viral,0.8
+VIH/SIDA,pérdida peso,inmunosupresión,0.85
+VIH/SIDA,fatiga,infección crónica,0.75
+VIH/SIDA,diarrea crónica,inmunodeficiencia,0.7
+VIH/SIDA,infecciones oportunistas,inmunosupresión,0.9
+VIH/SIDA,ganglios inflamados,infección viral,0.65
+VIH/SIDA,neumonía,infección pulmonar,0.7
+hepatitis B,fatiga,infección viral,0.75
+hepatitis B,ictericia,infección hepática,0.9
+hepatitis B,dolor abdominal,inflamación hepática,0.7
+hepatitis B,pérdida apetito,infección viral,0.65
+hepatitis B,náuseas,infección hepática,0.6
+hepatitis B,fiebre,infección viral,0.7
+hepatitis B,orina oscura,alteración hepática,0.7
+EPOC,tos crónica,exposición humo o contaminantes,0.9
+EPOC,dificultad respiratoria,daño pulmonar,0.95
+EPOC,esputo,irritación vías respiratorias,0.85
+EPOC,sibilancias,inflamación bronquial,0.8
+EPOC,fatiga,hipoxia,0.7
+EPOC,infecciones respiratorias frecuentes,daño pulmonar,0.65
+neumonía,fiebre,infección pulmonar,0.9
+neumonía,tos productiva,infección bacteriana,0.85
+neumonía,dificultad respiratoria,infección pulmonar,0.9
+neumonía,dolor torácico,infección pulmonar,0.7
+neumonía,escalofríos,infección bacteriana,0.65
+neumonía,fatiga,infección pulmonar,0.7
+infección urinaria,dolor al orinar,infección bacteriana,0.9
+infección urinaria,aumento frecuencia micción,infección,0.85
+infección urinaria,orina turbia,infección bacteriana,0.8
+infección urinaria,dolor abdominal,infección urinaria,0.7
+infección urinaria,fiebre,infección bacteriana,0.65
+infección urinaria,malestar general,infección,0.6
+diarreica aguda,dolor abdominal,infección gastrointestinal,0.9
+diarreica aguda,desequilibrio electrolítico,deshidratación,0.85
+diarreica aguda,vómitos,infección viral/bacteriana,0.8
+diarreica aguda,fiebre,infección bacteriana,0.75
+diarreica aguda,deshidratación,pérdida líquidos,0.9
+diarreica aguda,malestar general,infección,0.7
+chikungunya,fiebre,mordedura mosquito,0.95
+chikungunya,dolor articular,infección viral,0.9
+chikungunya,dolor muscular,infección viral,0.85
+chikungunya,cefalea,infección viral,0.75
+chikungunya,erupción cutánea,inmunidad reactiva,0.7
+chikungunya,fatiga,infección viral,0.65
+leptospirosis,fiebre,infección bacteriana,0.9
+leptospirosis,dolor cabeza,infección bacteriana,0.8
+leptospirosis,dolor muscular,infección bacteriana,0.85
+leptospirosis,náuseas,infección bacteriana,0.7
+leptospirosis,ictericia,daño hepático,0.75
+leptospirosis,sangrado,mala coagulación,0.7
+renal crónica,fatiga,disfunción renal,0.8
+renal crónica,hinchazón,inflamación y retención líquidos,0.75
+renal crónica,pérdida apetito,alteración metabólica,0.7
+renal crónica,náuseas,disfunción renal,0.65
+renal crónica,cambios micción,disfunción renal,0.7
+renal crónica,presión arterial alta,daño renal,0.8
+anemia ferropénica,fatiga,deficiencia hierro,0.9
+anemia ferropénica,palidez,disminución hemoglobina,0.85
+anemia ferropénica,mareos,disminución oxígeno,0.8
+anemia ferropénica,dificultad respiratoria,hipoxia,0.75
+anemia ferropénica,palpitaciones,hipoxia,0.7
+anemia ferropénica,dolor cabeza,hipoxia,0.65
+malaria,fiebre,mordedura mosquito infectado,0.95
+malaria,escalofríos,infección parasitaria,0.9
+malaria,sudoración,infección parasitaria,0.85
+malaria,dolor cabeza,infección parasitaria,0.8
+malaria,fatiga,infección parasitaria,0.75
+malaria,náuseas,infección parasitaria,0.7
+malaria,vómitos,infección parasitaria,0.65
+malaria,anemia,destrucción glóbulos rojos,0.7
+hepatitis C,fatiga,infección hepática,0.8
+hepatitis C,ictericia,infección viral,0.9
+hepatitis C,dolor abdominal,inflamación hepática,0.7
+hepatitis C,pérdida apetito,infección viral,0.65
+hepatitis C,náuseas,infección hepática,0.6
+hepatitis C,orina oscura,disfunción hepática,0.7
+hepatitis C,fiebre,infección viral,0.7
+zika,fiebre,infección viral,0.85
+zika,erupción cutánea,infección viral,0.8
+zika,dolor articular,infección viral,0.75
+zika,dolor muscular,infección viral,0.7
+zika,conjuntivitis,infección viral,0.65
+zika,fatiga,infección viral,0.6
+chagas,fiebre,infección parasitaria,0.8
+chagas,hinchazón en sitio picadura,infección parasitaria,0.75
+chagas,fatiga,infección crónica,0.7
+chagas,dolor cabeza,infección parasitaria,0.65
+chagas,dolor abdominal,infección crónica,0.6
+chagas,arritmias,daño cardíaco,0.7
+chagas,insuficiencia cardíaca,daño cardíaco,0.75
+sífilis,úlceras genitales,infección bacteriana,0.9
+sífilis,erupción cutánea,infección bacteriana,0.8
+sífilis,fiebre,infección bacteriana,0.7
+sífilis,ganglios inflamados,infección bacteriana,0.75
+sífilis,cansancio,infección crónica,0.65
+sífilis,pérdida peso,infección crónica,0.6
+neumonía bacteriana,fiebre alta,infección bacteriana,0.9
+neumonía bacteriana,tos productiva,infección pulmonar,0.85
+neumonía bacteriana,dificultad respiratoria,infección pulmonar,0.9
+neumonía bacteriana,dolor torácico,infección pulmonar,0.75
+neumonía bacteriana,escalofríos,infección bacteriana,0.7
+neumonía bacteriana,fatiga,infección pulmonar,0.7
+gastroenteritis viral,dolor abdominal,infección viral,0.9
+gastroenteritis viral,diarea,infección viral,0.95
+gastroenteritis viral,vómitos,infección viral,0.85
+gastroenteritis viral,fiebre,infección viral,0.75
+gastroenteritis viral,deshidratación,pérdida líquidos,0.8
+gastroenteritis viral,mareo,infección viral,0.65
+helicobacter pylori,dolor abdominal,infección bacteriana,0.9
+helicobacter pylori,ardor estomacal,infección bacteriana,0.85
+helicobacter pylori,náuseas,infección bacteriana,0.75
+helicobacter pylori,pérdida apetito,infección bacteriana,0.7
+helicobacter pylori,eructos,infección bacteriana,0.65
+helicobacter pylori,malestar general,infección bacteriana,0.6
+otitis,dolor oído,infección bacteriana/viral,0.9
+otitis,fiebre,infección,0.8
+otitis,pérdida audición,inflamación oído medio,0.7
+otitis,mareos,infección oído,0.65
+otitis,secreción oído,infección,0.7
+artritis reumatoide,dolor articular,enfermedad autoinmune,0.9
+artritis reumatoide,hinchazón articular,inflamación crónica,0.85
+artritis reumatoide,rigidez articular,enfermedad autoinmune,0.8
+artritis reumatoide,fatiga,inflamación sistémica,0.7
+artritis reumatoide,fiebre,inflamación,0.65
+bronquitis crónica,tos persistente,exposición humo y contaminantes,0.9
+bronquitis crónica,esputo frecuente,irritación vías respiratorias,0.85
+bronquitis crónica,dificultad respiratoria,obstrucción bronquial,0.8
+bronquitis crónica,sibilancias,inflamación vías respiratorias,0.75
+bronquitis crónica,fatiga,hipoxia,0.7
+enfermedad arterial coronaria,dolor torácico,obstrucción arterias coronarias,0.9
+enfermedad arterial coronaria,dificultad respiratoria,isquemia cardíaca,0.85
+enfermedad arterial coronaria,fatiga,reducción flujo sanguíneo,0.7
+enfermedad arterial coronaria,sudoración fría,angina,0.65
+enfermedad arterial coronaria,náuseas,isquemia,0.6
+hipotiroidismo,fatiga,disfunción tiroidea,0.9
+hipotiroidismo,aumento peso,metabolismo lento,0.85
+hipotiroidismo,intolerancia frío,alteración hormonal,0.8
+hipotiroidismo,constipación,metabolismo lento,0.75
+hipotiroidismo,depresión,desequilibrio hormonal,0.7
+hipotiroidismo,piel seca,alteración tiroidea,0.65
+depresión,tristeza persistente,desequilibrio químico cerebral,0.9
+depresión,fatiga,alteración neurotransmisores,0.85
+depresión,pérdida interés,alteración emocional,0.9
+depresión,cambios sueño,alteración emocional,0.8
+depresión,ansiedad,trastorno mental,0.75
+depresión,problemas concentración,desequilibrio emocional,0.7
+enfermedad pulmonar intersticial,dificultad respiratoria,daño tejido pulmonar,0.9
+enfermedad pulmonar intersticial,tos seca,inflamación crónica,0.85
+enfermedad pulmonar intersticial,fatiga,hipoxia,0.75
+enfermedad pulmonar intersticial,pérdida peso,condición crónica,0.7
+enfermedad pulmonar intersticial,dolor pecho,inflamación,0.65
+parkinson,temblor,involuntario,0.9
+parkinson,rigidez muscular,degeneración neuronal,0.85
+parkinson,lentitud movimientos,disfunción motora,0.9
+parkinson,inestabilidad postura,alteración motora,0.8
+parkinson,fatiga,desgaste neuronal,0.7
+parkinson,dificultad habla,alteración motora,0.65
+insuficiencia cardíaca,dificultad respiratoria,disfunción cardíaca,0.9
+insuficiencia cardíaca,edema periférico,retención líquidos,0.85
+insuficiencia cardíaca,fatiga,reducción gasto cardíaco,0.8
+insuficiencia cardíaca,tos crónica,congestión pulmonar,0.7
+insuficiencia cardíaca,aumento peso,retención líquidos,0.65
+cáncer de pulmón,tos persistente,crecimiento tumoral,0.9
+cáncer de pulmón,dolor torácico,invasión tumoral,0.85
+cáncer de pulmón,disnea,obstrucción vías aéreas,0.8
+cáncer de pulmón,pérdida peso,metástasis,0.75
+cáncer de pulmón,hemoptisis,sangrado tumoral,0.7
+hipertensión pulmonar,dificultad respiratoria,alta presión arterial pulmonar,0.9
+hipertensión pulmonar,fatiga,disfunción cardíaca,0.8
+hipertensión pulmonar,edema periférico,retención líquidos,0.7
+hipertensión pulmonar,dolor pecho,estrés cardíaco,0.65
+hipertensión pulmonar,mareos,baja oxigenación,0.6
+enfermedad hepática crónica,ictericia,daño hepático,0.9
+enfermedad hepática crónica,fatiga,insuficiencia hepática,0.85
+enfermedad hepática crónica,ascitis,retención líquidos,0.8
+enfermedad hepática crónica,pérdida apetito,disfunción hepática,0.7
+enfermedad hepática crónica,náuseas,insuficiencia hepática,0.65
+osteoporosis,fracturas frecuentes,disminución masa ósea,0.9
+osteoporosis,dolor óseo,debilitamiento huesos,0.8
+osteoporosis,pérdida altura,colapso vertebral,0.7
+osteoporosis,postura encorvada,daño óseo,0.65
+osteoporosis,fatiga,debido a dolor crónico,0.6
+eczema,erupción cutánea,reacción inflamatoria,0.9
+eczema,picazón,inmunidad alterada,0.85
+eczema,piel seca,inflamación crónica,0.8
+eczema,rojeces,inflamación,0.75
+eczema,lesiones costrosas,rascado frecuente,0.7
+alzheimer,pérdida memoria,degeneración neuronal,1.2
+alzheimer,confusión,atrofia cerebral,1.1
+alzheimer,dificultad lenguaje,daño cerebral,1.0
+alzheimer,cambios comportamiento,alteración cerebral,1.0
+alzheimer,pérdida habilidades cognitivas,degeneración progresiva,1.1
+cáncer de mama,masa palpable,crecimiento tumoral,1.2
+cáncer de mama,dolor mamario,invasión tumoral,1.0
+cáncer de mama,secreción mamaria,infección o tumor,0.8
+cáncer de mama,cambios piel,alteración tumoral,0.9
+cáncer de mama,ganglios inflamados,metástasis,1.0
+crohn,dolor abdominal,enfermedad inflamatoria intestinal,1.1
+crohn,diarrea crónica,inflamación intestinal,1.0
+crohn,pérdida peso,malabsorción,0.9
+crohn,fatiga,inflamación sistémica,0.85
+crohn,fiebre,inflamación intestinal,0.8
+artritis psoriásica,dolor articular,enfermedad autoinmune,1.0
+artritis psoriásica,hinchazón articular,inflamación crónica,0.9
+artritis psoriásica,lesiones cutáneas,psoriasis,1.0
+artritis psoriásica,rigidez articular,inflamación,0.85
+artritis psoriásica,fatiga,enfermedad crónica,0.75
+lupus,fatiga,enfermedad autoinmune,1.0
+lupus,erupción malar,inmunidad alterada,1.1
+lupus,artritis,inflamación sistémica,1.0
+lupus,fiebre,inflamación,0.85
+lupus,pérdida peso,enfermedad crónica,0.8
+cáncer de próstata,dificultad micción,crecimiento tumoral,1.1
+cáncer de próstata,dolor pélvico,invasión tumoral,1.0
+cáncer de próstata,hematuria,infección o tumor,0.8
+cáncer de próstata,pérdida peso,metástasis,0.9
+cáncer de próstata,disfunción eréctil,invasión nerviosa,0.7
+esclerosis múltiple,visión borrosa,desmielinización neuronal,1.1
+esclerosis múltiple,debilidad muscular,daño nervioso,1.0
+esclerosis múltiple,pérdida coordinación,disfunción motora,0.9
+esclerosis múltiple,fatiga,desgaste neuronal,0.85
+esclerosis múltiple,pérdida sensibilidad,alteración nerviosa,0.8
+insuficiencia renal crónica,fatiga,disfunción renal avanzada,1.0
+insuficiencia renal crónica,edema,retención líquidos,0.9
+insuficiencia renal crónica,náuseas,acumulación toxinas,0.85
+insuficiencia renal crónica,pérdida apetito,insuficiencia renal,0.8
+insuficiencia renal crónica,cambios micción,alteración renal,0.8
+enfermedad celíaca,dolor abdominal,reacción inmunitaria al gluten,1.0
+enfermedad celíaca,diarrea crónica,daño intestinal,0.9
+enfermedad celíaca,pérdida peso,mala absorción,0.85
+enfermedad celíaca,fatiga,deficiencia nutricional,0.8
+enfermedad celíaca,anemia,deficiencia hierro,0.75
+psoriasis,placas escamosas,enfermedad autoinmune,1.1
+psoriasis,picazón,inflamación cutánea,0.9
+psoriasis,enrojecimiento,inmunidad alterada,0.85
+psoriasis,sequedad piel,daño cutáneo,0.8
+psoriasis,engrosamiento piel,inflamación crónica,0.75
+hiperglucemia,sed excesiva,deficiencia insulina,1.1
+hiperglucemia,aumento micción,alteración metabolismo,1.0
+hiperglucemia,fatiga,metabolismo alterado,0.9
+hiperglucemia,visión borrosa,hiperglucemia prolongada,0.85
+hiperglucemia,pérdida peso,alteración insulina,0.8
+hipoglucemia,sudoración excesiva,baja glucosa sanguínea,1.1
+hipoglucemia,mareo,deficiencia glucosa,1.0
+hipoglucemia,confusión,hipoglucemia severa,0.9
+hipoglucemia,temblor,alteración neurológica,0.85
+hipoglucemia,fatiga,baja glucosa,0.8
+EPOC,tos crónica,exposición humo/contaminantes,1.2
+EPOC,dificultad respiratoria,daño pulmonar severo,1.3
+EPOC,esputo,irritación bronquial,1.0
+EPOC,sibilancias,inflamación vías respiratorias,0.9
+EPOC,fatiga,hipoxia,0.8
+anemia falciforme,dolor óseo,obstrucción vascular,1.1
+anemia falciforme,fatiga,anemia crónica,1.0
+anemia falciforme,ictericia,destrucción glóbulos rojos,0.9
+anemia falciforme,edema,hipoxia tisular,0.8
+anemia falciforme,pérdida peso,enfermedad crónica,0.75
+dengue grave,shock,fallo circulatorio,1.3
+dengue grave,hemorragia severa,mala coagulación,1.2
+dengue grave,fiebre alta,infección viral,1.1
+dengue grave,trombocitopenia,infección viral,1.15
+dengue grave,dolor abdominal intenso,infección grave,1.0
+hipotiroidismo severo,fatiga extrema,disfunción tiroidea,1.2
+hipotiroidismo severo,bradicardia,alteración hormonal,1.1
+hipotiroidismo severo,piel seca,alteración tiroidea,1.0
+hipotiroidismo severo,intolerancia al frío,metabolismo lento,0.95
+hipotiroidismo severo,ganancia peso,disfunción tiroidea,0.9
+covid-19,fiebre,infección viral,1.1
+covid-19,tos seca,infección respiratoria,1.0
+covid-19,dificultad respiratoria,infección pulmonar,1.2
+covid-19,fatiga,infección sistémica,0.9
+covid-19,pérdida gusto y olfato,infección viral,1.0
+covid-19,dolor de cabeza,infección viral,0.85
+covid-19,mialgias,infección viral,0.8
+covid-19,congestión nasal,infección viral,0.7
+covid-19,dolor de garganta,infección viral,0.75
+covid-19,dolor torácico,infección pulmonar,1.0
+covid-19,mareos,infección sistémica,0.65
+covid-19,confusión,hipoxia cerebral,1.1
+covid-19,náuseas,infección sistémica,0.7
+covid-19,vómitos,infección sistémica,0.7
+covid-19,diarrea,infección gastrointestinal,0.75
+covid-19,taquicardia,estrés sistémico,0.8
+covid-19,erupciones cutáneas,reacción inflamatoria,0.65
+covid-19,fiebre persistente,infección prolongada,1.05
+covid-19,arritmias,daño cardíaco,1.0
+covid-19,insuficiencia respiratoria,daño pulmonar severo,1.3
+cáncer de colon,cambio hábito intestinal,crecimiento tumoral,1.1
+cáncer de colon,sangrado rectal,lesión tumoral,1.0
+cáncer de colon,dolor abdominal,invasión tumoral,0.9
+cáncer de colon,pérdida peso,metástasis,0.85
+cáncer de colon,fatiga,anemia,0.8
+dengue,fiebre,mordedura mosquito,1.0
+dengue,dolor cabeza,infección viral,0.95
+dengue,dolor muscular,infección dengue,0.9
+dengue,dolor articular,infección viral,0.85
+dengue,náuseas,infección viral,0.8
+dengue,vómitos,infección viral,0.75
+dengue,sarpullido,inmunidad reactiva,0.7
+dengue,fatiga,infección viral,0.65
+dengue,sangrado,mala coagulación,0.75
+dengue,hemorragia,mala coagulación,0.8
+dengue,hipotensión,choque dengue,0.85
+dengue,mareos,hipotensión,0.7
+dengue,dolor retroocular,infección viral,0.9
+dengue,fiebre alta,mordedura mosquito,1.0
+dengue,cefalea,dengue grave,0.9
+dengue,dolor abdominal,dengue severo,0.75
+dengue,vómitos repetidos,dengue severo,0.8
+dengue,trombocitopenia,infección viral,0.95
+dengue,shock,complicación grave,1.0
+dengue,edema,inflamación vascular,0.7
+vph,verrugas genitales,infección viral,1.1
+vph,lesiones anogenitales,infección viral,1.0
+vph,dolor durante relaciones,infección,0.75
+vph,sangrado anormal,infección crónica,0.7
+vph,pérdida peso,infección crónica,0.6
+tuberculosis pulmonar,tos crónica,infección bacteriana,1.2
+tuberculosis pulmonar,pérdida peso,infección crónica,1.0
+tuberculosis pulmonar,fiebre,infección bacteriana,0.9
+tuberculosis pulmonar,sudoración nocturna,infección crónica,0.85
+tuberculosis pulmonar,dolor torácico,infección pulmonar,0.8

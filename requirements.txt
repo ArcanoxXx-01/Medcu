@@ -7,3 +7,5 @@ matplotlib
 bs4
 numpy
 faiss-cpu
+pytest
+scipy

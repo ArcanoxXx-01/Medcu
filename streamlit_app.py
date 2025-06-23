@@ -7,4 +7,4 @@ if __name__ == '__main__':
 
 # crawler = Crawler()
 
-# crawler.process_html_directory(init_id=714+585)
+# crawler.process_html_directory(init_id=95*16+7)

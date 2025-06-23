@@ -12,7 +12,7 @@ class MedicalGraphBuilder:
         self.db_path = db_path
         self.graph = nx.DiGraph()
         self.add_edges_from_csv()
-        self.build_graph()
+        # self.build_graph()
 
     def build_graph(self):
         """Construir el grafo
@@ -61,7 +61,7 @@ class MedicalGraphBuilder:
         weights = [self.graph[u][v]['peso'] for u, v in self.graph.edges]
 
         plt.figure(figsize=(12, 8))
-        nx.draw(self.graph, pos, with_labels=True, node_color='lightblue', edge_color='gray', width=weights)
+        nx.draw(self.graph, pos, with_labels=False, node_color='lightblue', edge_color='gray', width=weights)
         nx.draw_networkx_edge_labels(self.graph, pos, edge_labels=edge_labels)
         plt.title("Grafo Médico: síntomas y causas hacia enfermedades")
         plt.show()
@@ -146,5 +146,8 @@ class MedicalGraphBuilder:
 
         return list(nodos_similares)
 
+    def _summary_(self):
+        print(f"<Cantidad de nodos: {self.graph.number_of_nodes()}, Cantidad de aristas: {self.graph.number_of_edges()}>")
+        
 # graph = MedicalGraphBuilder()
 # graph.visualize()
