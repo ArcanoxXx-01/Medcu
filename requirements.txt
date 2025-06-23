@@ -1,0 +1,9 @@
+requests
+dotenv
+streamlit
+rapidfuzz
+networkx
+matplotlib
+bs4
+numpy
+faiss-cpu

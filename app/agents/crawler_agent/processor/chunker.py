@@ -1,7 +1,4 @@
-from platform import processor
 import time
-from typing import Dict
-import re
 from app.core.processor import FireworksProcessor 
 
 def chunk_sections(secciones: dict, model:FireworksProcessor, retry = 6):
