@@ -40,6 +40,7 @@ GENERATE_QUESTION = (
     "Devuelve únicamente la pregunta final, sin encabezados ni notas adicionales."
 )
 
+
 PROCESAR_ENTIDADES = (
     "Eres un asistente médico especializado en extracción estructurada de información clínica. "
     "Tu tarea consiste en analizar descripciones textuales sobre una enfermedad y transformar su contenido en listas organizadas. "

@@ -1,4 +1,3 @@
-from mimetypes import init
 import threading, queue, time, os
 from typing import Dict, List
 
@@ -17,6 +16,7 @@ class Crawler:
     def __init__(self, sleep_interval: float = 1.0):
         self.document_store = DocumentStore()
         self.vector_store = VectorStore( use_faiss = True)
+
         self.sleep_interval = sleep_interval
         
         self.embedding_generator = EmbeddingGenerator(
@@ -81,6 +81,7 @@ class Crawler:
                 if self.stop_event.is_set():
                     break
                 if self.document_store.check_url_expiration(url):
+
                     try:
                         html = scrape_article(url)
                     except Exception as e:
@@ -152,6 +153,7 @@ class Crawler:
             sections (Dict[str, str]): Diccionario con las secciones del artículo.
         """
         embeddings = []
+
         try:
             chunks, metadatas = chunk_sections(sections, self.process_model)
         except Exception as e:
@@ -168,6 +170,7 @@ class Crawler:
                         batch_embeddings = self.embedding_generator.embed_texts(batch)
                         embeddings.extend(batch_embeddings)
                         break
+                        
                     except Exception as e:
                         wait = 2 ** retry
                         print(f"Error (intento {retry+1}/6): {e}. Reintentando en {wait}s...")
@@ -178,6 +181,7 @@ class Crawler:
             print(f"Error inesperado al generar embeddings: {e}")
             
         for idx, (chunk, embedding, meta) in enumerate(zip(chunks, embeddings, metadatas)):
+
             try:
                 self.vector_store.upsert_vector(
                     url=url,
@@ -188,6 +192,7 @@ class Crawler:
                     causa=meta.get("causa"),
                     sintoma=meta.get("sintoma")
                 )
+
             except Exception as e:
                 print(f"[embedding_worker] Error almacenando vector chunk {idx} para {url.split('/')[-1]}:\n{e}")
 
@@ -199,6 +204,7 @@ class Crawler:
         Args:
             html_dir (str): Ruta al directorio que contiene los archivos HTML.
         """
+
         files = os.listdir(html_dir)
         files.sort()
         for filename in files[init_id:final_id]:
@@ -207,6 +213,7 @@ class Crawler:
             
             filepath = os.path.join(html_dir, filename)
             
+
             url = f"https://medlineplus.gov/spanish/ency/article/{filename}"
             
             if self.document_store.check_url_expiration(url, 30):

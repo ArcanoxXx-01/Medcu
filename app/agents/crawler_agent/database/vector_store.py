@@ -124,7 +124,13 @@ class VectorStore:
                 
 
     def search(self, query_embedding: List[float], top_k: int = 5):
-        if not self.use_faiss or self.faiss_index is None:
+        """
+        Busca los top_k vectores más similares a la consulta y devuelve
+        información básica con la distancia.
+
+        Returns:
+            List de tuplas (url, chunk_index, text_chunk, distance)
+        """        if not self.use_faiss or self.faiss_index is None:
             return []
 
         query_np = np.array(query_embedding, dtype=np.float32).reshape(1, -1)
@@ -142,6 +148,7 @@ class VectorStore:
         cursor = conn.cursor()
 
         results = []
+        
         placeholders= ','.join(['?']*len(result_ids))
         cursor.execute(f"SELECT nombre, sintoma, causa FROM vectors where id IN ({placeholders})", result_ids)
         objects = cursor.fetchall()
@@ -155,22 +162,33 @@ class VectorStore:
         return results
 
     def get_by_chunk(self, chunk: str) -> Optional[dict]:
+        """Busca si existe alguna fila en la base de datos que tenga exactamente el mismo texto en la columna text_chunk.
+
+        Args:
+            chunk (str): Texto por el cual se compararán los chunks de la base de datos.
+
+        Returns:
+            Optional[dict]: Retorna la fila como diccionario si se encuentra una coincidencia exacta, o None en caso contrario.
+        """
         conn = sqlite3.connect(self.db_path)
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
         cursor.execute("SELECT nombre, causa, sintoma FROM vectors WHERE text_chunk = ?", (chunk,))
         row = cursor.fetchone()
+
         conn.close()
 
         return dict(row) if row else None
 
+
     def save_faiss_index(self, path: str = "data/embeddings.index"):
+        """
+        Guarda el índice FAISS en disco para persistencia.
+        """
         if not self.use_faiss or self.faiss_index is None:
             return
 
         save_path = path if path else self.faiss_index_path
         with self._faiss_lock:
             faiss.write_index(self.faiss_index, save_path)
-
-# vector_store= VectorStore()

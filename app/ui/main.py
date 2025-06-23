@@ -1,4 +1,5 @@
 import streamlit as st
+import traceback
 import threading
 
 from app.agents.orchestrator.orchestrator import Orchestrator
@@ -64,7 +65,6 @@ def main():
             
             st.stop()
                 
-
     orchestrator = Orchestrator(
         cleaner = process_model.limpiar_consulta,
         extractor = process_model.extraer_entidades,
@@ -80,8 +80,7 @@ def main():
     
     # crawler = Crawler()
     # t_crawler = threading.Thread(target=crawler.run, daemon=True)
-    # t_crawler.start()
-    
+    # t_crawler.start()    
     # Compoenentes de la UI
     st.set_page_config(page_title='Medicub')
     st.title('🩺 Asistente Médico con IA')

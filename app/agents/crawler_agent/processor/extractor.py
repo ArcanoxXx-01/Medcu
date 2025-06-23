@@ -41,7 +41,6 @@ def extract_relevant_sections(html_content: str) -> Dict[str, str]:
                 result['sintomas'] = section.get_text(separator=' ', strip=True)
             elif 'nombres alternativos' in tittle:
                 result['nombres_alternativos'] = section.get_text(separator=' ', strip=True)
-
         return {
             'enfermedad': enfermedad,
             **result

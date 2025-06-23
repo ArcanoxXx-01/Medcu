@@ -143,5 +143,3 @@ class Orchestrator:
                 if valores:
                     resultado.append(valores)
         return resultado
-
-

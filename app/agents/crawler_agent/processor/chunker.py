@@ -47,3 +47,14 @@ def chunk_sections(secciones: dict, model:FireworksProcessor, retry = 6):
             })
             
     return chunks, metadatas 
+
+  # data = {
+#     "titulo": "Fractura",
+#     "causas": "Caída desde una altura\nTraumatismo\nAccidentes automovilísticos",
+#     "sintomas": "Hinchazón\nDolor intenso",
+#     "nombres_alternativos": "Hueso roto; Fractura por sobrecarga"
+# }
+
+# chunks, metadatas = chunk_sections(data)
+# for chunk in chunks:
+#     print(chunk)

@@ -37,6 +37,7 @@ class MedicalGraphBuilder:
         else:
             self.graph.add_edge(source, target, tipo=tipo, peso=peso)
 
+
     def add_edges_from_csv(self, csv_path: str = 'data/edges.csv'):
         """Agregar aristas de un csv"""
         with open(csv_path, newline='', encoding='utf-8') as csvfile:
@@ -145,7 +146,5 @@ class MedicalGraphBuilder:
 
         return list(nodos_similares)
 
-
 # graph = MedicalGraphBuilder()
-# graph.build_graph()
 # graph.visualize()
