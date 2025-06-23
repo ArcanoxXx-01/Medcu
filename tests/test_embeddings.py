@@ -3,7 +3,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from app.core.embeddings import EmbeddingGenerator
 from app.config import EMBEDDING_URL, FIREWORKS_EMBEDDING_MODEL, FIREWORKS_API_KEY
-import pytest
+# import pytest
 
 # @pytest.mark.skipif(
 #     not os.getenv("FIREWORKS_API_KEY"),

@@ -1,4 +1,5 @@
-import requests
+import io
+import requests, csv
 from app.core.prompts import *
 
 class FireworksProcessor:
@@ -27,7 +28,7 @@ class FireworksProcessor:
             "Content-Type": "application/json"
         }
 
-    def _llm_request(self, prompt: str, temperature: float = 0.2) -> str:
+    def _llm_request(self, prompt: str, temperature: float = 0) -> str:
         """
         Realiza la solicitud HTTP al modelo Fireworks tipo chat con un prompt dado.
 
@@ -154,3 +155,25 @@ class FireworksProcessor:
             })
         except Exception as e:
             raise ValueError(f"Error extraer las entidades del texto: {e}")
+        
+    def generate_edge(self, query):
+        prompt = GENERATE_EDGE.format(query=query)
+        try:
+            output = self._llm_request(prompt).strip()
+            
+            # Parsear el CSV directamente desde el string
+            csv_reader = csv.DictReader(io.StringIO(output))
+            
+            edges = []
+            for row in csv_reader:
+                edges.append({
+                    "nombre": row["nombre"].strip(),
+                    "sintoma": row["sintoma"].strip(),
+                    "causa": row["causa"].strip(),
+                    "peso": float(row["peso"].strip())
+                })
+            
+            return edges
+
+        except Exception as e:
+            raise ValueError(f"Error al generar aristas:\n{e}\nRespuesta del modelo:\n{output}")

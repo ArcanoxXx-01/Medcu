@@ -18,14 +18,13 @@ GENERATE_DIAGNOSTIC = (
     "Eres un asistente médico especializado en comunicar diagnósticos de manera clara y empática a pacientes no expertos. "
     "Tu tarea es redactar una respuesta natural y profesional que explique el posible diagnóstico y mencione brevemente los síntomas o causas en que se basa.\n\n"
     "Contexto:\n"
-    "- Diagnóstico más probable: {diagnostico}\n"
+    "- Diagnóstico: {diagnostico}\n"
     "- Entidades médicas consideradas: {entidades}  # lista como síntomas, causas y enfermedades\n\n"
     "Instrucciones:\n"
-    "1. Explica al usuario que, según los síntomas que ha reportado, el diagnóstico más probable es {diagnostico}.\n"
+    "1. Explica al usuario que, según los síntomas que ha reportado, el diagnóstico es {diagnostico}.\n"
     "2. Menciona las principales entidades médicas consideradas, agrupándolas si es posible (ej: síntomas observados, causas asociadas, enfermedades relacionadas).\n"
-    "3. Usa un tono empático, claro y moderadamente técnico (sin jerga compleja).\n"
-    "4. No des órdenes ni afirmes el diagnóstico como definitivo. Usa expresiones como \"es probable que...\", \"según los datos aportados...\", \"esto podría indicar...\".\n"
-    "5. Si es apropiado, sugiere acudir a un profesional para confirmación.\n\n"
+    "3. No des órdenes ni afirmes el diagnóstico como definitivo. Usa expresiones como \"es probable que...\", \"según los datos aportados...\", \"esto podría indicar...\".\n"
+    "4. Si es apropiado, sugiere acudir a un profesional para confirmación.\n\n"
     "Devuelve únicamente el mensaje para el paciente. No incluyas encabezados ni notas fuera del cuerpo del texto."
 )
 
@@ -62,4 +61,22 @@ PROCESAR_ENTIDADES = (
     "- No inventes información adicional.\n"
     "- No dejes listas vacías, usa `[]` si no hay información.\n"
     "- No expliques nada, responde solo con el JSON."
+)
+
+GENERATE_EDGE = (
+"Extrae de forma estructurada las enfermedades, sus síntomas, sus causas y un peso que indique qué tan representativo es cada síntoma para esa enfermedad.\n"
+"Devuelve la respuesta únicamente en formato CSV, con las siguientes columnas:\n"
+"nombre,sintoma,causa,peso\n\n"
+"    nombre: nombre de la enfermedad.\n"
+"    sintoma: un síntoma asociado a la enfermedad (una por fila).\n"
+"    causa: una posible causa de la enfermedad (una por fila).\n"
+"    peso: número entre 0.0 y 1.0 que representa cuánto influye ese síntoma en la enfermedad (1.0 = síntoma característico).\n"
+"No incluyas ningún comentario, explicación o texto adicional fuera del CSV.\n"
+"Texto a analizar:\n"
+"{query}\n"
+"Ejemplo de salida esperada:\n"
+"nombre,sintoma,causa,peso\n"
+"enfermedad1,sintoma1,causa1,peso1\n"
+"enfermedad2,sintoma2,causa2,peso2\n"
+"Asegúrate de devolver en el formato correcto (incluya las comas y saltos de línes necesarios)"
 )

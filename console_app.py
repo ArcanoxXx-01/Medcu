@@ -16,7 +16,7 @@ class Asisstant():
             api_key=FIREWORKS_API_KEY,
             api_url=API_URL
         )
-
+        
         self.embeddings_model = EmbeddingGenerator(
             model_id = FIREWORKS_EMBEDDING_MODEL, 
             api_key = FIREWORKS_API_KEY, 
@@ -25,14 +25,16 @@ class Asisstant():
 
         self.vec_store = VectorStore()
         self.knowledge_graph = MedicalGraphBuilder()
-        self.knowledge_graph._summary_()
-        self.knowledge_graph.visualize()
+        self.knowledge_graph.build_graph()
+        self.knowledge_graph.add_edges_from_csv()
+        # self.knowledge_graph.visualize()
             
         self.orchestrator = Orchestrator(
             cleaner = self.process_model.limpiar_consulta,
             extractor = self.process_model.extraer_entidades,
             embedder = self.embeddings_model.embed_texts,
             questioner = self.process_model.generate_question,
+            edge_generator = self.process_model.generate_edge,
             vector_store = self.vec_store,
             knowledge_graph = self.knowledge_graph,
             responder = self,
@@ -95,5 +97,5 @@ class Asisstant():
                 return
     
     
-app = Asisstant()
-app.run()
+# app = Asisstant()
+# app.run()

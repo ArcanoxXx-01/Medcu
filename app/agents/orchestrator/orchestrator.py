@@ -4,6 +4,7 @@ class Orchestrator:
                  extractor, 
                  embedder, 
                  questioner,
+                 edge_generator,
                  vector_store, 
                  knowledge_graph,
                  responder,
@@ -14,6 +15,7 @@ class Orchestrator:
         self.extractor = extractor
         self.embedder = embedder
         self.questioner = questioner
+        self.edge_generator = edge_generator
         self.vector_store = vector_store
         self.knowledge_graph = knowledge_graph
         self.responder = responder
@@ -31,6 +33,12 @@ class Orchestrator:
         except Exception as e:
             print(f"Fallo en [Módulo de Limpieza]:\n{e}\ncontinuando con consulta original...")
             clean_query = query
+            
+        try:
+            rows = self.edge_generator(clean_query)
+            self.knowledge_graph.save_in_csv(rows)
+        except Exception as e:
+            print(e)
 
         # Paso 2: Extracción de entidades médicas
         try:
@@ -151,6 +159,7 @@ class Orchestrator:
             print(f"Fallo durante la obtencion de feedback: \n{e} \ndevolver mejor diagnostico hasta el momento")
             
         try:
+            # print(best_diagnostic)
             return self.responder.generar_respuesta_diagnostico(best_diagnostic, all_extracted_entities) # <== poner los nodos negros en vez de all_entities
         
         except Exception as e:

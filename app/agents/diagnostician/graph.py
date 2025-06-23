@@ -1,3 +1,4 @@
+import os
 import sqlite3
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -8,10 +9,11 @@ import json
 from rapidfuzz import process, fuzz
 
 class MedicalGraphBuilder:
-    def __init__(self, db_path: str = "data/embeddings.db"):
+    def __init__(self, db_path: str = "data/embeddings.db", csv_path = 'data/edges.csv'):
         self.db_path = db_path
+        self.csv_path = csv_path
         self.graph = nx.DiGraph()
-        self.add_edges_from_csv()
+        # self.add_edges_from_csv()
         # self.build_graph()
 
     def build_graph(self):
@@ -38,8 +40,9 @@ class MedicalGraphBuilder:
             self.graph.add_edge(source, target, tipo=tipo, peso=peso)
 
 
-    def add_edges_from_csv(self, csv_path: str = 'data/edges.csv'):
+    def add_edges_from_csv(self):
         """Agregar aristas de un csv"""
+        csv_path = self.csv_path
         with open(csv_path, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
@@ -145,6 +148,35 @@ class MedicalGraphBuilder:
                     nodos_similares.add(nombre)
 
         return list(nodos_similares)
+    
+    def save_in_csv(self, rows):
+        file_exists = os.path.exists(self.csv_path)
+    
+        with open(self.csv_path, 'a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+
+            # Escribir encabezado si el archivo es nuevo
+            if not file_exists:
+                writer.writerow(["nombre", "sintoma", "causa", "peso"])
+
+            for row in rows:
+                # print("Filas a agregar:", row)
+                nombre = row.get('nombre', '').strip()
+                sintoma = row.get('sintoma', '').strip()
+                causa = row.get('causa', '').strip()
+                peso = float(row.get('peso', 1.0))
+
+                # Guardar fila en el CSV
+                writer.writerow([nombre, sintoma, causa, peso])
+
+                # Agregar aristas al grafo
+                if nombre:
+                    if sintoma:
+                        self._add_edge(sintoma, nombre, "sintoma", peso)
+                    if causa:
+                        self._add_edge(causa, nombre, "causa", peso)
+                
+            
 
     def _summary_(self):
         print(f"<Cantidad de nodos: {self.graph.number_of_nodes()}, Cantidad de aristas: {self.graph.number_of_edges()}>")
