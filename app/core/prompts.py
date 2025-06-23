@@ -40,3 +40,25 @@ GENERATE_QUESTION = (
     "Devuelve únicamente la pregunta final, sin encabezados ni notas adicionales."
 )
 
+PROCESAR_ENTIDADES = (
+    "Eres un asistente médico especializado en extracción estructurada de información clínica. "
+    "Tu tarea consiste en analizar descripciones textuales sobre una enfermedad y transformar su contenido en listas organizadas. "
+    "Extrae todos los elementos relevantes de cada campo, separando conceptos distintos aunque estén unidos por conjunciones o puntuación.\n\n"
+    "Entrada:\n"
+    "- Enfermedad: {enfermedad}\n"
+    "- Causas: {causas}\n"
+    "- Síntomas: {sintomas}\n"
+    "- Nombres alternativos: {nombres_alternativos}\n\n"
+    "Salida esperada:\n"
+    "Un diccionario en formato JSON con la siguiente estructura:\n"
+    "{{\n"
+    '  "enfermedad": "nombre de la enfermedad",\n'
+    '  "causas": ["causa 1", "causa 2", "..."],\n'
+    '  "sintomas": ["síntoma 1", "síntoma 2", "..."],\n'
+    '  "nombres_alternativos": ["nombre 1", "nombre 2", "..."]\n'
+    "}}\n\n"
+    "Reglas:\n"
+    "- No inventes información adicional.\n"
+    "- No dejes listas vacías, usa `[]` si no hay información.\n"
+    "- No expliques nada, responde solo con el JSON."
+)
