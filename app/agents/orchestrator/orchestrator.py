@@ -5,6 +5,7 @@ class Orchestrator:
                  cleaner, 
                  extractor, 
                  embedder, 
+                 questioner,
                  vector_store, 
                  knowledge_graph,
                  responder,
@@ -14,6 +15,7 @@ class Orchestrator:
         self.cleaner = cleaner
         self.extractor = extractor
         self.embedder = embedder
+        self.questioner = questioner
         self.vector_store = vector_store
         self.knowledge_graph = knowledge_graph
         self.responder = responder
@@ -27,13 +29,13 @@ class Orchestrator:
         # Paso 1: Limpieza de texto
         try:
             clean_query = self.cleaner(query)
-        except Exception:
-            print("Fallo en [Módulo de Limpieza]:\n continuando con consulta original")
+            print("Consulta limpiada correctamente")
+        except Exception as e:
+            print(f"Fallo en [Módulo de Limpieza]:\n{e}\ncontinuando con consulta original...")
             clean_query = query
 
         # Paso 2: Extracción de entidades médicas
         try:
-            print("Consulta limpiada correctamente")
             extracted_entities_as_dict = self.extractor(clean_query)
             print(f"Entidades médicas extraidas:\n  {extracted_entities_as_dict}\n")
             all_extracted_entities = list(set(self.flatten_dictionary(extracted_entities_as_dict)))
@@ -88,20 +90,35 @@ class Orchestrator:
         # Paso 7-10: Feedback iterativo
         try:
             gray_nodes = self.knowledge_graph.obtener_nodos_asociados(recovered_entities)
+            
+            # if not gray_nodes:
+                #seleccionar random
+                
             # print ("gray nodes: ",gray_nodes)
             while True:
                 print("Generando pregunta de feedback...")
                 sugerencia = self.knowledge_graph.sugerir_pregunta_feedback(black_nodes, gray_nodes)
-                if not sugerencia:
-                    break
-                user_confirm = self.responder.preguntar_usuario(sugerencia)
-                print(user_confirm)
+                
+                try:
+                    question = self.questioner(sugerencia)
+                except Exception as e:
+                    question = f"¿Presenta el síntoma {sugerencia}?"
+                    print(f"Fallo al generar la pregunta con LLM:\n{e} \nUsando pregunta por defetco...")
+                    
+                self.responder.preguntar_usuario(question)
+                
+                while self.responder.confirmation is None:
+                    continue
+                
+                user_confirm = self.responder.confirmation
+                   
                 if user_confirm:
                     black_nodes.append(sugerencia)
                     best_diagnostic = self.knowledge_graph.infer_diagnosis(black_nodes)
                     # Aqui seria procesar la entidad que se añadio a la consulta para añadir nuevos nodos grices
                 else:
-                    gray_nodes.remove(sugerencia)
+                    if gray_nodes.__contains__(sugerencia):
+                        gray_nodes.remove(sugerencia)
 
                 if best_diagnostic and best_diagnostic[0][1] >= self.feedback_gain_threshold:
                     break

@@ -41,6 +41,10 @@ def main():
     #     print(f"No se pudieron agregar aristas desde: '{csv_dir}'")
     
     class ResponderStreamlit(ResponderInterface):
+        def __init__(self):
+            super().__init__()
+            self.confirmation = None
+            
         def generar_respuesta_error(self, mensaje: str) -> None:
             st.error(f"⚠️ {mensaje}")
 
@@ -51,22 +55,21 @@ def main():
                 st.markdown(f"Dado los síntomas descritos, es muy probable que presente '{diagnostico}', por favor consulte a un especialista")
                 print("Fallo al crear la respuesta con LLM. \nUsando respuesta por defecto")
                 
-        def preguntar_usuario(self, entidad: str) -> bool:
-            try:
-                question = process_model.generate_question(entidad)
-            except:
-                question = f"¿Presenta el síntoma {entidad}?"
-                print("Fallo al generar la pregunta con LLM. \nUsando pregunta por defetco...")
+        def preguntar_usuario(self, question: str) -> bool:
                 
-            key = f"respuesta_{entidad}"
-            seleccion = st.radio(question, ["Sí", "No"], key=key)
+            seleccion = st.radio(question, ["Seleccione una opción:", "Sí", "No"])
 
-            return seleccion == "Sí"
+            if seleccion is not None:
+                self.confirmation = seleccion == "Sí"
+            
+            st.stop()
+                
 
     orchestrator = Orchestrator(
         cleaner = process_model.limpiar_consulta,
         extractor = process_model.extraer_entidades,
         embedder = embeddings_model.embed_texts,
+        questioner = process_model.generate_question,
         vector_store = vec_store,
         knowledge_graph = knowledge_graph,
         responder = ResponderStreamlit(),
