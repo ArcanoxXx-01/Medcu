@@ -1,10 +1,9 @@
 from app.agents.orchestrator.orchestrator import Orchestrator
 from app.core.processor import FireworksProcessor
 from app.core.embeddings import EmbeddingGenerator
-from app.agents.crawler_agent.database.doc_store import DocumentStore
 from app.agents.crawler_agent.database.vector_store import VectorStore
 from app.agents.crawler_agent.agent import Crawler
-from app.agents.diagnostician.graph import MedicalGraphBuilder
+from app.agents.questioner.heuristic_selector import KnowledgeGraph, Heuristic_Selector
 from app.config import *
 
 class Asisstant():
@@ -24,24 +23,37 @@ class Asisstant():
         )
 
         self.vec_store = VectorStore()
-        self.knowledge_graph = MedicalGraphBuilder()
-        self.knowledge_graph.build_graph()
-        self.knowledge_graph.add_edges_from_csv()
-        # self.knowledge_graph.visualize()
+        self.knowledge_graph = KnowledgeGraph(use_db=True, use_csv=True)
+        self.knowledge_graph.summary()
+        self.selector = Heuristic_Selector(self.knowledge_graph)
             
         self.orchestrator = Orchestrator(
-            cleaner = self.process_model.limpiar_consulta,
-            extractor = self.process_model.extraer_entidades,
-            embedder = self.embeddings_model.embed_texts,
-            questioner = self.process_model.generate_question,
-            edge_generator = self.process_model.generate_edge,
+            processor = self.process_model,
+            embedder = self.embeddings_model,
             vector_store = self.vec_store,
-            knowledge_graph = self.knowledge_graph,
+            selector = self.selector,
             responder = self,
             similarity_threshold = 0.8,
             top_k = 15,
             feedback_gain_threshold = 1
         )
+               
+    def generar_respuesta_error(self, mensaje: str):
+        pass
+    
+    def generar_respuesta_diagnostico(self, diagnostico: str, entidades: list[str]):
+        pass
+                        
+    def preguntar_usuario(self, question: str):
+        pass
+        
+    def run(self):
+        """Inicia una consulta"""
+        pass
+  
+class Console_Assistant(Asisstant):
+    def __init__(self):
+        super().__init__()
                
     def generar_respuesta_error(self, mensaje: str) -> None:
         print(mensaje)#ponerle color o algo
@@ -96,6 +108,5 @@ class Asisstant():
                 #limpiar consola
                 return
     
-    
-# app = Asisstant()
+# app = Console_Assistant()
 # app.run()

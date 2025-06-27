@@ -78,19 +78,3 @@ class ReducerSelector(selector):
         result+= self.graph.edges[tuple([u,v])].cost
     
     return result    
-
-
-
-
-# sel = ReducerSelector()
-  
-# initial = {
-#   'symptoms' : ['insomnio', 'dolor de estómago'],
-#   'diseases' : ['diabetes']
-# }
-
-# extra = {
-#   'symptoms' : ['ERT', 'Fatiga' , 'Agotamiento', 'Alergia a los alimentos - huevos'],
-# }
-
-# print(sel.get(initial, extra))

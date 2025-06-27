@@ -1,0 +1,62 @@
+[
+  {
+    "id": "001",
+    "consulta": "Tengo fiebre alta, dolor de cabeza y escalofríos desde ayer.",
+    "diagnostico_esperado": "Gripe",
+    "sintomas_reales": ["fiebre", "dolor de cabeza", "escalofríos"]
+  },
+  {
+    "id": "002",
+    "consulta": "Desde hace unos días tengo dolor en el pecho, dificultad para respirar y tos con flema.",
+    "diagnostico_esperado": "Neumonía",
+    "sintomas_reales": ["dolor torácico", "dificultad respiratoria", "tos productiva"]
+  },
+  {
+    "id": "003",
+    "consulta": "Me pican los ojos, tengo estornudos frecuentes y la nariz tapada.",
+    "diagnostico_esperado": "Rinitis alérgica",
+    "sintomas_reales": ["prurito ocular", "estornudos", "congestión nasal"]
+  },
+  {
+    "id": "004",
+    "consulta": "Tengo sed constante, orino con mucha frecuencia y he bajado de peso sin razón.",
+    "diagnostico_esperado": "Diabetes mellitus tipo 2",
+    "sintomas_reales": ["poliuria", "polidipsia", "pérdida de peso inexplicada"]
+  },
+  {
+    "id": "005",
+    "consulta": "Me duele mucho el oído derecho y he notado algo de pus saliendo.",
+    "diagnostico_esperado": "Otitis media aguda",
+    "sintomas_reales": ["otalgia", "secreción purulenta", "sensación de oído tapado"]
+  },
+  {
+    "id": "006",
+    "consulta": "Tengo dolor abdominal intenso, vómitos y no puedo expulsar gases ni heces.",
+    "diagnostico_esperado": "Obstrucción intestinal",
+    "sintomas_reales": ["dolor abdominal", "vómitos", "ausencia de evacuación"]
+  },
+  {
+    "id": "007",
+    "consulta": "Desde hace meses me siento muy cansado, tengo palidez y me falta el aire al hacer esfuerzo.",
+    "diagnostico_esperado": "Anemia ferropénica",
+    "sintomas_reales": ["fatiga", "palidez", "disnea de esfuerzo"]
+  },
+  {
+    "id": "008",
+    "consulta": "Siento ardor al orinar y tengo que ir al baño muy seguido.",
+    "diagnostico_esperado": "Infección urinaria",
+    "sintomas_reales": ["disuria", "polaquiuria", "urgencia urinaria"]
+  },
+  {
+    "id": "009",
+    "consulta": "Tengo dolor de garganta, fiebre leve y dificultad para tragar.",
+    "diagnostico_esperado": "Faringitis",
+    "sintomas_reales": ["odinofagia", "fiebre", "inflamación faríngea"]
+  },
+  {
+    "id": "010",
+    "consulta": "Me despierto tosiendo por la noche y siento opresión en el pecho.",
+    "diagnostico_esperado": "Asma",
+    "sintomas_reales": ["tos nocturna", "opresión torácica", "dificultad respiratoria"]
+  }
+]

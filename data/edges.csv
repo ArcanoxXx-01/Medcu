@@ -732,3 +732,239 @@ tuberculosis pulmonar,pérdida peso,infección crónica,1.0
 tuberculosis pulmonar,fiebre,infección bacteriana,0.9
 tuberculosis pulmonar,sudoración nocturna,infección crónica,0.85
 tuberculosis pulmonar,dolor torácico,infección pulmonar,0.8
+Úlcera vascular,Herida en la parte interna del pie,Antecedentes de úlceras vasculares,0.8
+Úlcera vascular,Piel oscura alrededor de la herida,Tabaquismo,0.7
+Úlcera vascular,Eccema alrededor de la herida,Estar de pie durante mucho tiempo,0.6
+Úlcera vascular,Falta de dolor,Pobre circulación sanguínea,0.5
+Úlcera vascular,Herida que no se cierra,Tabaquismo,0.9
+Úlcera vascular,Crecimiento de la herida,Pobre circulación sanguínea,0.8
+Úlcera venosa,Herida en la parte interna del pie,Insuficiencia venosa,0.8
+Úlcera venosa,Piel oscura alrededor de la herida,Estar de pie durante mucho tiempo,0.7
+Úlcera venosa,Eccema alrededor de la herida,Insuficiencia venosa,0.7
+Úlcera venosa,Falta de dolor,Insuficiencia venosa,0.5
+Úlcera venosa,Herida que no se cierra,Insuficiencia venosa,0.9
+Úlcera venosa,Crecimiento de la herida,Insuficiencia venosa,0.8
+Úlcera diabética,Herida en la parte interna del pie,Diabetes,0.6
+Úlcera diabética,Piel oscura alrededor de la herida,Neuropatía diabética,0.5
+Úlcera diabética,Falta de dolor,Neuropatía diabética,0.9
+Úlcera diabética,Herida que no se cierra,Pobre circulación sanguínea,0.7
+Úlcera diabética,Crecimiento de la herida,Pobre circulación sanguínea,0.7
+Úlcera vascular,Herida que no cicatriza,Insuficiencia venosa,0.8
+Úlcera vascular,Piel oscurecida alrededor de la herida,Trauma local,0.7
+Úlcera vascular,Eccema alrededor de la herida,Insuficiencia venosa,0.6
+Úlcera vascular,Aumento de tamaño de la herida,Infección,0.5
+Úlcera vascular,Localización en la parte interna del pie,Insuficiencia venosa,0.9
+Úlcera vascular,Falta de dolor,Pobre circulación,0.4
+Úlcera vascular,Antecedentes de úlceras vasculares,Predisposición genética,0.8
+Úlcera vascular,Ser fumador,Enfermedad vascular periférica,0.7
+Úlcera vascular,Trabajo que implica estar de pie,Insuficiencia venosa,0.6
+Úlcera vascular,Herida que no cierra,Antecedentes de úlceras vasculares,0.8
+Úlcera vascular,Piel oscurecida alrededor de la herida,Insuficiencia venosa,0.7
+Úlcera vascular,Eccema alrededor de la herida,Insuficiencia venosa,0.6
+Úlcera vascular,Herida en la parte inferior interna del pie,Falta de circulación,0.9
+Úlcera vascular,Agrandamiento de la herida,Infección o mala circulación,0.8
+Úlcera vascular,Poca o nula dolor,Daño nervioso o neuropatía,0.4
+Úlcera vascular,Estar mucho tiempo de pie,Insuficiencia venosa,0.7
+Úlcera vascular,Fumar,Enfermedad vascular,0.5
+Úlcera vascular,Dificultad para cicatrizar,Mala circulación o diabetes,0.6
+Diabetes,HbA1C elevada,mal control glucémico,0.8
+Diabetes,Úlcera en pie,neuropatía diabética,0.7
+Diabetes,Úlcera en pie,mal control glucémico,0.6
+Úlcera en pie,Dolor,lesión tisular,0.9
+Úlcera en pie,Infección,lesión tisular,0.8
+Diabetes,Edad avanzada,envejecimiento,0.5
+Úlcera en pie,Edad avanzada,envejecimiento,0.4
+Diabetes,Tratamiento con antidiabéticos orales,necesidad de control glucémico,0.3
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.7
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.6
+Infección viral,escalofríos,infección viral,0.7
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.5
+Neumonía,fiebre alta,infección bacteriana,0.8
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.6
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.7
+Infección viral,escalofríos,infección viral,0.5
+Sepsis,fiebre alta,infección bacteriana,0.7
+Sepsis,escalofríos,infección bacteriana,0.6
+Neumonía,fiebre alta,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.4
+Neumonía,escalofríos,infección bacteriana,0.5
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.7
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.6
+Infección viral,escalofríos,infección viral,0.7
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.5
+Neumonía,fiebre alta,infección bacteriana,0.8
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.6
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.7
+Infección viral,escalofríos,infección viral,0.5
+Sepsis,fiebre alta,infección bacteriana,0.7
+Sepsis,escalofríos,infección bacteriana,0.6
+Neumonía,fiebre alta,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.4
+Neumonía,escalofríos,infección bacteriana,0.5
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.7
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.6
+Infección viral,escalofríos,infección viral,0.7
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.5
+Neumonía,fiebre alta,infección bacteriana,0.8
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.7
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.6
+Infección viral,escalofríos,infección viral,0.7
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.8
+Neumonía,fiebre alta,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.5
+Neumonía,escalofríos,infección bacteriana,0.7
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.7
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.6
+Infección viral,escalofríos,infección viral,0.7
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.5
+Neumonía,fiebre alta,infección bacteriana,0.8
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.7
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.6
+Infección viral,escalofríos,infección viral,0.7
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.5
+Neumonía,fiebre alta,infección bacteriana,0.8
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.7
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.6
+Infección viral,escalofríos,infección viral,0.7
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.8
+Neumonía,fiebre alta,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.5
+Neumonía,escalofríos,infección bacteriana,0.7
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.7
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.6
+Infección viral,escalofríos,infección viral,0.7
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.8
+Neumonía,fiebre alta,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.5
+Neumonía,escalofríos,infección bacteriana,0.7
+Neumonía,dolor en el pecho,infección bacteriana,0.8
+Neumonía,dificultad respiratoria,infección bacteriana,0.9
+Neumonía,tos con flema,infección bacteriana,0.95
+Bronquitis,dolor en el pecho,infección viral,0.6
+Bronquitis,dificultad respiratoria,infección viral,0.7
+Bronquitis,tos con flema,infección viral,0.9
+Asma,dificultad respiratoria,alergia,0.85
+Asma,tos con flema,alergia,0.7
+Enfermedad Pulmonar Obstructiva Crónica (EPOC),dificultad respiratoria,tabaquismo,0.9
+Enfermedad Pulmonar Obstructiva Crónica (EPOC),tos con flema,tabaquismo,0.95
+Infarto de miocardio,dolor en el pecho,enfermedad cardiovascular,0.95
+Infarto de miocardio,dificultad respiratoria,enfermedad cardiovascular,0.7
+Neumonía,dolor en el pecho,infección bacteriana,0.8
+Neumonía,dificultad respiratoria,infección bacteriana,0.9
+Neumonía,tos con flema,infección bacteriana,0.95
+Bronquitis,dolor en el pecho,infección viral,0.6
+Bronquitis,dificultad respiratoria,infección viral,0.7
+Bronquitis,tos con flema,infección viral,0.9
+Asma,dificultad respiratoria,alergia,0.85
+Asma,tos con flema,alergia,0.7
+Enfermedad Pulmonar Obstructiva Crónica (EPOC),dificultad respiratoria,tabaquismo,0.9
+Enfermedad Pulmonar Obstructiva Crónica (EPOC),tos con flema,tabaquismo,0.95
+Infarto de miocardio,dolor en el pecho,enfermedad cardiovascular,0.95
+Infarto de miocardio,dificultad respiratoria,enfermedad cardiovascular,0.7
+Neumonía,dolor en el pecho,infección bacteriana,0.8
+Neumonía,dificultad respiratoria,infección bacteriana,0.9
+Neumonía,tos con flema,infección bacteriana,0.95
+Bronquitis,dolor en el pecho,infección viral,0.6
+Bronquitis,dificultad respiratoria,infección viral,0.7
+Bronquitis,tos con flema,infección viral,0.9
+Asma,dificultad respiratoria,alergia,0.85
+Asma,tos con flema,alergia,0.7
+Enfermedad Pulmonar Obstructiva Crónica (EPOC),dificultad respiratoria,tabaquismo,0.9
+Enfermedad Pulmonar Obstructiva Crónica (EPOC),tos con flema,tabaquismo,0.95
+Infarto de miocardio,dolor en el pecho,enfermedad cardiovascular,0.95
+Infarto de miocardio,dificultad respiratoria,enfermedad cardiovascular,0.7
+Malaria,fiebre alta,infección por Plasmodium,0.8
+Malaria,dolor de cabeza,infección por Plasmodium,0.6
+Malaria,escalofríos,infección por Plasmodium,0.9
+Infección viral,fiebre alta,infección viral,0.7
+Infección viral,dolor de cabeza,infección viral,0.5
+Infección viral,escalofríos,infección viral,0.6
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,dolor de cabeza,infección bacteriana,0.4
+Sepsis,escalofríos,infección bacteriana,0.8
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.6
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.7
+Infección viral,escalofríos,infección viral,0.5
+Sepsis,fiebre alta,infección bacteriana,0.7
+Sepsis,escalofríos,infección bacteriana,0.6
+Neumonía,fiebre alta,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.4
+Neumonía,escalofríos,infección bacteriana,0.5
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.7
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.6
+Infección viral,escalofríos,infección viral,0.7
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.5
+Neumonía,fiebre alta,infección bacteriana,0.8
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.6
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.7
+Infección viral,escalofríos,infección viral,0.5
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.7
+Neumonía,fiebre alta,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.4
+Neumonía,escalofríos,infección bacteriana,0.6
+Malaria,fiebre alta,infección por Plasmodium,0.9
+Malaria,dolor de cabeza,infección por Plasmodium,0.6
+Malaria,escalofríos,infección por Plasmodium,0.8
+Infección viral,fiebre alta,infección viral,0.8
+Infección viral,dolor de cabeza,infección viral,0.7
+Infección viral,escalofríos,infección viral,0.5
+Sepsis,fiebre alta,infección bacteriana,0.9
+Sepsis,escalofríos,infección bacteriana,0.7
+Neumonía,fiebre alta,infección bacteriana,0.8
+Neumonía,dolor de cabeza,infección bacteriana,0.4
+Neumonía,escalofríos,infección bacteriana,0.6

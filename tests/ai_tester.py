@@ -1,10 +1,10 @@
-import os
 import json
 from tabnanny import verbose
 import sys
 import os
 import time
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/")))
 from app.core.embeddings import EmbeddingGenerator
 
 from console_app import Asisstant
@@ -121,13 +121,13 @@ class Tester(Asisstant):
                 f"0: Diagnóstico completamente incorrecto y potencialmente peligroso.\n\n"
                 f"Diagnóstico esperado: {expected_answer}\n"
                 f"Diagnóstico a evaluar: {self.answer}\n"
-                f"Respuesta (solo el entero 3 y 5): "
+                f"Respuesta (solo el entero 0 y 5): "
             )
 
             # print(evaluator_prompt)
             while True:
                 try:
-                    response = self.llm._llm_request(evaluator_prompt, temperature=0.1)
+                    response = self.llm._llm_request(evaluator_prompt, temperature=0.8)
                     break
                 except:
                     time.sleep(20)
@@ -140,8 +140,8 @@ class Tester(Asisstant):
             accuracy += int(response.split()[-1])
             cnt_tests += 5
             print(accuracy)
-            # print("expected:", expected_answer)
-            # print("found:", self.answer)
+            print("expected:", expected_answer)
+            print("found:", self.answer)
 
         return accuracy / cnt_tests
 

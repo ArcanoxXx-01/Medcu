@@ -1,0 +1,1021 @@
+[
+  {
+    "nombre": "migraña",
+    "consulta": [
+      "dolor de cabeza",
+      "náuseas"
+    ],
+    "agregados": [
+      "sensibilidad a la luz",
+      "vómitos",
+      "visión borrosa",
+      "insomnio"
+    ],
+    "nodo_seleccionado": "Infección viral",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "migraña",
+    "consulta": [
+      "sensibilidad a la luz",
+      "vómitos",
+      "visión borrosa",
+      "insomnio"
+    ],
+    "agregados": [
+      "dolor de cabeza",
+      "náuseas"
+    ],
+    "nodo_seleccionado": "dificultad para dormir e irritabilidad",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hipertensión",
+    "consulta": [
+      "dolor de cabeza",
+      "mareos"
+    ],
+    "agregados": [
+      "zumbido de oídos",
+      "fatiga",
+      "visión borrosa"
+    ],
+    "nodo_seleccionado": "Infección viral",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hipertensión",
+    "consulta": [
+      "zumbido de oídos",
+      "fatiga",
+      "visión borrosa"
+    ],
+    "agregados": [
+      "dolor de cabeza",
+      "mareos"
+    ],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hipotiroidismo",
+    "consulta": [
+      "fatiga",
+      "aumento de peso"
+    ],
+    "agregados": [
+      "piel seca",
+      "intolerancia al frío",
+      "estreñimiento"
+    ],
+    "nodo_seleccionado": "GN membranosa",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hipotiroidismo",
+    "consulta": [
+      "piel seca",
+      "intolerancia al frío",
+      "estreñimiento"
+    ],
+    "agregados": [
+      "fatiga",
+      "aumento de peso"
+    ],
+    "nodo_seleccionado": "hipotiroidismo severo",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "asma",
+    "consulta": [
+      "sibilancias",
+      "tos seca"
+    ],
+    "agregados": [
+      "opresión torácica",
+      "dificultad para respirar al hacer ejercicio"
+    ],
+    "nodo_seleccionado": "bronquitis industrial",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "asma",
+    "consulta": [
+      "opresión torácica",
+      "dificultad para respirar al hacer ejercicio"
+    ],
+    "agregados": [
+      "sibilancias",
+      "tos seca"
+    ],
+    "nodo_seleccionado": "epoc",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "anemia",
+    "consulta": [
+      "fatiga",
+      "palidez"
+    ],
+    "agregados": [
+      "taquicardia",
+      "mareos",
+      "dificultad para concentrarse"
+    ],
+    "nodo_seleccionado": "anemia megaloblástica",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "anemia",
+    "consulta": [
+      "taquicardia",
+      "mareos",
+      "dificultad para concentrarse"
+    ],
+    "agregados": [
+      "fatiga",
+      "palidez"
+    ],
+    "nodo_seleccionado": "somatización",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "meningitis",
+    "consulta": [
+      "fiebre",
+      "rigidez de nuca"
+    ],
+    "agregados": [
+      "vómitos",
+      "confusión",
+      "dolor de cabeza"
+    ],
+    "nodo_seleccionado": "ronquera - laringitis",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "meningitis tardia",
+    "consulta": [
+      "rigidez de nuca",
+      "fiebre",
+      "cefalea intensa"
+    ],
+    "agregados": [
+      "náuseas",
+      "confusión",
+      "fotofobia"
+    ],
+    "nodo_seleccionado": "ronquera - laringitis",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "diabetes tipo2",
+    "consulta": [
+      "sed excesiva",
+      "pérdida de peso inexplicada"
+    ],
+    "agregados": [
+      "poliuria",
+      "cansancio",
+      "visión borrosa"
+    ],
+    "nodo_seleccionado": "diabetes insípida neurogénica",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "diabetes tipo2",
+    "consulta": [
+      "poliuria",
+      "cansancio",
+      "visión borrosa"
+    ],
+    "agregados": [
+      "sed excesiva",
+      "pérdida de peso inexplicada"
+    ],
+    "nodo_seleccionado": "pérdida de visión - oclusión de la arteria de la retina",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hepatitis",
+    "consulta": [
+      "ictericia",
+      "dolor en cuadrante superior derecho"
+    ],
+    "agregados": [
+      "orina oscura",
+      "fatiga",
+      "náuseas"
+    ],
+    "nodo_seleccionado": "ovalocitosis hereditaria",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hepatitis",
+    "consulta": [
+      "orina oscura",
+      "fatiga",
+      "náuseas"
+    ],
+    "agregados": [
+      "ictericia",
+      "dolor en cuadrante superior derecho"
+    ],
+    "nodo_seleccionado": "somatización",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "infeccion urinaria",
+    "consulta": [
+      "dolor al orinar",
+      "urgencia urinaria"
+    ],
+    "agregados": [
+      "orina turbia",
+      "dolor lumbar",
+      "fiebre leve"
+    ],
+    "nodo_seleccionado": "cistitis aguda",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "infeccion urinaria",
+    "consulta": [
+      "orina turbia",
+      "dolor lumbar",
+      "fiebre leve"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "zika",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "artritis reumatoide",
+    "consulta": [
+      "dolor articular",
+      "hinchazón de manos"
+    ],
+    "agregados": [
+      "rigidez matutina",
+      "fatiga",
+      "pérdida de apetito"
+    ],
+    "nodo_seleccionado": "artritis infecciosa",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "artritis reumatoide",
+    "consulta": [
+      "rigidez matutina",
+      "fatiga",
+      "pérdida de apetito"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hiperglucemia",
+    "consulta": [
+      "sed excesiva",
+      "visión borrosa"
+    ],
+    "agregados": [
+      "aumento de la micción",
+      "fatiga",
+      "infecciones frecuentes"
+    ],
+    "nodo_seleccionado": "hiperglucemia",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hiperglucemia",
+    "consulta": [
+      "aumento de la micción",
+      "fatiga",
+      "infecciones frecuentes"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "bronquitis",
+    "consulta": [
+      "tos persistente",
+      "producción de esputo"
+    ],
+    "agregados": [
+      "sibilancias",
+      "opresión torácica",
+      "fiebre baja"
+    ],
+    "nodo_seleccionado": "bronquitis crónica",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "bronquitis",
+    "consulta": [
+      "sibilancias",
+      "opresión torácica",
+      "fiebre baja"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "bronquitis industrial",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "malaria",
+    "consulta": [
+      "fiebre intermitente",
+      "escalofríos"
+    ],
+    "agregados": [
+      "dolor de cabeza",
+      "sudoración profusa",
+      "anemia"
+    ],
+    "nodo_seleccionado": "Sepsis",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "malaria",
+    "consulta": [
+      "dolor de cabeza",
+      "sudoración profusa",
+      "anemia"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "dificultad para respirar tras actividad leve o incluso en reposo",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "tuberculosis",
+    "consulta": [
+      "tos crónica",
+      "pérdida de peso"
+    ],
+    "agregados": [
+      "sudoración nocturna",
+      "fiebre baja",
+      "dolor torácico"
+    ],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "tuberculosis",
+    "consulta": [
+      "sudoración nocturna",
+      "fiebre baja",
+      "dolor torácico"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "colapso parcial del pulmón",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "osteoporosis",
+    "consulta": [
+      "dolor óseo",
+      "fractura espontánea"
+    ],
+    "agregados": [
+      "pérdida de estatura",
+      "curvatura de columna",
+      "dolor lumbar"
+    ],
+    "nodo_seleccionado": "hipofosfatemia",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "osteoporosis",
+    "consulta": [
+      "pérdida de estatura",
+      "curvatura de columna",
+      "dolor lumbar"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "prostatitis",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "alergia",
+    "consulta": [
+      "estornudos",
+      "picazón nasal"
+    ],
+    "agregados": [
+      "ojos llorosos",
+      "congestión nasal",
+      "tos seca"
+    ],
+    "nodo_seleccionado": "pólipos nasales",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "alergia",
+    "consulta": [
+      "ojos llorosos",
+      "congestión nasal",
+      "tos seca"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "disnea progresiva",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "insuficiencia renal",
+    "consulta": [
+      "edema",
+      "fatiga"
+    ],
+    "agregados": [
+      "orina espumosa",
+      "hipertensión",
+      "prurito generalizado"
+    ],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "insuficiencia renal",
+    "consulta": [
+      "edema",
+      "fatiga"
+    ],
+    "agregados": [
+      "orina espumosa",
+      "hipertensión",
+      "prurito generalizado"
+    ],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "cardiomiopatía",
+    "consulta": [
+      "fatiga",
+      "hinchazón de tobillos"
+    ],
+    "agregados": [
+      "dificultad para respirar",
+      "palpitaciones",
+      "dolor torácico leve"
+    ],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "cardiomiopatía",
+    "consulta": [
+      "dificultad para respirar",
+      "palpitaciones",
+      "dolor torácico leve"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "bronquitis ocupacional",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "esquizofrenia",
+    "consulta": [
+      "alucinaciones",
+      "ideas delirantes"
+    ],
+    "agregados": [
+      "aislamiento social",
+      "pérdida de motivación",
+      "pensamiento desorganizado"
+    ],
+    "nodo_seleccionado": "meningitis criptocócica",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "esquizofrenia",
+    "consulta": [
+      "aislamiento social",
+      "pérdida de motivación",
+      "pensamiento desorganizado"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "ppd",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "parkinson",
+    "consulta": [
+      "temblor en reposo",
+      "rigidez muscular"
+    ],
+    "agregados": [
+      "bradicinesia",
+      "inestabilidad postural",
+      "falta de expresión facial"
+    ],
+    "nodo_seleccionado": "parkinson",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "parkinson",
+    "consulta": [
+      "bradicinesia",
+      "inestabilidad postural",
+      "falta de expresión facial"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "parálisis agitante",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "colitis ulcerosa",
+    "consulta": [
+      "diarrea con sangre",
+      "dolor abdominal bajo"
+    ],
+    "agregados": [
+      "tenesmo rectal",
+      "pérdida de peso",
+      "fatiga crónica"
+    ],
+    "nodo_seleccionado": "parásitos intestinales - nemátodo",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "colitis ulcerosa",
+    "consulta": [
+      "tenesmo rectal",
+      "pérdida de peso",
+      "fatiga crónica"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "sarampión",
+    "consulta": [
+      "erupción cutánea",
+      "fiebre alta"
+    ],
+    "agregados": [
+      "tos seca",
+      "congestión nasal",
+      "manchas de Koplik"
+    ],
+    "nodo_seleccionado": "Sepsis",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "sarampión",
+    "consulta": [
+      "tos seca",
+      "congestión nasal",
+      "manchas de Koplik"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "disnea progresiva",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hemochromatosis",
+    "consulta": [
+      "fatiga",
+      "dolor articular"
+    ],
+    "agregados": [
+      "coloración broncínea de la piel",
+      "pérdida de peso",
+      "dolor abdominal"
+    ],
+    "nodo_seleccionado": "viral",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hemochromatosis",
+    "consulta": [
+      "coloración broncínea de la piel",
+      "pérdida de peso",
+      "dolor abdominal"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "rotavirus",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "esclerosis múltiple",
+    "consulta": [
+      "visión borrosa intermitente",
+      "entumecimiento"
+    ],
+    "agregados": [
+      "fatiga",
+      "dificultad para caminar",
+      "mialgias"
+    ],
+    "nodo_seleccionado": "exceso de mineralocorticoides",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "esclerosis múltiple",
+    "consulta": [
+      "fatiga",
+      "dificultad para caminar",
+      "mialgias"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "insuficiencia venosa",
+    "consulta": [
+      "hinchazón de piernas",
+      "dolor sordo de pantorrillas"
+    ],
+    "agregados": [
+      "venas varicosas",
+      "picazón",
+      "cambios de piel"
+    ],
+    "nodo_seleccionado": "glomerulonefritis - aguda",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "insuficiencia venosa",
+    "consulta": [
+      "venas varicosas",
+      "picazón",
+      "cambios de piel"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "dolor de piernas",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "amiloidosis",
+    "consulta": [
+      "fatiga",
+      "hinchazón abdominal"
+    ],
+    "agregados": [
+      "macroglosia",
+      "pérdida de peso",
+      "palpitaciones"
+    ],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "amiloidosis",
+    "consulta": [
+      "macroglosia",
+      "pérdida de peso",
+      "palpitaciones"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "síndrome de cushing",
+    "consulta": [
+      "aumento de peso central",
+      "fatiga"
+    ],
+    "agregados": [
+      "cara de luna llena",
+      "estrías purpúreas",
+      "hipertensión"
+    ],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "síndrome de cushing",
+    "consulta": [
+      "cara de luna llena",
+      "estrías purpúreas",
+      "hipertensión"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "tensión arterial alta",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "esofagitis reflujo",
+    "consulta": [
+      "ardor esternal",
+      "regurgitación ácida"
+    ],
+    "agregados": [
+      "dolor de garganta",
+      "tos crónica",
+      "náuseas"
+    ],
+    "nodo_seleccionado": null,
+    "score": 2,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "esofagitis reflujo",
+    "consulta": [
+      "dolor de garganta",
+      "tos crónica",
+      "náuseas"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "hinchazón de la parte posterior de la garganta (faringe)",
+    "score": 0.3333333333333333,
+    "enfermedades_relevantes": [
+      "dolor de garganta"
+    ]
+  },
+  {
+    "nombre": "coledocolitiasis",
+    "consulta": [
+      "ictericia",
+      "dolor en hipocondrio derecho"
+    ],
+    "agregados": [
+      "orina oscura",
+      "heces pálidas",
+      "náuseas"
+    ],
+    "nodo_seleccionado": "ovalocitosis hereditaria",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "coledocolitiasis",
+    "consulta": [
+      "orina oscura",
+      "heces pálidas",
+      "náuseas"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "colestasis intrahepática",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "pancreatitis",
+    "consulta": [
+      "dolor abdominal superior",
+      "náuseas"
+    ],
+    "agregados": [
+      "vómitos",
+      "fiebre",
+      "taquicardia"
+    ],
+    "nodo_seleccionado": "gastritis",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "pancreatitis",
+    "consulta": [
+      "vómitos",
+      "fiebre",
+      "taquicardia"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "rotavirus",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "nefrolitiasis",
+    "consulta": [
+      "dolor lumbar intenso",
+      "hematuria"
+    ],
+    "agregados": [
+      "náuseas",
+      "vómitos",
+      "urgencia urinaria"
+    ],
+    "nodo_seleccionado": "cáncer de próstata",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "nefrolitiasis",
+    "consulta": [
+      "náuseas",
+      "vómitos",
+      "urgencia urinaria"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "rotavirus",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "enfisema",
+    "consulta": [
+      "disnea progresiva",
+      "tos crónica"
+    ],
+    "agregados": [
+      "sibilancias",
+      "pérdida de peso",
+      "cianosis labios"
+    ],
+    "nodo_seleccionado": "metástasis pulmonar (osteosarcoma)",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "enfisema",
+    "consulta": [
+      "sibilancias",
+      "pérdida de peso",
+      "cianosis labios"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "bronquitis ocupacional",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hepatocarcinoma",
+    "consulta": [
+      "dolor en cuadrante superior derecho",
+      "pérdida de peso"
+    ],
+    "agregados": [
+      "ascitis",
+      "ictericia",
+      "fatiga"
+    ],
+    "nodo_seleccionado": "nutrición inadecuada",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "hepatocarcinoma",
+    "consulta": [
+      "ascitis",
+      "ictericia",
+      "fatiga"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "ovalocitosis hereditaria",
+    "score": 0.5,
+    "enfermedades_relevantes": [
+      "ictericia"
+    ]
+  },
+  {
+    "nombre": "meningoencefalitis",
+    "consulta": [
+      "fiebre",
+      "alteración de la conciencia"
+    ],
+    "agregados": [
+      "rigidez de nuca",
+      "cefalea intensa",
+      "fotofobia"
+    ],
+    "nodo_seleccionado": "ronquera - laringitis",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "meningoencefalitis",
+    "consulta": [
+      "rigidez de nuca",
+      "cefalea intensa",
+      "fotofobia"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "córnea - queratitis",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "tromboflebitis",
+    "consulta": [
+      "dolor e inflamación de pierna"
+    ],
+    "agregados": [
+      "eritema local",
+      "febrícula",
+      "endurecimiento venoso"
+    ],
+    "nodo_seleccionado": null,
+    "score": 1,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "tromboflebitis",
+    "consulta": [
+      "dolor e inflamación de pierna"
+    ],
+    "agregados": [
+      "eritema local",
+      "febrícula",
+      "endurecimiento venoso"
+    ],
+    "nodo_seleccionado": null,
+    "score": 3,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "amigdalitis bacteriana",
+    "consulta": [
+      "exudado amigdalino",
+      "adenopatías cervicales",
+      "disfagia"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": null,
+    "score": 4,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "enfermedad celiaca",
+    "consulta": [
+      "diarrea crónica",
+      "pérdida de peso"
+    ],
+    "agregados": [
+      "distensión abdominal",
+      "anemia ferropénica",
+      "fatiga"
+    ],
+    "nodo_seleccionado": "deposiciones blandas sin productos patológicos",
+    "score": 0.0,
+    "enfermedades_relevantes": []
+  },
+  {
+    "nombre": "enfermedad celiaca",
+    "consulta": [
+      "distensión abdominal",
+      "anemia ferropénica",
+      "fatiga"
+    ],
+    "agregados": [],
+    "nodo_seleccionado": "oxigenación deficiente",
+    "score": 1.0,
+    "enfermedades_relevantes": [
+      "anemia ferropénica"
+    ]
+  }
+]

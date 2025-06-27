@@ -1,5 +1,5 @@
-from digraph import *
-from selector import selector
+from .digraph import *
+from .selector import selector
 
 class dfs_selector(selector):
   def __init__(self, graph: digraph):
